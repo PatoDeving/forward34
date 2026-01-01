@@ -1,0 +1,590 @@
+/*
+ * Forward34 — Mejoras de Diseño v2
+ * Fix: Legibilidad, Fondos, Profesionalismo, Espaciado
+ */
+
+/* ============================================
+   0. ESPACIADO GENERAL - Reducido
+   ============================================ */
+
+/* Reducir padding de secciones */
+.section {
+    padding-top: 5rem !important; /* Reducido de 10rem */
+    padding-bottom: 5rem !important;
+}
+
+.section-md {
+    padding-top: 3rem !important; /* Reducido de 6rem */
+    padding-bottom: 3rem !important;
+}
+
+/* Reducir márgenes de cards grid */
+.card-grid {
+    margin-top: 3rem !important; /* Reducido de 6rem */
+    gap: 2rem !important; /* Reducido de 3rem */
+}
+
+/* Reducir márgenes de process steps */
+.process-steps {
+    margin-top: 3rem !important;
+    gap: 2rem !important;
+}
+
+/* ============================================
+   1. HERO SECTIONS - Más pequeños y legibles
+   ============================================ */
+
+.hero {
+    min-height: 45vh !important; /* Reducido de 50vh */
+    padding-top: calc(100px + 2rem) !important; /* Reducido */
+    padding-bottom: 3rem !important; /* Reducido */
+    background: linear-gradient(135deg, rgba(245,245,245,1) 0%, rgba(255,255,255,1) 100%) !important;
+    position: relative;
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+}
+
+.hero::before {
+    content: '🏀';
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    font-size: 5.6rem;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: auto;
+    z-index: 100;
+    filter: grayscale(100%);
+}
+
+.hero.ball-active::before {
+    opacity: 1;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    left: var(--mouse-x);
+    top: var(--mouse-y);
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.08) 40%, transparent 70%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease, left 0.15s ease, top 0.15s ease;
+}
+
+.hero:hover::after {
+    opacity: 1;
+}
+
+.hero h1 {
+    font-size: 4rem !important; /* Reducido de 4.5rem */
+    line-height: 1.05 !important;
+    margin-bottom: 1.5rem !important; /* Reducido */
+    color: var(--black) !important;
+}
+
+.hero .body-large,
+.hero p {
+    font-size: 1.375rem !important; /* Reducido de 1.5rem */
+    line-height: 1.5 !important;
+    color: var(--gray-700) !important;
+    max-width: 900px !important;
+    margin-bottom: 1.5rem !important;
+}
+
+/* ============================================
+   2. SECCIONES - Solo gris claro, NUNCA negro
+   ============================================ */
+
+/* RESETEAR fondos negros - todo blanco o gris claro */
+.section-dark {
+    background: linear-gradient(135deg, rgba(240,240,240,1) 0%, rgba(252,252,252,1) 100%) !important;
+    color: var(--black) !important;
+}
+
+.section-dark h1,
+.section-dark h2,
+.section-dark h3,
+.section-dark h4 {
+    color: var(--black) !important; /* Negro, no blanco */
+}
+
+.section-dark p,
+.section-dark .body-large {
+    color: var(--gray-700) !important; /* Gris oscuro, no blanco */
+}
+
+/* Patrón de fondos: Blanco -> Gris claro -> Blanco */
+.section:nth-child(even) {
+    background: linear-gradient(135deg, rgba(238,238,238,1) 0%, rgba(250,250,250,1) 100%) !important;
+    position: relative;
+}
+
+.section:nth-child(even)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(0,0,0,0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.section:nth-child(odd) {
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(248,248,248,1) 100%) !important;
+}
+
+/* NO fondos negros */
+.section:nth-child(3n) {
+    background: linear-gradient(135deg, rgba(240,240,240,1) 0%, rgba(252,252,252,1) 100%) !important;
+    color: var(--black) !important;
+}
+
+.section:nth-child(3n) h1,
+.section:nth-child(3n) h2,
+.section:nth-child(3n) h3,
+.section:nth-child(3n) h4 {
+    color: var(--black) !important;
+}
+
+.section:nth-child(3n) p,
+.section:nth-child(3n) .body-large {
+    color: var(--gray-700) !important;
+}
+
+/* ============================================
+   3. TÍTULOS CON CONTENEDORES ELEGANTES
+   ============================================ */
+
+/* Contenedor para títulos principales */
+.hero-content {
+    position: relative;
+    padding: var(--sp-lg);
+    border-left: 4px solid var(--black);
+    background: linear-gradient(90deg, rgba(0,0,0,0.02) 0%, transparent 100%);
+}
+
+/* Títulos de sección con línea decorativa */
+.section h2 {
+    font-size: 2.5rem !important; /* Reducido de 3rem */
+    position: relative;
+    padding-bottom: 1rem; /* Reducido */
+    margin-bottom: 2rem !important; /* Reducido */
+}
+
+.section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background: var(--black);
+}
+
+.section.text-center h2::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Títulos con background sutil */
+.section h1 {
+    font-size: 3.5rem !important; /* Reducido de 4rem */
+    padding: 0.5rem 0; /* Reducido */
+    position: relative;
+}
+
+/* ============================================
+   4. NAVBAR - Botón profesional
+   ============================================ */
+
+.main-nav .btn-primary {
+    padding: 0.625rem 1.5rem !important;
+    font-size: 0.875rem !important;
+    font-weight: var(--fw-semi) !important;
+    letter-spacing: 0.03em !important;
+    text-transform: uppercase !important;
+    border-radius: 2px !important;
+    background: var(--black) !important;
+    color: var(--white) !important;
+    border: 2px solid var(--black) !important;
+}
+
+.main-nav .btn-primary:hover {
+    background: var(--white) !important;
+    color: var(--black) !important;
+    border-color: var(--black) !important;
+    transform: none !important;
+    opacity: 1 !important;
+}
+
+.main-nav {
+    gap: var(--sp-md) !important;
+}
+
+/* ============================================
+   5. CARDS - Más profesionales
+   ============================================ */
+
+.card {
+    padding: 2rem !important; /* Reducido de 3rem */
+    border: 2px solid var(--gray-200) !important;
+    border-radius: 4px !important;
+    background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(248,248,248,1) 100%) !important;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: var(--black);
+    transition: height 0.3s ease;
+}
+
+.card:hover::before {
+    height: 100%;
+}
+
+.card:hover {
+    border-color: var(--black) !important;
+    transform: translateY(-6px) !important;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.08) !important;
+    background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(245,245,245,1) 100%) !important;
+}
+
+.card h3 {
+    font-size: 1.875rem !important;
+    margin-bottom: var(--sp-md) !important;
+    color: var(--black) !important;
+}
+
+.card p {
+    font-size: 1.0625rem !important;
+    line-height: 1.7 !important;
+    color: var(--gray-700) !important;
+}
+
+/* Cards en fondos grises */
+.section-dark .card,
+.section:nth-child(even) .card {
+    background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(250,250,250,1) 100%) !important;
+    border-color: var(--gray-200) !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08) !important;
+}
+
+.section-dark .card:hover,
+.section:nth-child(even) .card:hover {
+    border-color: var(--black) !important;
+}
+
+.section-dark .card h3,
+.section:nth-child(even) .card h3 {
+    color: var(--black) !important;
+}
+
+.section-dark .card p,
+.section:nth-child(even) .card p {
+    color: var(--gray-700) !important;
+}
+
+/* ============================================
+   6. PROCESS STEPS - Números arriba, no al lado
+   ============================================ */
+
+.step {
+    position: relative;
+    padding: 0 !important;
+    text-align: left;
+}
+
+.step-number {
+    font-size: 3rem !important;
+    color: var(--black) !important;
+    font-weight: var(--fw-bold) !important;
+    line-height: 1 !important;
+    margin-bottom: var(--sp-sm) !important;
+    display: block !important;
+    position: static !important;
+    opacity: 0.15;
+}
+
+.step h4 {
+    font-size: 1.25rem !important;
+    margin-bottom: var(--sp-xs) !important;
+    color: var(--black) !important;
+}
+
+.step p {
+    font-size: 1rem !important;
+    color: var(--gray-700) !important;
+    line-height: 1.6 !important;
+}
+
+/* ============================================
+   7. BOTONES - Más profesionales
+   ============================================ */
+
+.btn {
+    font-size: 1.0625rem !important;
+    padding: 1.125rem 2.5rem !important;
+    border-radius: 2px !important;
+    letter-spacing: 0.03em !important;
+    font-weight: var(--fw-semi) !important;
+}
+
+.btn-primary {
+    background: var(--black) !important;
+    color: var(--white) !important;
+    border: 2px solid var(--black) !important;
+}
+
+.btn-primary:hover {
+    background: var(--white) !important;
+    color: var(--black) !important;
+    border-color: var(--black) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15) !important;
+    opacity: 1 !important;
+}
+
+.btn-secondary {
+    border: 2px solid var(--black) !important;
+    padding: 1rem 2.375rem !important;
+    background: transparent !important;
+    color: var(--black) !important;
+}
+
+.btn-secondary:hover {
+    background: var(--black) !important;
+    color: var(--white) !important;
+    opacity: 1 !important;
+}
+
+/* ============================================
+   8. HEADER - Más limpio
+   ============================================ */
+
+#site-header {
+    backdrop-filter: blur(10px) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 1px 0 var(--gray-200) !important;
+}
+
+.header-container {
+    padding: 1.25rem var(--pad-desk) !important;
+}
+
+/* ============================================
+   9. FOOTER - Solo fondo negro aquí
+   ============================================ */
+
+footer {
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(30,30,30,1) 100%) !important;
+    border-top: 4px solid var(--gray-900) !important;
+    color: var(--white) !important;
+    position: relative;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at bottom left, rgba(255,255,255,0.06) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+footer h4 {
+    font-size: 1.125rem !important;
+    margin-bottom: var(--sp-md) !important;
+    color: var(--white) !important;
+}
+
+footer p,
+footer a {
+    font-size: 1rem !important;
+    color: var(--gray-200) !important;
+}
+
+footer a:hover {
+    color: var(--white) !important;
+}
+
+.footer-bottom {
+    color: var(--gray-700) !important;
+}
+
+.footer-bottom a {
+    color: var(--gray-700) !important;
+}
+
+/* ============================================
+   10. EFECTOS PROFESIONALES EN TÍTULOS
+   ============================================ */
+
+/* Container con efecto para página Empresa */
+.empresa-hero .hero-content {
+    background: linear-gradient(135deg, rgba(0,0,0,0.03) 0%, transparent 100%);
+    border-left: 4px solid var(--black);
+    padding: var(--sp-lg);
+}
+
+/* Container con efecto para página Servicios */
+.servicios-hero .hero-content {
+    position: relative;
+}
+
+.servicios-hero .hero-content::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--black);
+}
+
+/* Subtítulos con línea superior */
+.section .body-large {
+    font-size: 1.375rem !important;
+    padding-top: var(--sp-md);
+    position: relative;
+}
+
+/* ============================================
+   11. SEPARADORES ELEGANTES
+   ============================================ */
+
+.separator {
+    border: none !important;
+    height: 2px !important;
+    background: linear-gradient(90deg, transparent 0%, var(--gray-200) 50%, transparent 100%) !important;
+    margin: var(--sp-xl) 0 !important;
+}
+
+/* ============================================
+   12. RESPONSIVE
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .hero h1 {
+        font-size: 3.5rem !important;
+    }
+
+    .hero .body-large {
+        font-size: 1.25rem !important;
+    }
+
+    .section h1 {
+        font-size: 3rem !important;
+    }
+
+    .section h2 {
+        font-size: 2.25rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: 60vh !important;
+        padding-top: calc(80px + var(--sp-md)) !important;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem !important;
+    }
+
+    .hero .body-large {
+        font-size: 1.125rem !important;
+    }
+
+    .section h1 {
+        font-size: 2.25rem !important;
+    }
+
+    .section h2 {
+        font-size: 1.875rem !important;
+    }
+
+    .card h3 {
+        font-size: 1.5rem !important;
+    }
+
+    .main-nav .btn-primary {
+        display: none !important;
+    }
+
+    .hero-content {
+        padding: var(--sp-md);
+    }
+
+    .step {
+        padding-left: 0;
+    }
+
+    .step-number {
+        position: static;
+        margin-bottom: var(--sp-sm);
+    }
+}
+
+/* ============================================
+   13. ANIMACIONES SUAVES
+   ============================================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeInUp 0.8s ease-out forwards !important;
+}
+
+/* ============================================
+   14. LOGO SVG Y NAVBAR
+   ============================================ */
+
+/* Navbar muy compacto (mitad del tamaño original) */
+.header-container {
+    padding: 0.75rem var(--pad-desk) !important; /* 50% del original 1.5rem */
+}
+
+/* Logo ajustado para navbar compacto */
+.logo-svg {
+    height: 50px !important; /* Reducido para mantener proporción con navbar más pequeño */
+    width: auto !important;
+    display: block !important;
+}
+
+.logo a {
+    display: block !important;
+    line-height: 0 !important;
+}
+
+/* Logo en footer */
+.footer-logo {
+    height: 80px !important;
+    width: auto !important;
+    margin-bottom: var(--sp-sm);
+    opacity: 0.9;
+}

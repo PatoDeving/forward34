@@ -1,0 +1,67 @@
+===========================================
+INFORMACIÓN DE CONTACTO - Forward34
+===========================================
+
+Por favor proporciona la siguiente información REAL para actualizar el sitio:
+
+1. EMAIL DE CONTACTO:
+   Actual (placeholder): contacto@forward34.com
+   NUEVO: ___________________________________
+
+2. TELÉFONO:
+   Actual (placeholder): +52 55 1234 5678
+   NUEVO: ___________________________________
+
+3. DIRECCIÓN (opcional):
+   Actual: México
+   NUEVO: ___________________________________
+
+4. REDES SOCIALES (opcional):
+   LinkedIn: ___________________________________
+   Facebook: ___________________________________
+   Instagram: ___________________________________
+   Twitter/X: ___________________________________
+
+5. NOMBRE CONTACTO PRINCIPAL (para formulario):
+   ___________________________________
+
+===========================================
+CONFIGURACIÓN DEL FORMULARIO
+===========================================
+
+Para que el formulario funcione, elige UNA opción:
+
+OPCIÓN A - Formspree (Recomendado - Gratis):
+1. Ve a: https://formspree.io/
+2. Crea una cuenta
+3. Crea un nuevo formulario
+4. Copia el "Form ID" que te dan
+5. Pégalo aquí: ___________________________________
+
+OPCIÓN B - EmailJS (Alternativa):
+1. Ve a: https://www.emailjs.com/
+2. Crea una cuenta
+3. Configura tu servicio de email
+4. Copia las credenciales:
+   Service ID: ___________________________________
+   Template ID: ___________________________________
+   Public Key: ___________________________________
+
+OPCIÓN C - Netlify Forms (si usas Netlify):
+   No requiere configuración adicional
+
+OPCIÓN D - Endpoint personalizado:
+   URL de tu API: ___________________________________
+
+===========================================
+
+Una vez que me proporciones esta información,
+actualizaré automáticamente:
+
+✓ Footer de todas las páginas
+✓ Página de contacto
+✓ Enlaces de email y teléfono
+✓ Formulario funcional
+✓ (Opcional) Redes sociales en footer
+
+===========================================

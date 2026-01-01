@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(find:*)",
+      "Bash(node --version:*)",
+      "Bash(npm --version:*)",
+      "Bash(systeminfo:*)",
+      "Bash(findstr:*)",
+      "Bash(where:*)",
+      "Bash(del \"C:\\Users\\Edition PRO\\Desktop\\forward 34\\public\\css\\styles.css\")",
+      "Bash(start \"\" \"C:\\Users\\Edition PRO\\Desktop\\forward 34\\START-HERE.html\")",
+      "Bash(for file in empresa.html servicios.html descubrete.html contacto.html)",
+      "Bash(do sed -i 's|<a href=\"\"index.html\"\">Forward34</a>|<a href=\"\"index.html\"\">\\n                    <img src=\"\"public/images/forward34-logo.svg\"\" alt=\"\"Forward34\"\" class=\"\"logo-svg\"\">\\n                </a>|' \"$file\")",
+      "Bash(done)",
+      "Bash(do sed -i 's|<h4>Forward34</h4>|<img src=\"\"public/images/forward34-logo.svg\"\" alt=\"\"Forward34\"\" class=\"\"footer-logo\"\" style=\"\"filter: brightness(0) invert(1);\"\">|' \"$file\")",
+      "Bash(start \"\" \"C:\\Users\\Edition PRO\\Desktop\\forward 34\\index.html\")",
+      "Bash(for file in index.html empresa.html servicios.html descubrete.html contacto.html)",
+      "Bash(do sed -i 's|contacto@forward34.com|hector@forward34.com|g' \"$file\")",
+      "Bash(dir /b \"C:\\Users\\Edition PRO\\Desktop\\forward 34\")",
+      "Bash(git add:*)",
+      "Bash(del nul)"
+    ]
+  }
+}

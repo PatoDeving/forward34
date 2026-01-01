@@ -1,0 +1,22 @@
+{
+  "name": "forward34-website",
+  "version": "1.0.0",
+  "description": "Sitio web corporativo de Forward34 S.A. de C.V.",
+  "scripts": {
+    "dev": "npx http-server . -p 3000 -o -c-1",
+    "start": "npm run dev",
+    "build": "echo 'Build completed - Static site ready for deployment'",
+    "deploy": "vercel --prod",
+    "preview": "vercel"
+  },
+  "keywords": [
+    "forward34",
+    "website",
+    "corporate"
+  ],
+  "author": "Forward34 S.A. de C.V.",
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {},
+  "dependencies": {}
+}
