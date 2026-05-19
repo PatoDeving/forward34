@@ -334,34 +334,40 @@ a:hover { opacity: 1 !important; }
     vertical-align: bottom;
     position: relative;
     color: var(--ink);
-    line-height: 0.95;
+    line-height: 1.05;
+    /* asegurar espacio para descenders italic y para la subrayado-highlight */
+    padding-bottom: 0.18em;
+    margin-bottom: -0.18em;
 }
 
 .rotator-track {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     transition: transform 0.7s var(--ease-out);
     will-change: transform;
 }
 
 .rotator-track span {
     display: block;
-    line-height: 0.95;
+    width: max-content;
+    max-width: 100%;
+    line-height: 1.05;
     font-style: italic;
     font-weight: 500;
     color: var(--ink);
     font-family: var(--font-display);
-    padding-right: 0.05em;
     position: relative;
     z-index: 1;
+    padding: 0 0.04em;
 }
 
 .rotator-track span::after {
     content: '';
     position: absolute;
-    left: 0; right: 0.05em;
-    bottom: 0.08em;
-    height: 0.28em;
+    left: 0; right: 0;
+    bottom: 0.04em;
+    height: 0.26em;
     background: var(--volt);
     z-index: -1;
     transform: skew(-8deg);
@@ -1115,13 +1121,15 @@ footer .container { position: relative; z-index: 1; }
    17. ANIMACIONES DE ENTRADA
    ============================================================ */
 
-.reveal {
+/* Reveals: solo se ocultan cuando JS está cargado (.js en <html>).
+   Sin JS o si el observer no dispara, el contenido permanece visible. */
+.js .reveal {
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
 }
 
-.reveal.in {
+.js .reveal.in {
     opacity: 1;
     transform: translateY(0);
 }

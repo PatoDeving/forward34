@@ -4,6 +4,9 @@
 (function () {
   'use strict';
 
+  // Marcar JS disponible — las .reveal solo se ocultan con esta clase puesta.
+  document.documentElement.classList.add('js');
+
   /* --------------------------------------------------------
    * Header scroll state
    * -------------------------------------------------------- */
