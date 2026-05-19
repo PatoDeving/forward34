@@ -327,16 +327,19 @@ a:hover { opacity: 1 !important; }
     transform: skew(-8deg);
 }
 
-/* Rotating word */
+/* Rotating word
+   Altura en em fija (1.25em) para dejar espacio a los descenders
+   italics (g, p, j, y) sin que el overflow:hidden los recorte.
+   El margen vertical negativo evita que esta línea del h1 se vea
+   más alta que las demás líneas con line-height 0.95. */
 .rotator {
     display: inline-block;
     overflow: hidden;
     vertical-align: bottom;
     position: relative;
-    color: var(--ink);
-    line-height: 1.05;
-    /* asegurar espacio para descenders italic y para la subrayado-highlight */
-    padding-bottom: 0.18em;
+    height: 1.25em;
+    line-height: 1.25;
+    margin-top: -0.12em;
     margin-bottom: -0.18em;
 }
 
@@ -349,10 +352,12 @@ a:hover { opacity: 1 !important; }
 }
 
 .rotator-track span {
-    display: block;
+    display: flex;
+    align-items: center;
     width: max-content;
     max-width: 100%;
-    line-height: 1.05;
+    height: 1.25em;
+    line-height: 1.25;
     font-style: italic;
     font-weight: 500;
     color: var(--ink);
@@ -360,14 +365,15 @@ a:hover { opacity: 1 !important; }
     position: relative;
     z-index: 1;
     padding: 0 0.04em;
+    flex-shrink: 0;
 }
 
 .rotator-track span::after {
     content: '';
     position: absolute;
     left: 0; right: 0;
-    bottom: 0.04em;
-    height: 0.26em;
+    bottom: 0.18em;
+    height: 0.24em;
     background: var(--volt);
     z-index: -1;
     transform: skew(-8deg);

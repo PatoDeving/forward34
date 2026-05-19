@@ -74,17 +74,22 @@
     wrap.innerHTML = '';
     wrap.appendChild(track);
 
+    // Cada span tiene height: 1.25em. Avanzamos 1 paso = -1.25em por ciclo.
+    // Usar em evita problemas de medición con descenders italics (g, p, j).
+    const STEP = 1.25; // en em, debe coincidir con .rotator-track span height
+    let i = 0;
     let intervalId = null;
+
     const start = () => {
-      const h = track.firstElementChild.getBoundingClientRect().height;
-      if (!h) return;
-      wrap.style.height = h + 'px';
+      track.style.transition = 'none';
       track.style.transform = 'translateY(0)';
-      let i = 0;
+      void track.offsetHeight;
+      track.style.transition = '';
+      i = 0;
       if (intervalId) clearInterval(intervalId);
       intervalId = setInterval(() => {
         i++;
-        track.style.transform = `translateY(${-h * i}px)`;
+        track.style.transform = `translateY(${-STEP * i}em)`;
         if (i === words.length) {
           setTimeout(() => {
             track.style.transition = 'none';
@@ -97,19 +102,12 @@
       }, 2400);
     };
 
-    const init = () => requestAnimationFrame(start);
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(init);
+      document.fonts.ready.then(start);
     } else {
-      window.addEventListener('load', init, { once: true });
-      init();
+      window.addEventListener('load', start, { once: true });
+      start();
     }
-    // re-medir en resize (sin reiniciar el ciclo)
-    let rt;
-    window.addEventListener('resize', () => {
-      clearTimeout(rt);
-      rt = setTimeout(start, 200);
-    });
   });
 
   /* --------------------------------------------------------
