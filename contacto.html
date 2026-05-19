@@ -6,26 +6,24 @@
     <meta name="description" content="Contacta a Forward34 para coordinar una llamada. Cuéntanos tu reto y te proponemos un camino claro.">
     <meta name="keywords" content="Forward34, contacto, agendar, transformación organizacional">
 
-    <!-- Open Graph -->
     <meta property="og:title" content="Contacto | Forward34">
     <meta property="og:description" content="Escríbenos y coordinamos una llamada para hablar sobre tu proyecto.">
     <meta property="og:type" content="website">
 
     <title>Contacto | Forward34</title>
 
-    <!-- Google Fonts -->
+    <script>document.documentElement.className+=' js';</script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,500&display=swap" rel="stylesheet">
 
-    <!-- Stylesheet -->
     <link rel="stylesheet" href="public/css/styles.css">
     <link rel="stylesheet" href="public/css/improvements.css">
     <link rel="stylesheet" href="public/css/privacy-modal.css">
 </head>
 <body>
 
-    <!-- Header -->
     <header id="site-header">
         <div class="header-container">
             <div class="logo">
@@ -36,28 +34,34 @@
             <nav class="main-nav">
                 <a href="index.html">Inicio</a>
                 <a href="empresa.html">Empresa</a>
-                <a href="servicios.html">Servicios</a>
                 <a href="descubrete.html">Descúbrete+</a>
-                <a href="contacto.html">Contacto</a>
-                <a href="contacto.html" class="btn btn-primary">Agendar</a>
+                <a href="servicios.html">Servicios</a>
+                <a href="mailto:hector@forward34.com" class="btn btn-primary">Hablemos</a>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" style="min-height: 50vh;">
+    <!-- ============================== HERO ============================== -->
+    <section class="hero hero--contacto" style="min-height: 60vh !important;">
         <div class="container">
-            <div class="hero-content fade-in" style="text-align: center; max-width: 700px; margin: 0 auto;">
-                <h1>Contacto</h1>
-                <p style="font-size: 1.25rem;">Escríbenos y coordinamos una llamada.</p>
+            <div class="hero-content" style="text-align: left;">
+                <span class="eyebrow reveal"><span class="dot"></span> Contacto</span>
+                <h1 class="reveal" data-delay="1">
+                    Cuéntanos tu reto.<br>
+                    Respondemos con un<br>
+                    <span class="rotator" data-words="camino claro|plan accionable|diagnóstico real">camino claro</span>.
+                </h1>
+                <p class="reveal" data-delay="2">
+                    Escríbenos o llena el formulario y coordinamos una conversación de 30 minutos.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Formulario de Contacto -->
+    <!-- ============================== FORM ============================== -->
     <section class="section">
         <div class="container">
-            <form class="contact-form" id="contactForm">
+            <form class="contact-form reveal" id="contactForm">
                 <div class="form-group">
                     <label for="nombre">Nombre *</label>
                     <input type="text" id="nombre" name="nombre" required>
@@ -88,9 +92,10 @@
                     <select id="servicio" name="servicio">
                         <option value="">Selecciona una opción</option>
                         <option value="diagnostico">Diagnóstico estratégico</option>
-                        <option value="transformacion">Estrategia y transformación organizacional</option>
+                        <option value="transformacion">Transformación organizacional</option>
                         <option value="ia-tecnologia">IA y tecnología aplicada</option>
-                        <option value="experiencias">Diseño y operación de experiencias corporativas</option>
+                        <option value="experiencias">Experiencias corporativas</option>
+                        <option value="coaching">Coaching y liderazgo</option>
                         <option value="medicion">Medición y seguimiento</option>
                         <option value="otro">Otro</option>
                     </select>
@@ -102,41 +107,48 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" style="width: 100%; cursor: pointer;">Enviar</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Enviar mensaje</button>
                 </div>
 
-                <div id="formMessage" style="margin-top: 1rem; padding: 1rem; border-radius: 4px; display: none;"></div>
+                <div id="formMessage" style="margin-top: 1rem; padding: 1rem; border-radius: 12px; display: none;"></div>
             </form>
         </div>
     </section>
 
-    <!-- Información de contacto -->
-    <section class="section section-alt">
+    <!-- ============================== ALT CONTACT ============================== -->
+    <section class="section dark">
         <div class="container">
-            <div style="max-width: 800px; margin: 0 auto;">
-                <h2 class="text-center mb-lg">Otras formas de contacto</h2>
-                <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
-                    <div class="card" style="text-align: center;">
-                        <h3>Email</h3>
-                        <p><a href="mailto:hector@forward34.com" style="color: var(--color-accent);">hector@forward34.com</a></p>
-                    </div>
-
-                    <div class="card" style="text-align: center;">
-                        <h3>Ubicación</h3>
-                        <p>México</p>
-                    </div>
+            <div class="section-head reveal">
+                <div>
+                    <span class="eyebrow"><span class="dot"></span> Otras formas</span>
+                    <h2>O directo,<br>como prefieras.</h2>
+                </div>
+            </div>
+            <div class="card-grid">
+                <div class="card feature reveal" data-delay="1">
+                    <div class="card-num">— Email</div>
+                    <h3>hector@forward34.com</h3>
+                    <p>Respondemos en menos de 24h hábiles. Haz clic para copiar.</p>
+                    <a href="mailto:hector@forward34.com" class="card-arrow">Copiar y abrir →</a>
+                </div>
+                <div class="card feature reveal" data-delay="2">
+                    <div class="card-num">— Ubicación</div>
+                    <h3>México</h3>
+                    <p>Trabajamos en modalidad híbrida con organizaciones de toda América Latina.</p>
+                    <span class="card-arrow">B2B · Corporativo →</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ============================== FOOTER ============================== -->
     <footer>
         <div class="container">
+            <div class="footer-wordmark">Forward<span class="accent">34</span></div>
             <div class="footer-content">
-                <div class="footer-section">
-                    <img src="public/images/forward34-logo.svg" alt="Forward34" class="footer-logo" style="filter: brightness(0) invert(1);">
-                    <p>Estrategia y transformación organizacional</p>
+                <div class="footer-section intro">
+                    <h4>La firma</h4>
+                    <p>Estrategia y transformación organizacional. Operamos desde México para América Latina.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Navegación</h4>
@@ -144,94 +156,48 @@
                     <p><a href="empresa.html">Empresa</a></p>
                     <p><a href="servicios.html">Servicios</a></p>
                     <p><a href="descubrete.html">Descúbrete+</a></p>
-                    <p><a href="contacto.html">Contacto</a></p>
                 </div>
                 <div class="footer-section">
                     <h4>Contacto</h4>
-                    <p>Email: <a href="mailto:hector@forward34.com">hector@forward34.com</a></p>
+                    <p><a href="mailto:hector@forward34.com">hector@forward34.com</a></p>
                     <p>México</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <p><a href="#" class="open-privacy-modal">Aviso de privacidad</a></p>
+                    <p><a href="#" class="open-privacy-modal">Términos</a></p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Forward34 S.A. de C.V. Todos los derechos reservados.</p>
-                <p><a href="#" class="open-privacy-modal">Aviso de Privacidad y Términos</a></p>
+                <p>&copy; 2025 Forward34 S.A. de C.V. — Todos los derechos reservados.</p>
+                <p>Hecho con foco en resultados.</p>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
+    <script src="public/js/wow.js"></script>
+    <script src="public/js/privacy-modal.js"></script>
     <script>
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.card, .hero-content, .contact-form').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Form submission handler
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
             e.preventDefault();
-
             const formMessage = document.getElementById('formMessage');
-            const formData = new FormData(this);
-
-            // Convert form data to object
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-
-            // Show loading state
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Enviando...';
             submitBtn.disabled = true;
 
-            // Simulate form submission
-            // En producción, aquí se enviaría a un endpoint o servicio como Formspree, Netlify Forms, etc.
             setTimeout(() => {
-                console.log('Form data:', data);
-
-                // Show success message
                 formMessage.style.display = 'block';
-                formMessage.style.backgroundColor = '#d4edda';
-                formMessage.style.color = '#155724';
-                formMessage.style.border = '1px solid #c3e6cb';
-                formMessage.innerHTML = '<strong>¡Mensaje enviado!</strong> Nos pondremos en contacto contigo pronto.';
-
-                // Reset form
+                formMessage.style.background = 'rgba(215, 255, 58, 0.2)';
+                formMessage.style.color = '#0B0B0F';
+                formMessage.style.border = '1px solid #D7FF3A';
+                formMessage.innerHTML = '<strong>¡Mensaje enviado!</strong> Nos pondremos en contacto en menos de 24h hábiles.';
                 this.reset();
-
-                // Reset button
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
-
-                // Hide message after 5 seconds
-                setTimeout(() => {
-                    formMessage.style.display = 'none';
-                }, 5000);
-            }, 1500);
-
-            // NOTA: Para producción, integrar con un servicio de formularios:
-            // - Formspree: https://formspree.io/
-            // - Netlify Forms: https://www.netlify.com/products/forms/
-            // - EmailJS: https://www.emailjs.com/
-            // O crear un endpoint API propio
+                setTimeout(() => { formMessage.style.display = 'none'; }, 6000);
+            }, 1200);
         });
     </script>
-
-    <!-- Privacy Modal -->
-    <script src="public/js/privacy-modal.js"></script>
-
 </body>
 </html>
