@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Diagnóstico gratuito de IA + AI Sprint Forward34: descubre en 5 minutos dónde está tu organización en su transformación con inteligencia artificial y qué pasos seguir.">
+    <meta name="keywords" content="Forward34, consultoría IA, diagnóstico IA, transformación IA, inteligencia artificial empresarial, AI Sprint">
+
+    <meta property="og:title" content="Consultoría IA | Forward34">
+    <meta property="og:description" content="Descubre tu potencial de crecimiento con IA. Diagnóstico gratuito + AI Sprint de 10 semanas.">
+    <meta property="og:type" content="website">
+
+    <title>Consultoría IA | Forward34</title>
+
+    <script>document.documentElement.className+=' js';</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="public/css/styles.css">
+    <link rel="stylesheet" href="public/css/improvements.css">
+    <link rel="stylesheet" href="public/css/privacy-modal.css">
+    <link rel="stylesheet" href="public/css/assessment.css">
+</head>
+<body>
+
+    <header id="site-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="public/images/forward34-logo.svg" alt="Forward34" class="logo-svg">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html">Inicio</a>
+                <a href="empresa.html">Empresa</a>
+                <a href="descubrete.html">Descúbrete+</a>
+                <a href="servicios.html">Servicios</a>
+                <a href="consultoria-ia.html" class="active">Consultoría IA</a>
+                <a href="mailto:hector@forward34.com" class="btn btn-primary">Hablemos</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================== HERO ============================== -->
+    <section class="hero hero--servicios" style="min-height: 80vh !important;">
+        <div class="container">
+            <div class="hero-content">
+                <span class="eyebrow reveal"><span class="dot"></span> Consultoría IA · Diagnóstico gratuito</span>
+                <h1 class="reveal" data-delay="1">
+                    Descubre el potencial<br>de la IA en tu <span class="rotator" data-words="organización|operación|negocio|equipo">organización</span>.
+                </h1>
+                <p class="reveal" data-delay="2">
+                    Un diagnóstico de 5 minutos te muestra dónde estás, qué te frena y por dónde empezar. Sin venta de humo: la IA aplicada donde realmente mueve la aguja.
+                </p>
+                <div class="hero-cta reveal" data-delay="3">
+                    <a href="#diagnostico" class="btn btn-primary">Iniciar diagnóstico</a>
+                    <a href="#ai-sprint" class="btn btn-secondary">Conocer el AI Sprint</a>
+                </div>
+                <p class="hero-meta reveal" data-delay="4" style="margin-top: 2rem; font-size: 0.85rem; color: rgba(11,11,15,0.55); letter-spacing: 0.05em;">
+                    <span><span class="mark"></span> 8 preguntas</span>
+                    <span style="margin: 0 1rem;">·</span>
+                    <span>5 minutos</span>
+                    <span style="margin: 0 1rem;">·</span>
+                    <span>Resultado inmediato</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== DIAGNÓSTICO ============================== -->
+    <section class="section" id="diagnostico">
+        <div class="container">
+            <div class="section-head reveal">
+                <h2>Tu diagnóstico<br>de madurez en IA.</h2>
+                <p class="head-sub">Medimos cuatro dimensiones: datos, procesos, talento y casos de uso. Al terminar recibes tu score, el nivel de madurez y un roadmap inicial. Sin tarjeta, sin spam.</p>
+            </div>
+
+            <div class="assessment reveal" id="assessment">
+                <!-- INTRO -->
+                <div class="assessment-screen assessment-intro" data-screen="intro">
+                    <div class="assessment-eyebrow">— Diagnóstico de madurez IA</div>
+                    <h3 class="assessment-title">Antes de empezar.</h3>
+                    <p class="assessment-text">Te haremos 8 preguntas sobre cómo está tu organización en datos, procesos, talento y casos de uso de IA. Responde con honestidad — el valor del diagnóstico depende de eso.</p>
+                    <ul class="assessment-list">
+                        <li><span class="check">→</span> Toma ~5 minutos.</li>
+                        <li><span class="check">→</span> Resultado instantáneo en pantalla.</li>
+                        <li><span class="check">→</span> Te enviamos un roadmap detallado por correo si lo pides.</li>
+                    </ul>
+                    <button class="btn btn-primary" id="assessment-start">Comenzar diagnóstico</button>
+                </div>
+
+                <!-- QUESTION SCREEN -->
+                <div class="assessment-screen assessment-question" data-screen="question" hidden>
+                    <div class="assessment-progress">
+                        <div class="assessment-progress-meta">
+                            <span class="assessment-progress-label">Pregunta <span id="q-current">1</span> de <span id="q-total">8</span></span>
+                            <span class="assessment-progress-dim" id="q-dimension">Datos</span>
+                        </div>
+                        <div class="assessment-progress-bar"><div class="assessment-progress-fill" id="q-progress"></div></div>
+                    </div>
+                    <h3 class="assessment-question-text" id="q-text">Cargando...</h3>
+                    <div class="assessment-options" id="q-options"></div>
+                    <div class="assessment-nav">
+                        <button class="btn btn-secondary" id="q-back" disabled>← Anterior</button>
+                        <span class="assessment-hint" id="q-hint">Selecciona una opción para continuar</span>
+                    </div>
+                </div>
+
+                <!-- RESULT SCREEN -->
+                <div class="assessment-screen assessment-result" data-screen="result" hidden>
+                    <div class="assessment-eyebrow">— Tu resultado</div>
+                    <div class="result-score">
+                        <div class="result-score-number"><span id="r-score">0</span><span class="result-score-max">/16</span></div>
+                        <div class="result-score-label">
+                            <div class="result-bucket" id="r-bucket">—</div>
+                            <p id="r-bucket-desc">—</p>
+                        </div>
+                    </div>
+
+                    <div class="result-dimensions">
+                        <h4>Tu score por dimensión</h4>
+                        <div class="result-bars" id="r-bars"></div>
+                    </div>
+
+                    <div class="result-roadmap">
+                        <h4>Próximos pasos para ti</h4>
+                        <ol id="r-roadmap"></ol>
+                    </div>
+
+                    <div class="result-cta">
+                        <h4>Recibe el roadmap detallado</h4>
+                        <p>Te mandamos por correo el roadmap personalizado de 4 semanas para arrancar, con los casos de uso priorizados según tus respuestas.</p>
+                        <form class="result-form" id="r-form">
+                            <div class="form-row">
+                                <label>Nombre <input type="text" name="nombre" required></label>
+                                <label>Correo <input type="email" name="email" required></label>
+                            </div>
+                            <div class="form-row">
+                                <label>Empresa <input type="text" name="empresa" required></label>
+                                <label>Cargo <input type="text" name="cargo"></label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar y recibir mi roadmap</button>
+                            <p class="form-disclaimer">Al enviar abres tu cliente de correo con tus respuestas y resultado pre-llenados, dirigido a hector@forward34.com.</p>
+                        </form>
+                    </div>
+
+                    <div class="result-secondary">
+                        <button class="btn btn-secondary" id="r-restart">Volver a hacer el diagnóstico</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== MARQUEE ============================== -->
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+            <span class="marquee-item">Diagnóstico IA <span class="dot"></span></span>
+            <span class="marquee-item muted">Casos de uso <span class="dot"></span></span>
+            <span class="marquee-item">Pilotos en producción <span class="dot"></span></span>
+            <span class="marquee-item muted">Agentes y automatización <span class="dot"></span></span>
+            <span class="marquee-item">Adopción con métricas <span class="dot"></span></span>
+            <span class="marquee-item muted">Gobierno de datos <span class="dot"></span></span>
+        </div>
+    </div>
+
+    <!-- ============================== AI SPRINT ============================== -->
+    <section class="section dark" id="ai-sprint">
+        <div class="container">
+            <div class="section-head reveal">
+                <div>
+                    <span class="eyebrow"><span class="dot"></span> Programa estrella</span>
+                    <h2>AI Sprint Forward34.<br>10 semanas para<br>adelantar 2 años.</h2>
+                </div>
+                <p class="head-sub" style="color: rgba(244, 239, 230, 0.65);">Un programa intensivo de 10 semanas inspirado en el método de transformación exponencial, pero centrado en IA aplicada. Dos streams en paralelo: optimizar lo que ya hace tu organización y abrir frentes nuevos de valor con IA.</p>
+            </div>
+
+            <div class="streams">
+                <div class="stream reveal" data-delay="1">
+                    <div class="stream-tag">Stream A · Core</div>
+                    <h3>Apalancar lo que ya<br>tienes.</h3>
+                    <p>Identificamos los procesos críticos del negocio y aplicamos IA para acelerarlos: automatización, copilots, agentes y analítica embebida. Ganancias rápidas, medibles en semanas.</p>
+                    <ul class="stream-list">
+                        <li>Mapeo de procesos con mayor palanca</li>
+                        <li>Pilotos con métricas de impacto</li>
+                        <li>Playbooks de adopción para los equipos</li>
+                    </ul>
+                </div>
+                <div class="stream reveal" data-delay="2">
+                    <div class="stream-tag">Stream B · Edge</div>
+                    <h3>Construir lo que<br>aún no existe.</h3>
+                    <p>Exploramos modelos de negocio nuevos habilitados por IA: productos, servicios, canales y experiencias que tu organización no podía ofrecer antes. Apuestas controladas, validadas con datos.</p>
+                    <ul class="stream-list">
+                        <li>Generación de ideas con marco de oportunidad</li>
+                        <li>Prototipos rápidos con usuarios reales</li>
+                        <li>Casos de negocio listos para inversión</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="phases-wrap reveal" data-delay="3">
+                <h3 class="phases-title">Las cuatro fases del Sprint.</h3>
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">01</div>
+                        <h4>Prepare</h4>
+                        <p>Semanas 1-2. Alineación del comité, definición de scope, métricas de éxito y equipos.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">02</div>
+                        <h4>Awake</h4>
+                        <p>Semanas 3-4. Inmersión del liderazgo en el estado del arte de IA y sus implicaciones para el negocio.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">03</div>
+                        <h4>Disrupt</h4>
+                        <p>Semanas 5-8. Ideación, priorización y construcción de pilotos en los dos streams simultáneamente.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">04</div>
+                        <h4>Implement</h4>
+                        <p>Semanas 9-10. Demo a stakeholders, hoja de ruta a 12 meses, plan de adopción y gobierno.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== DIMENSIONES ============================== -->
+    <section class="section">
+        <div class="container">
+            <div class="section-head reveal">
+                <h2>Las cuatro dimensiones<br>que medimos.</h2>
+                <p class="head-sub">No medimos "qué tan moderno suenas hablando de IA". Medimos las cuatro palancas que determinan si tu organización puede capturar valor real, hoy.</p>
+            </div>
+            <div class="card-grid">
+                <div class="card reveal" data-delay="1">
+                    <div class="card-num">— 01</div>
+                    <h3>Datos</h3>
+                    <p>¿Existen, están limpios, son accesibles? Sin esta base, todo lo demás es marketing. Evaluamos inventario, calidad y gobierno.</p>
+                    <span class="card-arrow">Fundación →</span>
+                </div>
+                <div class="card reveal" data-delay="2">
+                    <div class="card-num">— 02</div>
+                    <h3>Procesos</h3>
+                    <p>¿Están documentados, son repetibles, hay puntos claros para insertar IA o agentes? Identificamos dónde la IA produce más impacto.</p>
+                    <span class="card-arrow">Palanca →</span>
+                </div>
+                <div class="card feature reveal" data-delay="3">
+                    <div class="card-num">— 03</div>
+                    <h3>Talento &amp; cultura</h3>
+                    <p>¿Tu gente usa IA hoy? ¿Hay sponsor ejecutivo? La adopción es 80% del éxito; sin patrocinio claro, los pilotos mueren.</p>
+                    <span class="card-arrow">Adopción →</span>
+                </div>
+                <div class="card reveal" data-delay="1">
+                    <div class="card-num">— 04</div>
+                    <h3>Casos de uso</h3>
+                    <p>¿Hay casos priorizados con ROI estimado? ¿Pilotos vivos? La madurez se mide por cuánto valor estás capturando, no por slides.</p>
+                    <span class="card-arrow">Valor →</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== PARA QUIÉN ============================== -->
+    <section class="section">
+        <div class="container">
+            <div class="section-head reveal">
+                <h2>Para quién<br>tiene sentido.</h2>
+            </div>
+            <div class="pillars">
+                <div class="pillar reveal" data-delay="1">
+                    <span class="num">— Perfil 01</span>
+                    <h3>El director que sabe que IA es el tema, pero no por dónde empezar.</h3>
+                    <p>Necesitas claridad antes de invertir. El diagnóstico te ahorra meses de exploración sin foco.</p>
+                </div>
+                <div class="pillar reveal" data-delay="2">
+                    <span class="num">— Perfil 02</span>
+                    <h3>La organización con pilotos sueltos que no escalan.</h3>
+                    <p>Tienes iniciativas dispersas y poco impacto medible. El Sprint las consolida en una estrategia con métricas.</p>
+                </div>
+                <div class="pillar reveal" data-delay="3">
+                    <span class="num">— Perfil 03</span>
+                    <h3>El equipo que necesita resultados visibles este trimestre.</h3>
+                    <p>Buscas pilotos en producción con ROI claro, no proyectos eternos. El Sprint entrega valor desde la semana 5.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== CTA FULL ============================== -->
+    <section class="cta-full">
+        <div class="container">
+            <span class="eyebrow reveal"><span class="dot"></span> Empieza por el diagnóstico</span>
+            <h2 class="reveal" data-delay="1">5 minutos<br>pueden cambiar<br>tu próxima década.</h2>
+            <p class="reveal" data-delay="2">El primer paso es entender dónde estás. Sin compromiso, sin venta, sin perder tiempo.</p>
+            <div class="hero-cta reveal" data-delay="3">
+                <a href="#diagnostico" class="btn btn-primary">Iniciar diagnóstico</a>
+                <a href="mailto:hector@forward34.com" class="btn btn-secondary">Hablar directamente</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== FOOTER ============================== -->
+    <footer>
+        <div class="container">
+            <div class="footer-wordmark">Forward<span class="accent">34</span></div>
+            <div class="footer-content">
+                <div class="footer-section intro">
+                    <h4>La firma</h4>
+                    <p>Estrategia y transformación organizacional. Operamos desde México para América Latina.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navegación</h4>
+                    <p><a href="index.html">Inicio</a></p>
+                    <p><a href="empresa.html">Empresa</a></p>
+                    <p><a href="servicios.html">Servicios</a></p>
+                    <p><a href="consultoria-ia.html">Consultoría IA</a></p>
+                    <p><a href="descubrete.html">Descúbrete+</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p><a href="mailto:hector@forward34.com">hector@forward34.com</a></p>
+                    <p>México</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <p><a href="#" class="open-privacy-modal">Aviso de privacidad</a></p>
+                    <p><a href="#" class="open-privacy-modal">Términos</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Forward34 S.A. de C.V. — Todos los derechos reservados.</p>
+                <p>Hecho con foco en resultados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="public/js/wow.js"></script>
+    <script src="public/js/privacy-modal.js"></script>
+    <script src="public/js/assessment.js"></script>
+</body>
+</html>
