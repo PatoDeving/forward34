@@ -22,7 +22,10 @@
       "Bash(del nul)",
       "Bash(git commit -m \"$(cat <<''EOF''\nAdd complete Forward34 website with all pages and assets\n\n- Add main pages: index, empresa, servicios, descubrete, contacto\n- Add public assets (CSS, images, logos)\n- Add configuration files (package.json, vercel.json)\n- Add documentation and setup guides\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git push:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nAdd privacy policy and terms modal to all pages\n\n- Create privacy-modal.css with modern modal styles\n- Create privacy-modal.js with modal functionality\n- Add privacy policy and terms content with today''s date (Jan 1, 2026)\n- Update all HTML pages (index, empresa, servicios, descubrete, contacto)\n- Add modal link to footer of all pages\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd privacy policy and terms modal to all pages\n\n- Create privacy-modal.css with modern modal styles\n- Create privacy-modal.js with modal functionality\n- Add privacy policy and terms content with today''s date (Jan 1, 2026)\n- Update all HTML pages (index, empresa, servicios, descubrete, contacto)\n- Add modal link to footer of all pages\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(rm -rf screenshots/*)",
+      "Bash(export PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers)",
+      "Bash(npx playwright *)"
     ]
   }
 }
