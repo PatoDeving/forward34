@@ -127,11 +127,25 @@
 
     const state = {
         current: 0,
-        answers: new Array(QUESTIONS.length).fill(null)
+        answers: new Array(QUESTIONS.length).fill(null),
+        startedAt: null
     };
 
     const screens = root.querySelectorAll('.assessment-screen');
     const $ = (sel) => root.querySelector(sel);
+
+    // ----- Analytics -----
+    function track(name, payload) {
+        const data = Object.assign({ event: name }, payload || {});
+        try {
+            if (window.dataLayer && typeof window.dataLayer.push === 'function') {
+                window.dataLayer.push(data);
+            }
+            if (typeof window.plausible === 'function') {
+                window.plausible(name, { props: payload || {} });
+            }
+        } catch (_) { /* analytics no debe romper la UI */ }
+    }
 
     function showScreen(name) {
         screens.forEach((s) => {
@@ -156,6 +170,7 @@
             const btn = document.createElement('button');
             btn.type = 'button';
             btn.className = 'assessment-option';
+            btn.setAttribute('data-test', 'option-' + i);
             if (selected === i) btn.classList.add('selected');
             btn.innerHTML = '<span class="opt-marker"></span><span class="opt-label">' + opt.label + '</span>';
             btn.addEventListener('click', () => selectOption(i));
@@ -167,8 +182,15 @@
     }
 
     function selectOption(i) {
+        const isFirst = state.answers[state.current] === null;
         state.answers[state.current] = i;
         renderQuestion();
+        track('assessment_answer', {
+            q: state.current + 1,
+            dimension: QUESTIONS[state.current].dimension,
+            score: QUESTIONS[state.current].options[i].score,
+            first_answer: isFirst
+        });
         setTimeout(() => {
             if (state.current < QUESTIONS.length - 1) {
                 state.current++;
@@ -176,6 +198,8 @@
             } else {
                 renderResult();
                 showScreen('result');
+                const { total, bucket } = scoreSummary();
+                track('assessment_complete', { score: total, bucket });
             }
         }, 280);
     }
@@ -196,6 +220,12 @@
 
     function getBucket(total) {
         return BUCKETS.find((b) => total >= b.min && total <= b.max) || BUCKETS[0];
+    }
+
+    function scoreSummary() {
+        const { total, byDim } = computeScore();
+        const bucket = getBucket(total).label;
+        return { total, byDim, bucket };
     }
 
     function renderResult() {
@@ -237,48 +267,88 @@
         });
     }
 
-    function buildMailto(formData) {
+    function buildLeadPayload(formData) {
         const { total, byDim } = computeScore();
-        const bucket = getBucket(total);
+        const bucket = getBucket(total).label;
+        return {
+            nombre: formData.nombre,
+            email: formData.email,
+            empresa: formData.empresa,
+            cargo: formData.cargo,
+            tamano: formData.tamano,
+            consent: !!formData.consent,
+            score: total,
+            bucket: bucket,
+            byDim: Object.keys(byDim).map((d) => ({
+                name: d, score: byDim[d].score, max: byDim[d].max
+            })),
+            answers: QUESTIONS.map((q, i) => {
+                const a = state.answers[i];
+                return {
+                    dimension: q.dimension,
+                    question: q.text,
+                    answer: a === null ? '(sin responder)' : q.options[a].label
+                };
+            }),
+            source: 'consultoria-ia.html',
+            website: formData.website || ''
+        };
+    }
+
+    function buildMailtoFallback(lead) {
         const lines = [];
         lines.push('Hola Forward34,');
         lines.push('');
-        lines.push('Acabo de completar el diagnóstico de madurez de IA. Me gustaría recibir el roadmap detallado.');
+        lines.push('Acabo de completar el diagnóstico de madurez de IA.');
         lines.push('');
-        lines.push('--- MIS DATOS ---');
-        lines.push('Nombre: ' + (formData.nombre || ''));
-        lines.push('Correo: ' + (formData.email || ''));
-        lines.push('Empresa: ' + (formData.empresa || ''));
-        lines.push('Cargo: ' + (formData.cargo || ''));
+        lines.push('Mis datos:');
+        lines.push('  Nombre: ' + lead.nombre);
+        lines.push('  Empresa: ' + lead.empresa + ' (' + (lead.tamano || '—') + ')');
+        lines.push('  Cargo: ' + (lead.cargo || '—'));
         lines.push('');
-        lines.push('--- MI RESULTADO ---');
-        lines.push('Score total: ' + total + '/16  (' + bucket.label + ')');
+        lines.push('Resultado: ' + lead.score + '/16 — ' + lead.bucket);
         lines.push('');
-        lines.push('Desglose por dimensión:');
-        Object.keys(byDim).forEach((d) => {
-            lines.push('  · ' + d + ': ' + byDim[d].score + '/' + byDim[d].max);
-        });
+        lines.push('Desglose:');
+        (lead.byDim || []).forEach((d) => lines.push('  · ' + d.name + ': ' + d.score + '/' + d.max));
         lines.push('');
-        lines.push('--- MIS RESPUESTAS ---');
-        QUESTIONS.forEach((q, i) => {
-            const a = state.answers[i];
-            const ans = a === null ? '(sin responder)' : q.options[a].label;
-            lines.push((i + 1) + '. [' + q.dimension + '] ' + q.text);
-            lines.push('   → ' + ans);
-        });
-        lines.push('');
-        lines.push('Quedo atento.');
+        lines.push('Quedo atento al roadmap detallado.');
 
-        const subject = 'Diagnóstico IA — ' + (formData.empresa || formData.nombre || 'Nuevo lead') + ' (' + total + '/16, ' + bucket.label + ')';
-        const body = lines.join('\n');
-        return 'mailto:hector@forward34.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        const subject = 'Diagnóstico IA — ' + (lead.empresa || lead.nombre) + ' (' + lead.score + '/16, ' + lead.bucket + ')';
+        return 'mailto:hector@forward34.com?subject=' + encodeURIComponent(subject) +
+            '&body=' + encodeURIComponent(lines.join('\n'));
     }
 
-    // Wire up
+    async function submitLead(lead) {
+        try {
+            const res = await fetch('/api/lead', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(lead)
+            });
+            if (!res.ok) {
+                const data = await res.json().catch(() => ({}));
+                throw new Error(data.error || ('HTTP ' + res.status));
+            }
+            return await res.json();
+        } catch (err) {
+            return { ok: false, error: err.message || String(err) };
+        }
+    }
+
+    function showFormStatus(message, type) {
+        const el = $('#r-form-status');
+        el.textContent = message;
+        el.classList.remove('is-error', 'is-success');
+        if (type) el.classList.add('is-' + type);
+    }
+
+    // ----- Wiring -----
     $('#assessment-start').addEventListener('click', () => {
         state.current = 0;
+        state.startedAt = Date.now();
         renderQuestion();
         showScreen('question');
+        track('assessment_start', {});
     });
 
     $('#q-back').addEventListener('click', () => {
@@ -292,17 +362,57 @@
         state.current = 0;
         state.answers = new Array(QUESTIONS.length).fill(null);
         showScreen('intro');
+        track('assessment_restart', {});
     });
 
-    $('#r-form').addEventListener('submit', (e) => {
+    $('#r-form').addEventListener('submit', async (e) => {
         e.preventDefault();
-        const fd = new FormData(e.target);
+        const form = e.target;
+        const fd = new FormData(form);
         const data = {
-            nombre: fd.get('nombre'),
-            email: fd.get('email'),
-            empresa: fd.get('empresa'),
-            cargo: fd.get('cargo')
+            nombre: (fd.get('nombre') || '').toString().trim(),
+            email: (fd.get('email') || '').toString().trim(),
+            empresa: (fd.get('empresa') || '').toString().trim(),
+            cargo: (fd.get('cargo') || '').toString().trim(),
+            tamano: (fd.get('tamano') || '').toString(),
+            consent: fd.get('consent') === 'on',
+            website: (fd.get('website') || '').toString()
         };
-        window.location.href = buildMailto(data);
+
+        if (!data.nombre || !data.email || !data.empresa || !data.tamano) {
+            showFormStatus('Faltan campos obligatorios.', 'error');
+            return;
+        }
+        if (!data.consent) {
+            showFormStatus('Necesitas aceptar el aviso de privacidad para continuar.', 'error');
+            return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+            showFormStatus('El correo no parece válido.', 'error');
+            return;
+        }
+
+        const lead = buildLeadPayload(data);
+        const submitBtn = $('#r-submit');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+        showFormStatus('Enviando tus respuestas...', null);
+        track('lead_submit', { score: lead.score, bucket: lead.bucket, tamano: lead.tamano });
+
+        const result = await submitLead(lead);
+
+        submitBtn.disabled = false;
+
+        if (result && result.ok) {
+            submitBtn.textContent = '✓ Recibido';
+            showFormStatus('¡Gracias! Recibimos tus respuestas. Te contactaremos en menos de 48 horas hábiles con el roadmap detallado.', 'success');
+            form.querySelectorAll('input, select, button').forEach((el) => { el.disabled = true; });
+            track('lead_success', { score: lead.score, bucket: lead.bucket });
+        } else {
+            submitBtn.textContent = 'Reintentar';
+            showFormStatus('No pudimos enviar automáticamente. Abrimos tu cliente de correo como alternativa.', 'error');
+            track('lead_fallback_mailto', { error: result && result.error });
+            window.location.href = buildMailtoFallback(lead);
+        }
     });
 })();

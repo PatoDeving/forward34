@@ -17,6 +17,16 @@
   "author": "Forward34 S.A. de C.V.",
   "license": "UNLICENSED",
   "private": true,
-  "devDependencies": {},
-  "dependencies": {}
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "http-server": "^14.1.1"
+  },
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:42085/git/PatoDeving/forward34"
+  }
 }

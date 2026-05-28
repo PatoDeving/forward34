@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="public/css/styles.css">
     <link rel="stylesheet" href="public/css/improvements.css">
     <link rel="stylesheet" href="public/css/privacy-modal.css">
+    <link rel="stylesheet" href="public/css/mobile-menu.css">
     <link rel="stylesheet" href="public/css/assessment.css">
 </head>
 <body>
@@ -40,8 +41,23 @@
                 <a href="consultoria-ia.html" class="active">Consultoría IA</a>
                 <a href="mailto:hector@forward34.com" class="btn btn-primary">Hablemos</a>
             </nav>
+            <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </header>
+
+    <aside class="mobile-menu" aria-label="Menú móvil">
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="empresa.html">Empresa</a>
+            <a href="descubrete.html">Descúbrete+</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="consultoria-ia.html">Consultoría IA</a>
+            <a href="mailto:hector@forward34.com" class="btn btn-primary">Hablemos</a>
+        </nav>
+    </aside>
+    <div class="mobile-overlay" aria-hidden="true"></div>
 
     <!-- ============================== HERO ============================== -->
     <section class="hero hero--servicios" style="min-height: 80vh !important;">
@@ -132,7 +148,7 @@
                     <div class="result-cta">
                         <h4>Recibe el roadmap detallado</h4>
                         <p>Te mandamos por correo el roadmap personalizado de 4 semanas para arrancar, con los casos de uso priorizados según tus respuestas.</p>
-                        <form class="result-form" id="r-form">
+                        <form class="result-form" id="r-form" novalidate>
                             <div class="form-row">
                                 <label>Nombre <input type="text" name="nombre" required></label>
                                 <label>Correo <input type="email" name="email" required></label>
@@ -141,8 +157,23 @@
                                 <label>Empresa <input type="text" name="empresa" required></label>
                                 <label>Cargo <input type="text" name="cargo"></label>
                             </div>
-                            <button type="submit" class="btn btn-primary">Enviar y recibir mi roadmap</button>
-                            <p class="form-disclaimer">Al enviar abres tu cliente de correo con tus respuestas y resultado pre-llenados, dirigido a hector@forward34.com.</p>
+                            <label class="form-select-label">Tamaño de la empresa
+                                <select name="tamano" required>
+                                    <option value="">Selecciona...</option>
+                                    <option value="1-20">1 - 20 personas</option>
+                                    <option value="21-100">21 - 100 personas</option>
+                                    <option value="101-500">101 - 500 personas</option>
+                                    <option value="501-2000">501 - 2,000 personas</option>
+                                    <option value="2001+">Más de 2,000</option>
+                                </select>
+                            </label>
+                            <label class="form-consent">
+                                <input type="checkbox" name="consent" required>
+                                <span>He leído y acepto el <a href="#" class="open-privacy-modal">aviso de privacidad</a>. Autorizo a Forward34 a contactarme con el roadmap personalizado.</span>
+                            </label>
+                            <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp-field" aria-hidden="true">
+                            <button type="submit" class="btn btn-primary" id="r-submit">Enviar y recibir mi roadmap</button>
+                            <p class="form-disclaimer" id="r-form-status">Sin spam: usamos tus datos sólo para enviarte el roadmap y dar seguimiento si lo pides.</p>
                         </form>
                     </div>
 
@@ -340,6 +371,7 @@
 
     <script src="public/js/wow.js"></script>
     <script src="public/js/privacy-modal.js"></script>
+    <script src="public/js/mobile-menu.js"></script>
     <script src="public/js/assessment.js"></script>
 </body>
 </html>

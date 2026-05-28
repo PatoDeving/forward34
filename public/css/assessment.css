@@ -338,10 +338,83 @@
 .result-form .btn-primary { align-self: flex-start; margin-top: 0.5rem; }
 
 .form-disclaimer {
-    font-size: 0.8rem;
-    color: rgba(244, 239, 230, 0.45);
-    margin: 0.5rem 0 0;
+    font-size: 0.85rem;
+    color: rgba(244, 239, 230, 0.5);
+    margin: 0.75rem 0 0;
     line-height: 1.5;
+    transition: color 0.2s;
+}
+
+.form-disclaimer.is-error { color: #ffb4b4; }
+.form-disclaimer.is-success { color: var(--volt); }
+
+.form-select-label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(244, 239, 230, 0.55);
+}
+
+.form-select-label select {
+    background: var(--ink-3);
+    border: 1px solid rgba(244, 239, 230, 0.15);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    color: var(--cream);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%23F4EFE6' d='M6 8L0 0h12z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+
+.form-select-label select:focus {
+    outline: none;
+    border-color: var(--volt);
+}
+
+.form-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: rgba(244, 239, 230, 0.78);
+    line-height: 1.5;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+.form-consent input[type="checkbox"] {
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--volt);
+    margin-top: 2px;
+    cursor: pointer;
+}
+
+.form-consent a {
+    color: var(--volt);
+    text-decoration: underline;
+}
+
+/* Honeypot anti-bot — invisible para humanos */
+.hp-field {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 .result-secondary {
