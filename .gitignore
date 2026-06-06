@@ -1,6 +1,11 @@
 # Vercel
 .vercel
 
+# Env (nunca commitear secretos como RESEND_API_KEY)
+.env
+.env.local
+.env.*.local
+
 # OS
 .DS_Store
 Thumbs.db
