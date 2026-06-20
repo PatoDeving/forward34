@@ -1,10 +1,9 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
 
-// El mobile menu solo está habilitado en consultoria-ia.html en este branch.
-// El resto del sitio mantiene su comportamiento previo (menú desktop con
-// regla `display: none` en viewport angosto). Cuando se quiera extender a
-// todo el sitio, este test se replica para las otras páginas.
+// El mobile menu está habilitado en TODO el sitio (header con hamburguesa
+// + panel deslizable). Estas pruebas detalladas corren sobre consultoria-ia
+// y abajo hay un smoke test parametrizado para las 6 páginas.
 
 test.describe('mobile menu (consultoria-ia)', () => {
     test.use({ viewport: { width: 380, height: 800 } });
@@ -44,4 +43,34 @@ test.describe('mobile menu (consultoria-ia)', () => {
         await page.keyboard.press('Escape');
         await expect(page.locator('.mobile-menu')).not.toHaveClass(/is-open/);
     });
+});
+
+// Smoke: el hamburger + panel funcionan en TODAS las páginas (antes solo
+// existía en consultoria-ia — el resto no tenía navegación en móvil).
+test.describe('mobile menu — presente en todo el sitio', () => {
+    test.use({ viewport: { width: 380, height: 800 } });
+
+    const PAGES = [
+        '/index.html',
+        '/consultoria-ia.html',
+        '/servicios.html',
+        '/empresa.html',
+        '/descubrete.html',
+        '/contacto.html'
+    ];
+
+    for (const path of PAGES) {
+        test(`${path} — toggle visible y abre el panel`, async ({ page }) => {
+            await page.goto(path);
+            const toggle = page.locator('.mobile-menu-toggle');
+            const menu = page.locator('.mobile-menu');
+            await expect(toggle).toBeVisible();
+            await expect(menu).not.toHaveClass(/is-open/);
+            await toggle.click();
+            await expect(menu).toHaveClass(/is-open/);
+            // El panel debe tener los 5 links de navegación.
+            await expect(menu.locator('a[href="index.html"]')).toBeVisible();
+            await expect(menu.locator('a[href="consultoria-ia.html"]')).toBeVisible();
+        });
+    }
 });

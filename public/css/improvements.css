@@ -1213,3 +1213,16 @@ footer .container { position: relative; z-index: 1; }
     background:
         radial-gradient(50% 50% at 50% 30%, rgba(215, 255, 58, 0.22), transparent 60%);
 }
+.hero--consultoria::before {
+    background:
+        radial-gradient(55% 55% at 70% 70%, rgba(215, 255, 58, 0.28), transparent 60%),
+        radial-gradient(45% 45% at 15% 25%, rgba(42, 31, 61, 0.12), transparent 60%);
+}
+
+/* Altura del hero por página (antes venía como style inline con !important;
+   en móvil prevalece el min-height:auto del media query de 768px). */
+.hero--consultoria { min-height: 80vh; }
+.hero--servicios   { min-height: 75vh; }
+.hero--empresa     { min-height: 75vh; }
+.hero--descubrete  { min-height: 80vh; }
+.hero--contacto    { min-height: 60vh; }

@@ -8,6 +8,11 @@
     <link rel="canonical" href="https://forward34.com/">
     <meta name="theme-color" content="#0B0B0F">
 
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/public/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/public/apple-touch-icon.png">
+    <link rel="manifest" href="/public/site.webmanifest">
+
     <meta property="og:site_name" content="Forward34">
     <meta property="og:locale" content="es_MX">
     <meta property="og:title" content="Forward34 — Estrategia y transformación organizacional">
@@ -37,6 +42,7 @@
     <link rel="stylesheet" href="public/css/styles.css">
     <link rel="stylesheet" href="public/css/improvements.css">
     <link rel="stylesheet" href="public/css/privacy-modal.css">
+    <link rel="stylesheet" href="public/css/mobile-menu.css">
 
     <script type="application/ld+json">
     {
@@ -79,15 +85,30 @@
                 </a>
             </div>
             <nav class="main-nav">
-                <a href="index.html">Inicio</a>
+                <a href="index.html" class="active">Inicio</a>
                 <a href="empresa.html">Empresa</a>
                 <a href="descubrete.html">Descúbrete+</a>
                 <a href="servicios.html">Servicios</a>
                 <a href="consultoria-ia.html">Consultoría IA</a>
                 <a href="mailto:hector@forward34.com" class="btn btn-primary">Hablemos</a>
             </nav>
+            <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </header>
+
+    <aside class="mobile-menu" aria-label="Menú móvil">
+        <nav>
+            <a href="index.html" class="active">Inicio</a>
+            <a href="empresa.html">Empresa</a>
+            <a href="descubrete.html">Descúbrete+</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="consultoria-ia.html">Consultoría IA</a>
+            <a href="mailto:hector@forward34.com" class="btn btn-primary">Hablemos</a>
+        </nav>
+    </aside>
+    <div class="mobile-overlay" aria-hidden="true"></div>
 
     <!-- ============================== HERO ============================== -->
     <section class="hero hero--home">
@@ -240,7 +261,7 @@
                 </div>
                 <div class="footer-section">
                     <h4>Navegación</h4>
-                    <p><a href="index.html">Inicio</a></p>
+                    <p><a href="index.html" class="active">Inicio</a></p>
                     <p><a href="empresa.html">Empresa</a></p>
                     <p><a href="servicios.html">Servicios</a></p>
                     <p><a href="descubrete.html">Descúbrete+</a></p>
@@ -265,5 +286,6 @@
 
     <script src="public/js/wow.js"></script>
     <script src="public/js/privacy-modal.js"></script>
+    <script src="public/js/mobile-menu.js"></script>
 </body>
 </html>
