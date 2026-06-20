@@ -21,19 +21,19 @@ async function shot(page, name, testInfo) {
 
 test.describe('visual screenshots', () => {
     test('home desktop', async ({ page }, testInfo) => {
-        await page.goto('/index.html');
+        await page.goto('/');
         await page.waitForLoadState('networkidle');
         await shot(page, 'home-desktop', testInfo);
     });
 
     test('consultoria-ia hero + intro', async ({ page }, testInfo) => {
-        await page.goto('/consultoria-ia.html');
+        await page.goto('/consultoria-ia');
         await page.waitForLoadState('networkidle');
         await shot(page, 'consultoria-ia-full', testInfo);
     });
 
     test('consultoria-ia diagnóstico en pregunta 4', async ({ page }, testInfo) => {
-        await page.goto('/consultoria-ia.html');
+        await page.goto('/consultoria-ia');
         await page.locator('#assessment-start').click();
         for (let i = 1; i < 4; i++) {
             await page.locator('[data-test="option-1"]').click();
@@ -44,7 +44,7 @@ test.describe('visual screenshots', () => {
     });
 
     test('consultoria-ia resultado y form', async ({ page }, testInfo) => {
-        await page.goto('/consultoria-ia.html');
+        await page.goto('/consultoria-ia');
         await page.locator('#assessment-start').click();
         for (let i = 1; i <= 8; i++) {
             const opt = (i % 3);
@@ -57,7 +57,7 @@ test.describe('visual screenshots', () => {
     });
 
     test('servicios desktop', async ({ page }, testInfo) => {
-        await page.goto('/servicios.html');
+        await page.goto('/servicios');
         await page.waitForLoadState('networkidle');
         await shot(page, 'servicios-desktop', testInfo);
     });
@@ -67,19 +67,19 @@ test.describe('visual screenshots mobile', () => {
     test.use({ viewport: { width: 390, height: 844 } });
 
     test('home mobile', async ({ page }, testInfo) => {
-        await page.goto('/index.html');
+        await page.goto('/');
         await page.waitForLoadState('networkidle');
         await shot(page, 'home-mobile', testInfo);
     });
 
     test('consultoria-ia mobile', async ({ page }, testInfo) => {
-        await page.goto('/consultoria-ia.html');
+        await page.goto('/consultoria-ia');
         await page.waitForLoadState('networkidle');
         await shot(page, 'consultoria-ia-mobile', testInfo);
     });
 
     test('mobile menu abierto', async ({ page }, testInfo) => {
-        await page.goto('/consultoria-ia.html');
+        await page.goto('/consultoria-ia');
         await page.locator('.mobile-menu-toggle').click();
         await page.waitForTimeout(400);
         await shot(page, 'mobile-menu-open', testInfo);

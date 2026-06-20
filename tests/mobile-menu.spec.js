@@ -9,7 +9,7 @@ test.describe('mobile menu (consultoria-ia)', () => {
     test.use({ viewport: { width: 380, height: 800 } });
 
     test('toggle abre y cierra el panel', async ({ page }) => {
-        await page.goto('/consultoria-ia.html');
+        await page.goto('/consultoria-ia');
         const toggle = page.locator('.mobile-menu-toggle');
         const menu = page.locator('.mobile-menu');
         await expect(toggle).toBeVisible();
@@ -21,23 +21,23 @@ test.describe('mobile menu (consultoria-ia)', () => {
     });
 
     test('menú móvil tiene link a todas las secciones', async ({ page }) => {
-        await page.goto('/consultoria-ia.html');
+        await page.goto('/consultoria-ia');
         await page.locator('.mobile-menu-toggle').click();
-        await expect(page.locator('.mobile-menu a[href="index.html"]')).toBeVisible();
-        await expect(page.locator('.mobile-menu a[href="empresa.html"]')).toBeVisible();
-        await expect(page.locator('.mobile-menu a[href="servicios.html"]')).toBeVisible();
-        await expect(page.locator('.mobile-menu a[href="consultoria-ia.html"]')).toBeVisible();
+        await expect(page.locator('.mobile-menu a[href="/"]')).toBeVisible();
+        await expect(page.locator('.mobile-menu a[href="empresa"]')).toBeVisible();
+        await expect(page.locator('.mobile-menu a[href="servicios"]')).toBeVisible();
+        await expect(page.locator('.mobile-menu a[href="consultoria-ia"]')).toBeVisible();
     });
 
     test('click en link cierra el menú y navega', async ({ page }) => {
-        await page.goto('/consultoria-ia.html');
+        await page.goto('/consultoria-ia');
         await page.locator('.mobile-menu-toggle').click();
-        await page.locator('.mobile-menu a[href="empresa.html"]').click();
-        await expect(page).toHaveURL(/empresa\.html/);
+        await page.locator('.mobile-menu a[href="empresa"]').click();
+        await expect(page).toHaveURL(/\/empresa$/);
     });
 
     test('tecla Escape cierra el menú', async ({ page }) => {
-        await page.goto('/consultoria-ia.html');
+        await page.goto('/consultoria-ia');
         await page.locator('.mobile-menu-toggle').click();
         await expect(page.locator('.mobile-menu')).toHaveClass(/is-open/);
         await page.keyboard.press('Escape');
@@ -51,12 +51,12 @@ test.describe('mobile menu — presente en todo el sitio', () => {
     test.use({ viewport: { width: 380, height: 800 } });
 
     const PAGES = [
-        '/index.html',
-        '/consultoria-ia.html',
-        '/servicios.html',
-        '/empresa.html',
-        '/descubrete.html',
-        '/contacto.html'
+        '/',
+        '/consultoria-ia',
+        '/servicios',
+        '/empresa',
+        '/descubrete',
+        '/contacto'
     ];
 
     for (const path of PAGES) {
@@ -69,8 +69,8 @@ test.describe('mobile menu — presente en todo el sitio', () => {
             await toggle.click();
             await expect(menu).toHaveClass(/is-open/);
             // El panel debe tener los 5 links de navegación.
-            await expect(menu.locator('a[href="index.html"]')).toBeVisible();
-            await expect(menu.locator('a[href="consultoria-ia.html"]')).toBeVisible();
+            await expect(menu.locator('a[href="/"]')).toBeVisible();
+            await expect(menu.locator('a[href="consultoria-ia"]')).toBeVisible();
         });
     }
 });

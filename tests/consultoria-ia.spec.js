@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 
 test.describe('consultoria-ia.html', () => {
     test('hero carga con título y CTAs', async ({ page }) => {
-        await page.goto('/consultoria-ia.html');
+        await page.goto('/consultoria-ia');
         await expect(page).toHaveTitle(/Consultoría IA/);
         await expect(page.locator('h1')).toContainText('Descubre el potencial');
         await expect(page.locator('a[href="#diagnostico"]').first()).toBeVisible();
@@ -11,7 +11,7 @@ test.describe('consultoria-ia.html', () => {
     });
 
     test('flujo completo del diagnóstico: intro → 8 preguntas → resultado', async ({ page }) => {
-        await page.goto('/consultoria-ia.html');
+        await page.goto('/consultoria-ia');
         await page.locator('#assessment-start').click();
 
         // Recorrer las 8 preguntas eligiendo la opción intermedia (score 1)
@@ -38,7 +38,7 @@ test.describe('consultoria-ia.html', () => {
     });
 
     test('score máximo y mínimo se calculan correcto', async ({ page }) => {
-        await page.goto('/consultoria-ia.html');
+        await page.goto('/consultoria-ia');
         await page.locator('#assessment-start').click();
         for (let i = 1; i <= 8; i++) {
             await page.locator('[data-test="option-2"]').click();
@@ -49,7 +49,7 @@ test.describe('consultoria-ia.html', () => {
     });
 
     test('botón anterior regresa a la pregunta previa y mantiene selección', async ({ page }) => {
-        await page.goto('/consultoria-ia.html');
+        await page.goto('/consultoria-ia');
         await page.locator('#assessment-start').click();
         await page.locator('[data-test="option-2"]').click();
         await expect(page.locator('#q-current')).toHaveText('2');
@@ -60,7 +60,7 @@ test.describe('consultoria-ia.html', () => {
     });
 
     test('form valida campos requeridos y consentimiento', async ({ page }) => {
-        await page.goto('/consultoria-ia.html');
+        await page.goto('/consultoria-ia');
         await page.locator('#assessment-start').click();
         for (let i = 1; i <= 8; i++) {
             await page.locator('[data-test="option-0"]').click();
@@ -96,7 +96,7 @@ test.describe('consultoria-ia.html', () => {
             });
         });
 
-        await page.goto('/consultoria-ia.html');
+        await page.goto('/consultoria-ia');
         await page.locator('#assessment-start').click();
         for (let i = 1; i <= 8; i++) {
             await page.locator('[data-test="option-1"]').click();
@@ -116,7 +116,7 @@ test.describe('consultoria-ia.html', () => {
     });
 
     test('reiniciar diagnóstico limpia el estado', async ({ page }) => {
-        await page.goto('/consultoria-ia.html');
+        await page.goto('/consultoria-ia');
         await page.locator('#assessment-start').click();
         for (let i = 1; i <= 8; i++) {
             await page.locator('[data-test="option-2"]').click();
@@ -130,12 +130,12 @@ test.describe('consultoria-ia.html', () => {
 
 test.describe('navegación cross-pages', () => {
     const pages = [
-        { url: '/index.html', title: /Forward34/ },
-        { url: '/empresa.html', title: /Empresa/ },
-        { url: '/descubrete.html', title: /Descúbrete/ },
-        { url: '/servicios.html', title: /Servicios/ },
-        { url: '/contacto.html', title: /Contacto/ },
-        { url: '/consultoria-ia.html', title: /Consultoría IA/ }
+        { url: '/', title: /Forward34/ },
+        { url: '/empresa', title: /Empresa/ },
+        { url: '/descubrete', title: /Descúbrete/ },
+        { url: '/servicios', title: /Servicios/ },
+        { url: '/contacto', title: /Contacto/ },
+        { url: '/consultoria-ia', title: /Consultoría IA/ }
     ];
 
     for (const p of pages) {
@@ -143,7 +143,7 @@ test.describe('navegación cross-pages', () => {
             await page.goto(p.url);
             await expect(page).toHaveTitle(p.title);
             // El link existe ya sea en main-nav o mobile-menu
-            const links = page.locator('a[href="consultoria-ia.html"]');
+            const links = page.locator('a[href="consultoria-ia"]');
             await expect.poll(async () => await links.count()).toBeGreaterThan(0);
         });
     }
