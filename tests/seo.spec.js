@@ -8,11 +8,11 @@ const path = require('path');
 
 const PAGES = [
     { path: '/', canonical: 'https://forward34.com/' },
-    { path: '/consultoria-ia.html', canonical: 'https://forward34.com/consultoria-ia.html' },
-    { path: '/servicios.html', canonical: 'https://forward34.com/servicios.html' },
-    { path: '/empresa.html', canonical: 'https://forward34.com/empresa.html' },
-    { path: '/descubrete.html', canonical: 'https://forward34.com/descubrete.html' },
-    { path: '/contacto.html', canonical: 'https://forward34.com/contacto.html' }
+    { path: '/consultoria-ia', canonical: 'https://forward34.com/consultoria-ia' },
+    { path: '/servicios', canonical: 'https://forward34.com/servicios' },
+    { path: '/empresa', canonical: 'https://forward34.com/empresa' },
+    { path: '/descubrete', canonical: 'https://forward34.com/descubrete' },
+    { path: '/contacto', canonical: 'https://forward34.com/contacto' }
 ];
 
 test.describe('SEO essentials', () => {
@@ -68,7 +68,7 @@ test.describe('SEO essentials', () => {
     });
 
     test('consultoria-ia incluye JSON-LD con Service y FAQPage', async ({ page }) => {
-        await page.goto('/consultoria-ia.html');
+        await page.goto('/consultoria-ia');
         const blocks = await page.locator('script[type="application/ld+json"]').allTextContents();
         const joined = blocks.join('\n');
         expect(joined).toContain('"@type": "Service"');
@@ -93,7 +93,7 @@ test.describe('SEO essentials', () => {
         const sitemap = await page.request.get('/sitemap.xml');
         expect(sitemap.ok()).toBeTruthy();
         const xml = await sitemap.text();
-        expect(xml).toContain('<loc>https://forward34.com/consultoria-ia.html</loc>');
+        expect(xml).toContain('<loc>https://forward34.com/consultoria-ia</loc>');
     });
 
     // El serving real del 404 depende de Vercel; aquí validamos que el
@@ -103,8 +103,8 @@ test.describe('SEO essentials', () => {
         const html = fs.readFileSync(path.join(__dirname, '..', '404.html'), 'utf8');
         expect(html).toMatch(/<meta name="robots" content="noindex/);
         expect(html).toContain('href="/public/css/styles.css"');
-        expect(html).toContain('href="/index.html"');
-        expect(html).toContain('href="/consultoria-ia.html"');
+        expect(html).toContain('href="/"');
+        expect(html).toContain('href="/consultoria-ia"');
         // No debe haber rutas relativas a assets (romperían en /foo/bar).
         expect(html).not.toMatch(/href="public\//);
         expect(html).not.toMatch(/src="public\//);
