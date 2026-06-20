@@ -15,7 +15,7 @@ const PAGES = [
 
 test.describe('SEO essentials', () => {
     for (const p of PAGES) {
-        test(`${p.path} tiene canonical + open graph + twitter card`, async ({ page }) => {
+        test(`${p.path} tiene canonical + open graph + twitter card + favicon`, async ({ page }) => {
             await page.goto(p.path);
 
             const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
@@ -29,8 +29,36 @@ test.describe('SEO essentials', () => {
 
             const twCard = await page.locator('meta[name="twitter:card"]').getAttribute('content');
             expect(twCard).toBe('summary_large_image');
+
+            // Favicon: SVG + PNG + apple-touch-icon + manifest
+            const svgIcon = await page.locator('link[rel="icon"][type="image/svg+xml"]').getAttribute('href');
+            expect(svgIcon).toBe('public/favicon.svg');
+            const appleIcon = await page.locator('link[rel="apple-touch-icon"]').getAttribute('href');
+            expect(appleIcon).toBe('public/apple-touch-icon.png');
+            const manifest = await page.locator('link[rel="manifest"]').getAttribute('href');
+            expect(manifest).toBe('public/site.webmanifest');
         });
     }
+
+    test('favicon assets se sirven con el content-type correcto', async ({ page }) => {
+        const svg = await page.request.get('/public/favicon.svg');
+        expect(svg.ok()).toBeTruthy();
+        expect(svg.headers()['content-type']).toMatch(/svg/);
+
+        const png32 = await page.request.get('/public/favicon-32.png');
+        expect(png32.ok()).toBeTruthy();
+        expect(png32.headers()['content-type']).toMatch(/png/);
+
+        const apple = await page.request.get('/public/apple-touch-icon.png');
+        expect(apple.ok()).toBeTruthy();
+
+        const manifest = await page.request.get('/public/site.webmanifest');
+        expect(manifest.ok()).toBeTruthy();
+        const json = await manifest.json();
+        expect(json.name).toContain('Forward34');
+        expect(Array.isArray(json.icons)).toBe(true);
+        expect(json.icons.length).toBeGreaterThanOrEqual(2);
+    });
 
     test('consultoria-ia incluye JSON-LD con Service y FAQPage', async ({ page }) => {
         await page.goto('/consultoria-ia.html');
