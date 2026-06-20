@@ -3,6 +3,8 @@
 // JSON-LD con Service y FAQPage. Si esto se rompe, la PR no merge.
 
 const { test, expect } = require('@playwright/test');
+const fs = require('fs');
+const path = require('path');
 
 const PAGES = [
     { path: '/', canonical: 'https://forward34.com/' },
@@ -30,27 +32,32 @@ test.describe('SEO essentials', () => {
             const twCard = await page.locator('meta[name="twitter:card"]').getAttribute('content');
             expect(twCard).toBe('summary_large_image');
 
-            // Favicon: SVG + PNG + apple-touch-icon + manifest
+            // Favicon: ICO (root) + SVG + apple-touch-icon + manifest, todos root-absolute
+            const icoIcon = await page.locator('link[rel="icon"][href="/favicon.ico"]').getAttribute('href');
+            expect(icoIcon).toBe('/favicon.ico');
             const svgIcon = await page.locator('link[rel="icon"][type="image/svg+xml"]').getAttribute('href');
-            expect(svgIcon).toBe('public/favicon.svg');
+            expect(svgIcon).toBe('/public/favicon.svg');
             const appleIcon = await page.locator('link[rel="apple-touch-icon"]').getAttribute('href');
-            expect(appleIcon).toBe('public/apple-touch-icon.png');
+            expect(appleIcon).toBe('/public/apple-touch-icon.png');
             const manifest = await page.locator('link[rel="manifest"]').getAttribute('href');
-            expect(manifest).toBe('public/site.webmanifest');
+            expect(manifest).toBe('/public/site.webmanifest');
         });
     }
 
     test('favicon assets se sirven con el content-type correcto', async ({ page }) => {
+        const ico = await page.request.get('/favicon.ico');
+        expect(ico.ok()).toBeTruthy();
+        // El .ico debe empezar con la cabecera ICONDIR (00 00 01 00)
+        const head = (await ico.body()).subarray(0, 4);
+        expect(Array.from(head)).toEqual([0, 0, 1, 0]);
+
         const svg = await page.request.get('/public/favicon.svg');
         expect(svg.ok()).toBeTruthy();
         expect(svg.headers()['content-type']).toMatch(/svg/);
 
-        const png32 = await page.request.get('/public/favicon-32.png');
-        expect(png32.ok()).toBeTruthy();
-        expect(png32.headers()['content-type']).toMatch(/png/);
-
         const apple = await page.request.get('/public/apple-touch-icon.png');
         expect(apple.ok()).toBeTruthy();
+        expect(apple.headers()['content-type']).toMatch(/png/);
 
         const manifest = await page.request.get('/public/site.webmanifest');
         expect(manifest.ok()).toBeTruthy();
@@ -87,5 +94,19 @@ test.describe('SEO essentials', () => {
         expect(sitemap.ok()).toBeTruthy();
         const xml = await sitemap.text();
         expect(xml).toContain('<loc>https://forward34.com/consultoria-ia.html</loc>');
+    });
+
+    // El serving real del 404 depende de Vercel; aquí validamos que el
+    // archivo está bien formado: noindex, rutas root-absolute (sirve en
+    // cualquier profundidad de URL) y CTAs de recuperación.
+    test('404.html es noindex, usa rutas root-absolute y tiene CTAs', () => {
+        const html = fs.readFileSync(path.join(__dirname, '..', '404.html'), 'utf8');
+        expect(html).toMatch(/<meta name="robots" content="noindex/);
+        expect(html).toContain('href="/public/css/styles.css"');
+        expect(html).toContain('href="/index.html"');
+        expect(html).toContain('href="/consultoria-ia.html"');
+        // No debe haber rutas relativas a assets (romperían en /foo/bar).
+        expect(html).not.toMatch(/href="public\//);
+        expect(html).not.toMatch(/src="public\//);
     });
 });

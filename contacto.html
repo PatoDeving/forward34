@@ -8,11 +8,10 @@
     <link rel="canonical" href="https://forward34.com/contacto.html">
     <meta name="theme-color" content="#0B0B0F">
 
-    <link rel="icon" href="public/favicon.svg" type="image/svg+xml">
-    <link rel="icon" href="public/favicon-32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="public/favicon-16.png" sizes="16x16" type="image/png">
-    <link rel="apple-touch-icon" href="public/apple-touch-icon.png">
-    <link rel="manifest" href="public/site.webmanifest">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/public/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/public/apple-touch-icon.png">
+    <link rel="manifest" href="/public/site.webmanifest">
 
     <meta property="og:site_name" content="Forward34">
     <meta property="og:locale" content="es_MX">
@@ -40,6 +39,7 @@
     <link rel="stylesheet" href="public/css/styles.css">
     <link rel="stylesheet" href="public/css/improvements.css">
     <link rel="stylesheet" href="public/css/privacy-modal.css">
+    <link rel="stylesheet" href="public/css/mobile-menu.css">
 
     <script type="application/ld+json">
     {
@@ -81,11 +81,26 @@
                 <a href="consultoria-ia.html">Consultoría IA</a>
                 <a href="mailto:hector@forward34.com" class="btn btn-primary">Hablemos</a>
             </nav>
+            <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </header>
 
+    <aside class="mobile-menu" aria-label="Menú móvil">
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="empresa.html">Empresa</a>
+            <a href="descubrete.html">Descúbrete+</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="consultoria-ia.html">Consultoría IA</a>
+            <a href="mailto:hector@forward34.com" class="btn btn-primary">Hablemos</a>
+        </nav>
+    </aside>
+    <div class="mobile-overlay" aria-hidden="true"></div>
+
     <!-- ============================== HERO ============================== -->
-    <section class="hero hero--contacto" style="min-height: 60vh !important;">
+    <section class="hero hero--contacto">
         <div class="container">
             <div class="hero-content" style="text-align: left;">
                 <span class="eyebrow reveal"><span class="dot"></span> Contacto</span>
@@ -105,6 +120,7 @@
     <section class="section">
         <div class="container">
             <form class="contact-form reveal" id="contactForm">
+                <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
                 <div class="form-group">
                     <label for="nombre">Nombre *</label>
                     <input type="text" id="nombre" name="nombre" required>
@@ -220,27 +236,91 @@
 
     <script src="public/js/wow.js"></script>
     <script src="public/js/privacy-modal.js"></script>
+    <script src="public/js/mobile-menu.js"></script>
     <script>
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
-            e.preventDefault();
+        (function () {
+            const form = document.getElementById('contactForm');
+            if (!form) return;
             const formMessage = document.getElementById('formMessage');
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Enviando...';
-            submitBtn.disabled = true;
 
-            setTimeout(() => {
+            function showMessage(html, ok) {
                 formMessage.style.display = 'block';
-                formMessage.style.background = 'rgba(215, 255, 58, 0.2)';
+                formMessage.style.background = ok ? 'rgba(215, 255, 58, 0.2)' : 'rgba(255, 99, 71, 0.12)';
                 formMessage.style.color = '#0B0B0F';
-                formMessage.style.border = '1px solid #D7FF3A';
-                formMessage.innerHTML = '<strong>¡Mensaje enviado!</strong> Nos pondremos en contacto en menos de 24h hábiles.';
-                this.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-                setTimeout(() => { formMessage.style.display = 'none'; }, 6000);
-            }, 1200);
-        });
+                formMessage.style.border = ok ? '1px solid #D7FF3A' : '1px solid rgba(255, 99, 71, 0.5)';
+                formMessage.innerHTML = html;
+            }
+
+            function buildMailtoFallback(data) {
+                const subject = `Contacto web — ${data.empresa || data.nombre || ''}`.trim();
+                const lines = [
+                    `Nombre: ${data.nombre || ''}`,
+                    `Empresa: ${data.empresa || ''}`,
+                    `Cargo: ${data.cargo || ''}`,
+                    `Email: ${data.email || ''}`,
+                    `Teléfono: ${data.telefono || ''}`,
+                    `Servicio: ${data.servicio || ''}`,
+                    '',
+                    data.mensaje || ''
+                ];
+                return 'mailto:hector@forward34.com?subject=' + encodeURIComponent(subject) +
+                    '&body=' + encodeURIComponent(lines.join('\n'));
+            }
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Enviando...';
+                submitBtn.disabled = true;
+
+                const data = {
+                    nombre: form.nombre.value,
+                    empresa: form.empresa.value,
+                    cargo: form.cargo.value,
+                    email: form.email.value,
+                    telefono: form.telefono.value,
+                    servicio: form.servicio.value,
+                    mensaje: form.mensaje.value,
+                    website: form.website ? form.website.value : '',
+                    source: 'contacto.html'
+                };
+
+                if (typeof window.f34Track === 'function') {
+                    window.f34Track('contact_submit', { servicio: data.servicio });
+                }
+
+                try {
+                    const res = await fetch('/api/contact', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    const result = await res.json().catch(() => ({}));
+
+                    if (res.ok && result.ok) {
+                        showMessage('<strong>¡Mensaje enviado!</strong> Te respondemos en menos de 24h hábiles.', true);
+                        form.reset();
+                        if (typeof window.f34Track === 'function') {
+                            window.f34Track('contact_success', { servicio: data.servicio });
+                        }
+                        setTimeout(() => { formMessage.style.display = 'none'; }, 6000);
+                    } else {
+                        throw new Error(result.error || 'Error del servidor');
+                    }
+                } catch (err) {
+                    // Fallback: abrir el cliente de correo con los datos prellenados.
+                    if (typeof window.f34Track === 'function') {
+                        window.f34Track('contact_fallback_mailto', { error: String(err && err.message || err) });
+                    }
+                    showMessage('No pudimos enviar el formulario automáticamente. Abrimos tu correo para que nos escribas directamente…', false);
+                    window.location.href = buildMailtoFallback(data);
+                } finally {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+        })();
     </script>
 </body>
 </html>
