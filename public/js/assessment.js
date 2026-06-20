@@ -135,9 +135,15 @@
     const $ = (sel) => root.querySelector(sel);
 
     // ----- Analytics -----
+    // Si analytics.js está cargado, delegamos en window.f34Track (GA4 + dataLayer + plausible).
+    // Si no, conservamos el fallback antiguo (solo dataLayer + plausible).
     function track(name, payload) {
-        const data = Object.assign({ event: name }, payload || {});
         try {
+            if (typeof window.f34Track === 'function') {
+                window.f34Track(name, payload || {});
+                return;
+            }
+            const data = Object.assign({ event: name }, payload || {});
             if (window.dataLayer && typeof window.dataLayer.push === 'function') {
                 window.dataLayer.push(data);
             }
