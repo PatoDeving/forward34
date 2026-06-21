@@ -30,10 +30,8 @@ module.exports = defineConfig({
         }
     ],
     webServer: {
-        // Servidor que emula el cleanUrls de Vercel (ver scripts/static-server.js)
-        // para que los tests validen las URLs sin .html igual que en prod.
-        command: 'node scripts/static-server.js 4123',
-        url: 'http://127.0.0.1:4123/consultoria-ia',
+        command: 'npx http-server . -p 4123 -c-1 -s',
+        url: 'http://127.0.0.1:4123/consultoria-ia.html',
         reuseExistingServer: !process.env.CI,
         timeout: 30_000
     }
