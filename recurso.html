@@ -355,6 +355,32 @@
 
     var $ = function (id) { return document.getElementById(id); };
 
+    /* El vercel.json de este sitio usa el formato antiguo (builds + routes),
+       y con él las funciones quedan publicadas CON la extensión: /api/recurso.js
+       responde, /api/recurso da 404. Se intenta primero la que funciona hoy y
+       se cae a la otra, para que esto siga vivo si algún día se migra la
+       configuración. Un 404 significa "ruta equivocada", no "error del
+       servidor", así que solo en ese caso se reintenta. */
+    var RUTAS_API = ['/api/recurso.js', '/api/recurso'];
+
+    function enviarLead(datos) {
+        var cuerpo = JSON.stringify(datos);
+
+        function intentar(i) {
+            return fetch(RUTAS_API[i], {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: cuerpo
+            }).then(function (res) {
+                if (res.status === 404 && i + 1 < RUTAS_API.length) return intentar(i + 1);
+                if (!res.ok) throw new Error('status ' + res.status);
+                return res.json();
+            });
+        }
+
+        return intentar(0);
+    }
+
     var params = new URLSearchParams(location.search);
     // De qué cuenta de Instagram llegó el lead. Se acepta utm_source o fuente.
     var fuente = params.get('utm_source') || params.get('fuente') || 'directo';
@@ -420,20 +446,12 @@
                 $('rec-enviar-texto').textContent = 'Enviando';
                 boton.insertAdjacentHTML('beforeend', '<span class="rec-spinner" id="rec-spinner"></span>');
 
-                fetch('/api/recurso', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        nombre: nombre,
-                        correo: correo,
-                        recurso_id: recurso.slug,
-                        fuente: fuente,
-                        website: $('rec-website').value
-                    })
-                })
-                .then(function (res) {
-                    if (!res.ok) throw new Error('status ' + res.status);
-                    return res.json();
+                enviarLead({
+                    nombre: nombre,
+                    correo: correo,
+                    recurso_id: recurso.slug,
+                    fuente: fuente,
+                    website: $('rec-website').value
                 })
                 .then(function (datos) {
                     var enlace = $('rec-descargar');
