@@ -7,7 +7,7 @@
 // Hace dos cosas, ninguna bloqueante: si el Sheet o el correo fallan,
 // la persona igual recibe su PDF en pantalla.
 //   1) Guarda el lead en un Google Sheet (fecha, nombre, correo, recurso,
-//      recurso_id, fuente).
+//      recurso_id, fuente, mensaje).
 //   2) Le envía el recurso por correo vía Resend, reusando la misma cuenta
 //      que ya usa api/lead.js.
 //
@@ -18,7 +18,7 @@
 //   RECURSO_SHEETS_CLIENT_EMAIL    correo de la cuenta de servicio de Google
 //   RECURSO_SHEETS_PRIVATE_KEY     llave privada de esa cuenta de servicio
 //   RECURSO_SHEETS_SPREADSHEET_ID  id del Google Sheet destino
-//   RECURSO_SHEETS_RANGE           opcional, default "Leads!A:F"
+//   RECURSO_SHEETS_RANGE           opcional, default "Leads!A:G"
 //   RECURSO_MAIL_FROM              opcional, remitente propio de los recursos
 //   RECURSO_SITE_URL               opcional, default https://forward34.com
 
@@ -48,7 +48,7 @@ const catalogo = cargarCatalogo();
 const RECURSOS = Array.isArray(catalogo.recursos) ? catalogo.recursos : [];
 
 const SITIO = process.env.RECURSO_SITE_URL || 'https://forward34.com';
-const RANGO_SHEET = process.env.RECURSO_SHEETS_RANGE || 'Leads!A:F';
+const RANGO_SHEET = process.env.RECURSO_SHEETS_RANGE || 'Leads!A:G';
 
 const escapeHtml = (str) =>
     String(str || '')
@@ -184,8 +184,22 @@ async function guardarEnSheet(fila) {
    Correo con el recurso (Resend — la misma cuenta que ya usa lead.js).
 ------------------------------------------------------------------ */
 
+// En las landings de contacto el título es "Platiquemos", que no es el nombre
+// del PDF. Por eso el catálogo puede declarar "recursoNombre" aparte.
+function nombreDelRecurso(recurso) {
+    return recurso.recursoNombre || recurso.titulo;
+}
+
 function plantillaCorreo(nombre, recurso, enlacePdf) {
     const saludo = nombre ? `Hola ${escapeHtml(String(nombre).split(/\s+/)[0])},` : 'Hola,';
+    const esContacto = recurso.contacto === true;
+
+    const entrada = esContacto
+        ? `Gracias por dejarnos tus datos. Te escribimos pronto.<br><br>
+           Mientras tanto, aquí está el framework que usamos:
+           <strong>${escapeHtml(nombreDelRecurso(recurso))}</strong>`
+        : `Aquí está tu recurso: <strong>${escapeHtml(nombreDelRecurso(recurso))}</strong>`;
+
     const bullets = (recurso.bullets || [])
         .map((b) => `<li style="margin-bottom:10px;color:rgba(11,11,15,0.65)">${escapeHtml(b)}</li>`)
         .join('');
@@ -196,11 +210,9 @@ function plantillaCorreo(nombre, recurso, enlacePdf) {
     <p style="margin:0 0 24px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(11,11,15,0.5)">Forward34</p>
 
     <p style="margin:0 0 14px;font-size:15px;line-height:1.6">${saludo}</p>
-    <p style="margin:0 0 22px;font-size:15px;line-height:1.6">
-        Aquí está tu recurso: <strong>${escapeHtml(recurso.titulo)}</strong>
-    </p>
+    <p style="margin:0 0 22px;font-size:15px;line-height:1.6">${entrada}</p>
 
-    <ul style="margin:0 0 28px;padding-left:20px;font-size:14px;line-height:1.6">${bullets}</ul>
+    ${esContacto ? '' : `<ul style="margin:0 0 28px;padding-left:20px;font-size:14px;line-height:1.6">${bullets}</ul>`}
 
     <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 26px">
         <tr><td style="background:#0B0B0F;border-radius:999px">
@@ -230,7 +242,7 @@ function plantillaCorreo(nombre, recurso, enlacePdf) {
 // sistema sirva desde el minuto uno: aunque el Google Sheet no esté
 // configurado todavía (o se caiga), el lead llega a la bandeja del equipo
 // y no se pierde. Reusa LEAD_TO, que ya existe para el diagnóstico IA.
-async function notificarInterno(nombre, correo, recurso, fuente, fila) {
+async function notificarInterno(nombre, correo, recurso, fuente, fila, mensaje) {
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) throw new Error('RESEND_API_KEY no está definida');
 
@@ -239,12 +251,24 @@ async function notificarInterno(nombre, correo, recurso, fuente, fila) {
         || process.env.LEAD_FROM
         || 'Forward34 <leads@forward34.com>';
 
+    const esContacto = recurso.contacto === true;
+
+    // Si dejó un mensaje es lo primero que hay que leer: es lo que dice qué
+    // necesita esta persona antes de que alguien le marque.
+    const bloqueMensaje = mensaje
+        ? `<div style="margin:20px 0;padding:14px 16px;background:#F4EFE6;border-left:3px solid #D7FF3A;border-radius:8px">
+               <p style="margin:0 0 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#666">Qué necesita</p>
+               <p style="margin:0;font-size:15px;line-height:1.5">${escapeHtml(mensaje)}</p>
+           </div>`
+        : '';
+
     const html = `<!doctype html><html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:#0B0B0F;max-width:560px;margin:0 auto;padding:24px">
-        <h2 style="margin:0 0 16px;border-bottom:2px solid #D7FF3A;padding-bottom:8px">Nuevo lead — Recurso descargado</h2>
+        <h2 style="margin:0 0 16px;border-bottom:2px solid #D7FF3A;padding-bottom:8px">${esContacto ? 'Quiere que le contacten' : 'Nuevo lead — Recurso descargado'}</h2>
+        ${bloqueMensaje}
         <table style="border-collapse:collapse;font-size:14px">
             <tr><td style="padding:5px 14px 5px 0;color:#666">Nombre</td><td><strong>${escapeHtml(nombre) || '—'}</strong></td></tr>
             <tr><td style="padding:5px 14px 5px 0;color:#666">Correo</td><td><a href="mailto:${escapeHtml(correo)}">${escapeHtml(correo)}</a></td></tr>
-            <tr><td style="padding:5px 14px 5px 0;color:#666">Recurso</td><td>${escapeHtml(recurso.titulo)}</td></tr>
+            <tr><td style="padding:5px 14px 5px 0;color:#666">Landing</td><td>${escapeHtml(recurso.titulo)}</td></tr>
             <tr><td style="padding:5px 14px 5px 0;color:#666">Cuenta de origen</td><td><strong>${escapeHtml(fuente)}</strong></td></tr>
         </table>
         <p style="margin-top:24px;font-size:12px;color:#888">
@@ -261,7 +285,8 @@ async function notificarInterno(nombre, correo, recurso, fuente, fila) {
         body: JSON.stringify({
             from,
             to: [to],
-            subject: `Lead: ${recurso.titulo} (${fuente})`,
+            reply_to: correo,
+            subject: `${esContacto ? 'Contacto' : 'Lead'}: ${recurso.titulo} (${fuente})`,
             html
         })
     });
@@ -291,7 +316,7 @@ async function enviarCorreo(nombre, correo, recurso) {
         body: JSON.stringify({
             from,
             to: [correo],
-            subject: `Tu recurso: ${recurso.titulo}`,
+            subject: `Tu recurso: ${nombreDelRecurso(recurso)}`,
             html: plantillaCorreo(nombre, recurso, enlacePdf)
         })
     });
@@ -336,19 +361,21 @@ module.exports = async (req, res) => {
 
     const nombre = limpiarTexto(body.nombre, 80);
     const fuente = limpiarFuente(body.fuente);
+    // Solo lo piden las landings de contacto; en las de descarga viene vacío.
+    const mensaje = limpiarTexto(body.mensaje, 600);
 
-    // fecha, nombre, correo, recurso, recurso_id, fuente
-    const fila = [fechaMexico(), nombre, correo, recurso.titulo, recurso.slug, fuente];
+    // fecha, nombre, correo, recurso, recurso_id, fuente, mensaje
+    const fila = [fechaMexico(), nombre, correo, recurso.titulo, recurso.slug, fuente, mensaje];
 
     console.log('[recurso] new', JSON.stringify({
-        recurso: recurso.slug, fuente, correo
+        recurso: recurso.slug, fuente, correo, conMensaje: mensaje.length > 0
     }));
 
     // Ninguna de las tres tareas puede tumbar la entrega del recurso.
     const [resSheet, resCorreo, resAviso] = await Promise.allSettled([
         guardarEnSheet(fila),
         enviarCorreo(nombre, correo, recurso),
-        notificarInterno(nombre, correo, recurso, fuente, fila)
+        notificarInterno(nombre, correo, recurso, fuente, fila, mensaje)
     ]);
 
     if (resSheet.status === 'rejected') {
