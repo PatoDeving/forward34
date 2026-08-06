@@ -25,6 +25,22 @@ ni `api/lead.js` (el diagnóstico IA), ni ninguna variable de entorno actual.
 
 ---
 
+## Importante: esto ya funciona sin configurar nada
+
+En cuanto el Pull Request se apruebe, el sistema **ya sirve** sin crear una
+sola variable nueva:
+
+- La persona ve la landing, deja su correo y descarga el PDF.
+- Le llega el recurso a su bandeja (usa el Resend que ya existe).
+- A ti te llega un correo con cada lead: nombre, correo, qué recurso y de
+  qué cuenta de Instagram vino.
+
+Lo único que **no** pasa hasta que hagas los pasos 3 a 6 es que los leads se
+escriban solos en un Google Sheet. Mientras tanto los tienes en tu bandeja,
+así que puedes publicar el video sin esperar a nada.
+
+---
+
 ## Lo que te toca hacer
 
 ### Pasos 1 y 2 — PDFs y copy: ya están hechos

@@ -226,6 +226,52 @@ function plantillaCorreo(nombre, recurso, enlacePdf) {
 </body></html>`;
 }
 
+// Aviso interno con cada lead. Es la red de seguridad que hace que el
+// sistema sirva desde el minuto uno: aunque el Google Sheet no esté
+// configurado todavía (o se caiga), el lead llega a la bandeja del equipo
+// y no se pierde. Reusa LEAD_TO, que ya existe para el diagnóstico IA.
+async function notificarInterno(nombre, correo, recurso, fuente, fila) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) throw new Error('RESEND_API_KEY no está definida');
+
+    const to = process.env.RECURSO_LEAD_TO || process.env.LEAD_TO || 'hector@forward34.com';
+    const from = process.env.RECURSO_MAIL_FROM
+        || process.env.LEAD_FROM
+        || 'Forward34 <leads@forward34.com>';
+
+    const html = `<!doctype html><html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:#0B0B0F;max-width:560px;margin:0 auto;padding:24px">
+        <h2 style="margin:0 0 16px;border-bottom:2px solid #D7FF3A;padding-bottom:8px">Nuevo lead — Recurso descargado</h2>
+        <table style="border-collapse:collapse;font-size:14px">
+            <tr><td style="padding:5px 14px 5px 0;color:#666">Nombre</td><td><strong>${escapeHtml(nombre) || '—'}</strong></td></tr>
+            <tr><td style="padding:5px 14px 5px 0;color:#666">Correo</td><td><a href="mailto:${escapeHtml(correo)}">${escapeHtml(correo)}</a></td></tr>
+            <tr><td style="padding:5px 14px 5px 0;color:#666">Recurso</td><td>${escapeHtml(recurso.titulo)}</td></tr>
+            <tr><td style="padding:5px 14px 5px 0;color:#666">Cuenta de origen</td><td><strong>${escapeHtml(fuente)}</strong></td></tr>
+        </table>
+        <p style="margin-top:24px;font-size:12px;color:#888">
+            Fila para el Sheet: ${escapeHtml(fila.join(' | '))}
+        </p>
+    </body></html>`;
+
+    const res = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+            from,
+            to: [to],
+            subject: `Lead: ${recurso.titulo} (${fuente})`,
+            html
+        })
+    });
+
+    if (!res.ok) {
+        const detalle = await res.text();
+        throw new Error(`Resend (interno) respondió ${res.status}: ${detalle.slice(0, 200)}`);
+    }
+}
+
 async function enviarCorreo(nombre, correo, recurso) {
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) throw new Error('RESEND_API_KEY no está definida');
@@ -298,10 +344,11 @@ module.exports = async (req, res) => {
         recurso: recurso.slug, fuente, correo
     }));
 
-    // Ninguna de las dos tareas puede tumbar la entrega del recurso.
-    const [resSheet, resCorreo] = await Promise.allSettled([
+    // Ninguna de las tres tareas puede tumbar la entrega del recurso.
+    const [resSheet, resCorreo, resAviso] = await Promise.allSettled([
         guardarEnSheet(fila),
-        enviarCorreo(nombre, correo, recurso)
+        enviarCorreo(nombre, correo, recurso),
+        notificarInterno(nombre, correo, recurso, fuente, fila)
     ]);
 
     if (resSheet.status === 'rejected') {
@@ -311,6 +358,9 @@ module.exports = async (req, res) => {
     }
     if (resCorreo.status === 'rejected') {
         console.warn('[recurso] correo no enviado:', resCorreo.reason && resCorreo.reason.message);
+    }
+    if (resAviso.status === 'rejected') {
+        console.warn('[recurso] aviso interno no enviado:', resAviso.reason && resAviso.reason.message);
     }
 
     return res.status(200).json({
