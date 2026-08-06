@@ -247,7 +247,7 @@
 
             <!-- ESTADO 1: formulario -->
             <div id="rec-form-view" hidden>
-                <span class="rec-eyebrow">Recurso gratuito</span>
+                <span class="rec-eyebrow" id="rec-etiqueta">Recurso gratuito</span>
                 <h1 id="rec-titulo"></h1>
                 <p class="rec-gancho" id="rec-gancho"></p>
                 <ul class="rec-bullets" id="rec-bullets"></ul>
@@ -383,6 +383,9 @@
             if (!recurso) { pintarVacio(); return; }
 
             document.title = recurso.titulo + ' | Forward34';
+            // "Framework", "Informe"... Si el recurso no trae etiqueta,
+            // se queda el texto por defecto que ya está en el HTML.
+            if (recurso.etiqueta) $('rec-etiqueta').textContent = recurso.etiqueta;
             $('rec-titulo').textContent = recurso.titulo;
             $('rec-gancho').textContent = recurso.gancho;
 

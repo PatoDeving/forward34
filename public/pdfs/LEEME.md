@@ -42,13 +42,13 @@ del Google Sheet:
 El recurso y la cuenta son independientes: cualquier recurso puede venir de
 cualquier cuenta.
 
-## PDFs esperados hoy
+## PDFs actuales
 
-| Archivo | Recurso | Estado |
+| Archivo | Recurso | Slug |
 |---|---|---|
-| `liderazgo-ia.pdf` | Liderazgo en la era de la IA | pendiente de subir |
-| `cultura-organizacional.pdf` | Cultura organizacional | pendiente de subir |
-| `recurso-tres.pdf` | Tercer recurso | pendiente (PDF y copy) |
+| `criterio.pdf` | Tu criterio es la nueva ventaja competitiva | `criterio-ia` |
+| `conocimiento-interno.pdf` | El conocimiento interno como tu mayor ventaja | `conocimiento-interno` |
+| `momento-sputnik.pdf` | El momento Sputnik de la IA | `momento-sputnik` |
 
 ## Dos cosas que conviene saber
 

@@ -1,39 +1,42 @@
 {
-  "_leeme": "Catalogo de recursos descargables. Para agregar uno nuevo: copia un bloque completo, cambia slug/titulo/gancho/bullets/pdf, y sube el PDF a public/pdfs/ con ese nombre. Instrucciones completas en public/pdfs/LEEME.md",
+  "_leeme": "Catalogo de recursos descargables. Para agregar uno nuevo: copia un bloque completo, cambia slug/etiqueta/titulo/gancho/bullets/pdf, y sube el PDF a public/pdfs/ con ese nombre. Instrucciones completas en public/pdfs/LEEME.md",
 
   "recursos": [
     {
-      "slug": "liderazgo-ia",
-      "titulo": "Liderazgo en la era de la IA",
-      "gancho": "Las decisiones que ningun algoritmo deberia tomar por ti.",
+      "slug": "criterio-ia",
+      "etiqueta": "Framework",
+      "titulo": "Tu criterio es la nueva ventaja competitiva",
+      "gancho": "Saber usar ChatGPT ya no te diferencia. Lo que sí: cómo decides.",
       "bullets": [
-        "El marco de criterio para decidir que delegas a la IA y que no",
-        "Los tres errores que cometen los equipos al automatizar demasiado pronto",
-        "Una guia practica para conversar de IA con tu consejo directivo"
+        "El framework de 5 pasos para pasar de usar IA a decidir mejor",
+        "Las 3 señales de que lo que te falta es criterio, no otra herramienta",
+        "Un ejercicio de 30 minutos para empezar esta semana"
       ],
-      "pdf": "/public/pdfs/liderazgo-ia.pdf"
+      "pdf": "/public/pdfs/criterio.pdf"
     },
     {
-      "slug": "cultura-organizacional",
-      "titulo": "Cultura organizacional que sostiene el crecimiento",
-      "gancho": "La cultura no se declara en una junta: se disena.",
+      "slug": "conocimiento-interno",
+      "etiqueta": "Framework",
+      "titulo": "El conocimiento interno como tu mayor ventaja",
+      "gancho": "Lo que tu organización ya sabe está enterrado en correos. Ahí está la ventaja.",
       "bullets": [
-        "Los cuatro indicadores que revelan la cultura real de tu equipo",
-        "Como detectar la brecha entre los valores escritos y los vividos",
-        "Un plan de 90 dias para intervenir sin romper lo que funciona"
+        "Cómo pasar de conocimiento disperso a ventaja real, en 5 pasos",
+        "Los 3 errores que matan estos proyectos antes de que arranquen",
+        "Un ejercicio de 30 minutos para ver la diferencia con tus propios documentos"
       ],
-      "pdf": "/public/pdfs/cultura-organizacional.pdf"
+      "pdf": "/public/pdfs/conocimiento-interno.pdf"
     },
     {
-      "slug": "recurso-tres",
-      "titulo": "Titulo del tercer recurso",
-      "gancho": "Gancho de una linea que resume la promesa.",
+      "slug": "momento-sputnik",
+      "etiqueta": "Informe",
+      "titulo": "El momento Sputnik de la IA",
+      "gancho": "Por qué un modelo lanzado desde China puso nerviosa a Silicon Valley.",
       "bullets": [
-        "Primer beneficio concreto",
-        "Segundo beneficio concreto",
-        "Tercer beneficio concreto"
+        "Qué pasó realmente y por qué se volvió a hablar de la Guerra Fría",
+        "Por qué la noticia no es un modelo nuevo, sino que la IA dejó de tener un solo dueño",
+        "3 movimientos concretos para hacer esta semana"
       ],
-      "pdf": "/public/pdfs/recurso-tres.pdf"
+      "pdf": "/public/pdfs/momento-sputnik.pdf"
     }
   ]
 }

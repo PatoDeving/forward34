@@ -27,23 +27,23 @@ ni `api/lead.js` (el diagnóstico IA), ni ninguna variable de entorno actual.
 
 ## Lo que te toca hacer
 
-### Paso 1 — Subir los PDFs
+### Pasos 1 y 2 — PDFs y copy: ya están hechos
 
-Mete los archivos en la carpeta `public/pdfs/`. Los nombres deben coincidir
-con los del catálogo:
+Los tres recursos ya están cargados y con su copy escrito:
 
-- `liderazgo-ia.pdf`
-- `cultura-organizacional.pdf`
-- `recurso-tres.pdf`
+| Recurso | Slug | PDF |
+|---|---|---|
+| Tu criterio es la nueva ventaja competitiva | `criterio-ia` | `criterio.pdf` |
+| El conocimiento interno como tu mayor ventaja | `conocimiento-interno` | `conocimiento-interno.pdf` |
+| El momento Sputnik de la IA | `momento-sputnik` | `momento-sputnik.pdf` |
 
-Detalles de nombres y peso en [`public/pdfs/LEEME.md`](public/pdfs/LEEME.md).
-
-### Paso 2 — Poner el copy final
-
-Abre `public/data/recursos.json` y reemplaza los textos de ejemplo por los
-definitivos: `titulo`, `gancho` (una línea) y los 3 `bullets`.
+Si quieres ajustar los textos, están en `public/data/recursos.json`:
+`titulo`, `gancho` (una línea) y los 3 `bullets`.
 
 **No cambies el `slug`** salvo que también cambies el enlace en ManyChat.
+
+Para agregar recursos nuevos más adelante, mira
+[`public/pdfs/LEEME.md`](public/pdfs/LEEME.md).
 
 ### Paso 3 — Crear el Google Sheet
 
@@ -109,7 +109,7 @@ Cuando el Pull Request esté abierto, Vercel genera una URL de prueba. Ábrela
 en el celular y visita:
 
 ```
-https://LA-URL-DE-PREVIEW/recurso.html?r=liderazgo-ia&utm_source=forward34
+https://LA-URL-DE-PREVIEW/recurso.html?r=criterio-ia&utm_source=forward34
 ```
 
 Comprueba que:
@@ -126,13 +126,27 @@ El formato es siempre el mismo. Cambia `r=` según el recurso y `utm_source=`
 según la cuenta desde la que se publicó el video:
 
 ```
-https://forward34.com/recurso.html?r=liderazgo-ia&utm_source=forward34
-https://forward34.com/recurso.html?r=liderazgo-ia&utm_source=descubrete
-https://forward34.com/recurso.html?r=liderazgo-ia&utm_source=hector
+https://forward34.com/recurso.html?r=criterio-ia&utm_source=forward34
+https://forward34.com/recurso.html?r=criterio-ia&utm_source=descubrete
+https://forward34.com/recurso.html?r=criterio-ia&utm_source=hector
 ```
 
 Los tres apuntan al mismo recurso; lo único que cambia es de qué cuenta vino
 la persona. Eso es lo que verás en la columna `fuente` del Sheet.
+
+**Los 9 enlaces listos para pegar en ManyChat** (3 recursos × 3 cuentas):
+
+| Recurso | Cuenta | Enlace |
+|---|---|---|
+| Criterio | Forward34 | `https://forward34.com/recurso.html?r=criterio-ia&utm_source=forward34` |
+| Criterio | Descúbrete+ | `https://forward34.com/recurso.html?r=criterio-ia&utm_source=descubrete` |
+| Criterio | Héctor | `https://forward34.com/recurso.html?r=criterio-ia&utm_source=hector` |
+| Conocimiento | Forward34 | `https://forward34.com/recurso.html?r=conocimiento-interno&utm_source=forward34` |
+| Conocimiento | Descúbrete+ | `https://forward34.com/recurso.html?r=conocimiento-interno&utm_source=descubrete` |
+| Conocimiento | Héctor | `https://forward34.com/recurso.html?r=conocimiento-interno&utm_source=hector` |
+| Sputnik | Forward34 | `https://forward34.com/recurso.html?r=momento-sputnik&utm_source=forward34` |
+| Sputnik | Descúbrete+ | `https://forward34.com/recurso.html?r=momento-sputnik&utm_source=descubrete` |
+| Sputnik | Héctor | `https://forward34.com/recurso.html?r=momento-sputnik&utm_source=hector` |
 
 ### Paso 9 (opcional) — Meta Pixel
 
