@@ -446,14 +446,12 @@
                 $('rec-enviar-texto').textContent = 'Enviando';
                 boton.insertAdjacentHTML('beforeend', '<span class="rec-spinner" id="rec-spinner"></span>');
 
-                enviarLead({
-                    nombre: nombre,
-                    correo: correo,
-                    recurso_id: recurso.slug,
-                    fuente: fuente,
-                    website: $('rec-website').value
-                })
-                .then(function (datos) {
+                // Pase lo que pase, la persona se lleva su recurso. Si el
+                // servidor no respondió no le prometemos un correo que no
+                // salió, pero la descarga siempre está.
+                function entregarRecurso(datos) {
+                    datos = datos || {};
+
                     var enlace = $('rec-descargar');
                     enlace.href = datos.pdf || recurso.pdf;
                     enlace.setAttribute('download', '');
@@ -470,21 +468,27 @@
                         $('rec-exito-detalle').querySelector('strong').textContent = correo;
                     } else {
                         $('rec-exito-detalle').textContent =
-                            'Puedes descargarlo aquí mismo. Guárdalo en tu dispositivo.';
+                            'Descárgalo aquí mismo y guárdalo en tu dispositivo.';
                     }
 
                     mostrar('rec-exito-view');
                     pixel('Lead', { content_name: recurso.titulo, source: fuente });
                     window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+
+                enviarLead({
+                    nombre: nombre,
+                    correo: correo,
+                    recurso_id: recurso.slug,
+                    fuente: fuente,
+                    website: $('rec-website').value
                 })
+                .then(entregarRecurso)
                 .catch(function (err) {
-                    console.error('[recurso] error al enviar', err);
-                    caja.textContent = 'No pudimos procesarlo en este momento. Intenta de nuevo en un momento.';
-                    caja.hidden = false;
-                    boton.disabled = false;
-                    $('rec-enviar-texto').textContent = 'Recibir el recurso';
-                    var sp = $('rec-spinner');
-                    if (sp) sp.remove();
+                    // El servidor falló, pero eso es problema nuestro, no de
+                    // quien vino por su recurso: se le entrega igual.
+                    console.error('[recurso] el servidor no respondió, se entrega la descarga igual', err);
+                    entregarRecurso(null);
                 });
             });
         })
