@@ -67,7 +67,7 @@ Para agregar recursos nuevos más adelante, mira
 2. Nombra la primera pestaña **`Leads`** (con mayúscula inicial).
 3. En la fila 1 escribe estos encabezados, uno por columna:
 
-   `fecha` · `nombre` · `correo` · `recurso` · `recurso_id` · `fuente`
+   `fecha` · `nombre` · `correo` · `recurso` · `recurso_id` · `fuente` · `mensaje`
 
 4. Guarda el **ID de la hoja**: está en la barra de direcciones, entre
    `/d/` y `/edit`. Es una cadena larga de letras y números.
@@ -184,7 +184,7 @@ Mientras esté vacío, el pixel no carga y no se envía nada a Meta.
 | `RECURSO_SHEETS_CLIENT_EMAIL` | Sí | Identificar la cuenta robot de Google |
 | `RECURSO_SHEETS_PRIVATE_KEY` | Sí | Su llave (secreta) |
 | `RECURSO_SHEETS_SPREADSHEET_ID` | Sí | Qué hoja recibe los leads |
-| `RECURSO_SHEETS_RANGE` | No | Otra pestaña. Por defecto `Leads!A:F` |
+| `RECURSO_SHEETS_RANGE` | No | Otra pestaña. Por defecto `Leads!A:G` |
 | `RECURSO_MAIL_FROM` | No | Otro remitente. Por defecto usa `LEAD_FROM` |
 | `RECURSO_SITE_URL` | No | Otro dominio. Por defecto `https://forward34.com` |
 

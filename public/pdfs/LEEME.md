@@ -18,6 +18,45 @@ https://forward34.com/recurso.html?r=TU-SLUG&utm_source=forward34
 
 No hay que tocar la página ni la función. Solo el JSON y el PDF.
 
+## Dos tipos de landing, la misma página
+
+**De descarga** (por defecto). Encabeza con el recurso: "aquí está tu
+framework". Es lo que usas cuando el video promete un material.
+
+**De contacto.** Encabeza con la conversación: "déjanos tus datos y te
+escribimos". El PDF sigue entregándose, pero como cortesía. Es lo que usas
+cuando el video promete que alguien va a contactar a la persona.
+
+Para hacer una de contacto, agrega estos campos a la entrada:
+
+```json
+{
+  "slug": "platiquemos",
+  "contacto": true,
+  "etiqueta": "Hablemos",
+  "titulo": "Platiquemos",
+  "gancho": "Déjanos tus datos y te escribimos.",
+  "bullets": ["...", "...", "..."],
+  "cta": "Déjanos tus datos",
+  "pregunta": "¿Qué necesitas?",
+  "pdf": "/public/pdfs/criterio.pdf",
+  "recursoNombre": "Tu criterio es la nueva ventaja competitiva"
+}
+```
+
+Qué hace cada campo extra:
+
+| Campo | Para qué |
+|---|---|
+| `contacto` | Cambia el marco: consentimiento, mensaje de éxito y el correo hablan de contacto, no de descarga |
+| `cta` | Texto del botón |
+| `pregunta` | Muestra un campo abierto opcional. Lo que escriban va al Sheet y se destaca en el aviso interno |
+| `recursoNombre` | Nombre real del PDF. Sin esto el correo diría "Tu recurso: Platiquemos" |
+
+El aviso interno de una landing de contacto llega con asunto **Contacto:** en
+vez de **Lead:**, y con *responder a* apuntando al correo de la persona: le
+contestas dándole a Responder.
+
 ## Reglas para los nombres
 
 - Minúsculas, sin acentos, sin espacios y sin ñ.

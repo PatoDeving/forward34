@@ -135,6 +135,10 @@
             overflow: hidden;
         }
 
+        /* El textarea del sitio pide 150px de alto: demasiado en un celular
+           para una pregunta opcional de una o dos líneas. */
+        #rec-mensaje { min-height: 84px; resize: vertical; }
+
         .rec-card .btn { width: 100%; justify-content: center; }
 
         .rec-consent {
@@ -265,6 +269,14 @@
                                autocomplete="email" inputmode="email" maxlength="254" required>
                     </div>
 
+                    <!-- Solo aparece en los recursos que declaran "pregunta"
+                         en el catálogo (los de contacto). -->
+                    <div class="form-group" id="rec-pregunta-campo" hidden>
+                        <label for="rec-mensaje" id="rec-pregunta-label">¿Qué necesitas?</label>
+                        <textarea id="rec-mensaje" name="mensaje" rows="3" maxlength="600"
+                                  placeholder="Opcional. En una o dos líneas."></textarea>
+                    </div>
+
                     <div class="rec-trampa" aria-hidden="true">
                         <label for="rec-website">No llenar este campo</label>
                         <input type="text" id="rec-website" name="website" tabindex="-1" autocomplete="off">
@@ -275,8 +287,8 @@
                     </button>
 
                     <p class="rec-consent">
-                        Al enviar aceptas recibir este recurso y contenido ocasional de Forward34.
-                        Sin spam. Puedes darte de baja cuando quieras.
+                        <span id="rec-consent-texto">Al enviar aceptas recibir este recurso y contenido
+                        ocasional de Forward34. Sin spam. Puedes darte de baja cuando quieras.</span>
                         <a href="#" class="open-privacy-modal">Aviso de privacidad</a>
                     </p>
 
@@ -415,6 +427,26 @@
             $('rec-titulo').textContent = recurso.titulo;
             $('rec-gancho').textContent = recurso.gancho;
 
+            /* Dos tipos de landing, misma página:
+                 - descarga (por defecto): "aquí está tu recurso"
+                 - contacto ("contacto": true en el catálogo): "déjanos tus
+                   datos y te escribimos", con una pregunta abierta opcional.
+               El PDF se entrega en los dos casos. */
+            var esContacto = recurso.contacto === true;
+
+            if (recurso.cta) $('rec-enviar-texto').textContent = recurso.cta;
+
+            if (recurso.pregunta) {
+                $('rec-pregunta-label').textContent = recurso.pregunta;
+                $('rec-pregunta-campo').hidden = false;
+            }
+
+            if (esContacto) {
+                $('rec-consent-texto').textContent = 'Al enviar aceptas que te contactemos '
+                    + 'y recibir contenido ocasional de Forward34. Sin spam. Puedes darte de '
+                    + 'baja cuando quieras.';
+            }
+
             var ul = $('rec-bullets');
             ul.innerHTML = '';
             (recurso.bullets || []).forEach(function (texto) {
@@ -456,19 +488,25 @@
                     enlace.href = datos.pdf || recurso.pdf;
                     enlace.setAttribute('download', '');
 
-                    $('rec-exito-titulo').textContent = nombre
-                        ? 'Listo, ' + nombre.split(' ')[0]
-                        : 'Listo';
+                    var pila = nombre ? ', ' + nombre.split(' ')[0] : '';
+                    $('rec-exito-titulo').textContent = esContacto
+                        ? 'Gracias' + pila
+                        : 'Listo' + pila;
 
                     // Solo se promete el correo si de verdad salió.
-                    if (datos.correoEnviado) {
-                        $('rec-exito-detalle').innerHTML = 'Te lo enviamos a <strong></strong>. '
+                    var detalle = $('rec-exito-detalle');
+                    if (esContacto) {
+                        detalle.textContent = datos.correoEnviado
+                            ? 'Te escribimos pronto. Mientras tanto, aquí está el framework de '
+                              + 'criterio: te lo mandamos también por correo.'
+                            : 'Te escribimos pronto. Mientras tanto, aquí está el framework de criterio.';
+                    } else if (datos.correoEnviado) {
+                        detalle.innerHTML = 'Te lo enviamos a <strong></strong>. '
                             + 'Si no aparece en unos minutos, revisa spam o promociones. '
                             + 'También puedes descargarlo aquí mismo.';
-                        $('rec-exito-detalle').querySelector('strong').textContent = correo;
+                        detalle.querySelector('strong').textContent = correo;
                     } else {
-                        $('rec-exito-detalle').textContent =
-                            'Descárgalo aquí mismo y guárdalo en tu dispositivo.';
+                        detalle.textContent = 'Descárgalo aquí mismo y guárdalo en tu dispositivo.';
                     }
 
                     mostrar('rec-exito-view');
@@ -479,6 +517,7 @@
                 enviarLead({
                     nombre: nombre,
                     correo: correo,
+                    mensaje: $('rec-mensaje').value.trim(),
                     recurso_id: recurso.slug,
                     fuente: fuente,
                     website: $('rec-website').value

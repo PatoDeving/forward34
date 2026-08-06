@@ -3,6 +3,22 @@
 
   "recursos": [
     {
+      "slug": "platiquemos",
+      "contacto": true,
+      "etiqueta": "Hablemos",
+      "titulo": "Platiquemos",
+      "gancho": "Déjanos tus datos y te escribimos. Cuéntanos qué necesitas y vamos directo al punto.",
+      "bullets": [
+        "Una conversación corta para entender tu contexto, sin presentación de ventas",
+        "Te decimos con franqueza si podemos ayudarte o no",
+        "De cortesía te llevas el framework de criterio que usamos"
+      ],
+      "cta": "Déjanos tus datos",
+      "pregunta": "¿Qué necesitas?",
+      "pdf": "/public/pdfs/criterio.pdf",
+      "recursoNombre": "Tu criterio es la nueva ventaja competitiva"
+    },
+    {
       "slug": "criterio-ia",
       "etiqueta": "Framework",
       "titulo": "Tu criterio es la nueva ventaja competitiva",
