@@ -1,0 +1,39 @@
+{
+  "_leeme": "Catalogo de recursos descargables. Para agregar uno nuevo: copia un bloque completo, cambia slug/titulo/gancho/bullets/pdf, y sube el PDF a public/pdfs/ con ese nombre. Instrucciones completas en public/pdfs/LEEME.md",
+
+  "recursos": [
+    {
+      "slug": "liderazgo-ia",
+      "titulo": "Liderazgo en la era de la IA",
+      "gancho": "Las decisiones que ningun algoritmo deberia tomar por ti.",
+      "bullets": [
+        "El marco de criterio para decidir que delegas a la IA y que no",
+        "Los tres errores que cometen los equipos al automatizar demasiado pronto",
+        "Una guia practica para conversar de IA con tu consejo directivo"
+      ],
+      "pdf": "/public/pdfs/liderazgo-ia.pdf"
+    },
+    {
+      "slug": "cultura-organizacional",
+      "titulo": "Cultura organizacional que sostiene el crecimiento",
+      "gancho": "La cultura no se declara en una junta: se disena.",
+      "bullets": [
+        "Los cuatro indicadores que revelan la cultura real de tu equipo",
+        "Como detectar la brecha entre los valores escritos y los vividos",
+        "Un plan de 90 dias para intervenir sin romper lo que funciona"
+      ],
+      "pdf": "/public/pdfs/cultura-organizacional.pdf"
+    },
+    {
+      "slug": "recurso-tres",
+      "titulo": "Titulo del tercer recurso",
+      "gancho": "Gancho de una linea que resume la promesa.",
+      "bullets": [
+        "Primer beneficio concreto",
+        "Segundo beneficio concreto",
+        "Tercer beneficio concreto"
+      ],
+      "pdf": "/public/pdfs/recurso-tres.pdf"
+    }
+  ]
+}

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Descarga tu recurso de Forward34.">
+
+    <!-- Landing de campaña: no debe competir en buscadores con el sitio. -->
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#0B0B0F">
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/public/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/public/apple-touch-icon.png">
+
+    <meta property="og:site_name" content="Forward34">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:title" content="Tu recurso | Forward34">
+    <meta property="og:description" content="Déjanos tu correo y te enviamos el recurso.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://forward34.com/public/images/og-default.png">
+
+    <title>Tu recurso | Forward34</title>
+
+    <script>document.documentElement.className+=' js';</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="public/css/styles.css">
+    <link rel="stylesheet" href="public/css/improvements.css">
+    <link rel="stylesheet" href="public/css/privacy-modal.css">
+
+    <style>
+        /* Landing de recurso. Usa los tokens y componentes del sitio
+           (--ink, --cream, --volt, .btn, .form-group). Solo se define
+           aquí lo que no existe ya: el layout de una sola tarjeta. */
+
+        body { overflow-x: hidden; }
+
+        .rec-page {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .rec-top {
+            display: flex;
+            justify-content: center;
+            padding: 1.5rem 1.25rem 0;
+        }
+        .rec-top img { height: 30px; width: auto; }
+
+        .rec-main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.75rem 1.25rem 2.5rem;
+        }
+
+        .rec-card {
+            width: 100%;
+            max-width: 480px;
+            background: var(--chalk);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 1.75rem 1.4rem;
+            box-shadow: var(--shadow-md);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity .45s var(--ease-out), transform .45s var(--ease-out);
+        }
+        .rec-card.visible { opacity: 1; transform: none; }
+
+        .rec-eyebrow {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: .68rem;
+            font-weight: 600;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--ink);
+            background: var(--volt);
+            padding: .3rem .7rem;
+            border-radius: 999px;
+            margin-bottom: 1.1rem;
+        }
+
+        .rec-card h1 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 600;
+            line-height: 1.14;
+            letter-spacing: -.02em;
+            color: var(--ink);
+            margin: 0 0 .7rem;
+        }
+
+        .rec-gancho {
+            font-size: .98rem;
+            line-height: 1.6;
+            color: rgba(11, 11, 15, .62);
+            margin: 0 0 1.5rem;
+        }
+
+        .rec-bullets { list-style: none; margin: 0 0 1.8rem; padding: 0; }
+        .rec-bullets li {
+            position: relative;
+            padding-left: 1.75rem;
+            font-size: .9rem;
+            line-height: 1.55;
+            color: var(--ink);
+            margin-bottom: .8rem;
+        }
+        .rec-bullets li:last-child { margin-bottom: 0; }
+        .rec-bullets li::before {
+            content: '';
+            position: absolute;
+            left: 0; top: .34em;
+            width: 9px; height: 9px;
+            border-radius: 50%;
+            background: var(--volt);
+            box-shadow: 0 0 0 3px var(--volt-soft);
+        }
+
+        /* Campo trampa para bots: fuera de pantalla, sin display:none
+           (algunos bots ignoran los elementos ocultos por display). */
+        .rec-trampa {
+            position: absolute;
+            left: -9999px;
+            width: 1px; height: 1px;
+            overflow: hidden;
+        }
+
+        .rec-card .btn { width: 100%; justify-content: center; }
+
+        .rec-consent {
+            margin: .9rem 0 0;
+            font-size: .72rem;
+            line-height: 1.55;
+            color: rgba(11, 11, 15, .45);
+            text-align: center;
+        }
+        .rec-consent a { color: rgba(11, 11, 15, .7); text-decoration: underline; }
+
+        .rec-error {
+            margin-top: .9rem;
+            padding: .7rem .9rem;
+            border: 1px solid rgba(180, 35, 24, .25);
+            background: rgba(180, 35, 24, .06);
+            border-radius: 12px;
+            font-size: .8rem;
+            line-height: 1.5;
+            color: #8C1D14;
+        }
+
+        .rec-spinner {
+            width: 14px; height: 14px;
+            border: 2px solid rgba(244, 239, 230, .35);
+            border-top-color: var(--cream);
+            border-radius: 50%;
+            animation: recGirar .7s linear infinite;
+        }
+        @keyframes recGirar { to { transform: rotate(360deg); } }
+
+        /* Estado de éxito */
+        .rec-exito { text-align: center; }
+        .rec-check {
+            width: 48px; height: 48px;
+            margin: 0 auto 1.2rem;
+            border-radius: 50%;
+            background: var(--volt);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .rec-check svg { width: 22px; height: 22px; }
+        .rec-exito h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -.02em;
+            color: var(--ink);
+            margin: 0 0 .6rem;
+        }
+        .rec-detalle {
+            font-size: .9rem;
+            line-height: 1.6;
+            color: rgba(11, 11, 15, .62);
+            margin: 0 0 1.7rem;
+            /* Un correo largo no tiene espacios: sin esto se desborda. */
+            overflow-wrap: anywhere;
+        }
+        .rec-detalle strong { color: var(--ink); font-weight: 600; }
+
+        .rec-suave {
+            display: inline-block;
+            margin-top: 1.2rem;
+            font-size: .82rem;
+            color: rgba(11, 11, 15, .55);
+            border-bottom: 1px solid var(--line-strong);
+            padding-bottom: 2px;
+            transition: color .3s var(--ease-out);
+        }
+        .rec-suave:hover { color: var(--ink); opacity: 1; }
+
+        /* Pie discreto con la co-marca */
+        .rec-foot {
+            padding: 0 1.25rem 1.75rem;
+            text-align: center;
+        }
+        .rec-foot p {
+            font-size: .7rem;
+            line-height: 1.6;
+            color: rgba(11, 11, 15, .4);
+            margin: 0;
+        }
+        .rec-foot a { color: rgba(11, 11, 15, .55); }
+
+        @media (min-width: 640px) {
+            .rec-top { padding: 2.25rem 2rem 0; }
+            .rec-top img { height: 34px; }
+            .rec-card { padding: 2.6rem 2.4rem; border-radius: 24px; }
+            .rec-card h1 { font-size: 2.1rem; }
+            .rec-gancho { font-size: 1.05rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .rec-card { transition: none; }
+            .rec-spinner { animation: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="rec-page">
+
+    <header class="rec-top">
+        <a href="index.html" aria-label="Forward34">
+            <img src="public/images/forward34-logo.svg" alt="Forward34">
+        </a>
+    </header>
+
+    <main class="rec-main">
+        <div class="rec-card" id="rec-card">
+
+            <!-- ESTADO 1: formulario -->
+            <div id="rec-form-view" hidden>
+                <span class="rec-eyebrow">Recurso gratuito</span>
+                <h1 id="rec-titulo"></h1>
+                <p class="rec-gancho" id="rec-gancho"></p>
+                <ul class="rec-bullets" id="rec-bullets"></ul>
+
+                <form id="rec-form" novalidate>
+                    <div class="form-group">
+                        <label for="rec-nombre">Nombre</label>
+                        <input type="text" id="rec-nombre" name="nombre" placeholder="Tu nombre"
+                               autocomplete="given-name" maxlength="80">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rec-correo">Correo *</label>
+                        <input type="email" id="rec-correo" name="correo" placeholder="tu@correo.com"
+                               autocomplete="email" inputmode="email" maxlength="254" required>
+                    </div>
+
+                    <div class="rec-trampa" aria-hidden="true">
+                        <label for="rec-website">No llenar este campo</label>
+                        <input type="text" id="rec-website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="rec-enviar">
+                        <span id="rec-enviar-texto">Recibir el recurso</span>
+                    </button>
+
+                    <p class="rec-consent">
+                        Al enviar aceptas recibir este recurso y contenido ocasional de Forward34.
+                        Sin spam. Puedes darte de baja cuando quieras.
+                        <a href="#" class="open-privacy-modal">Aviso de privacidad</a>
+                    </p>
+
+                    <div class="rec-error" id="rec-error" hidden></div>
+                </form>
+            </div>
+
+            <!-- ESTADO 2: éxito -->
+            <div id="rec-exito-view" class="rec-exito" hidden>
+                <div class="rec-check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#0B0B0F" stroke-width="3"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <h2 id="rec-exito-titulo">Listo</h2>
+                <p class="rec-detalle" id="rec-exito-detalle"></p>
+                <a class="btn btn-primary" id="rec-descargar" href="#" target="_blank" rel="noopener">Descargar el PDF</a>
+                <br>
+                <a class="rec-suave" href="index.html">Conoce Forward34</a>
+            </div>
+
+            <!-- ESTADO 3: el enlace no corresponde a ningún recurso -->
+            <div id="rec-vacio-view" class="rec-exito" hidden>
+                <h2>No encontramos ese recurso</h2>
+                <p class="rec-detalle">
+                    Es posible que el enlace esté incompleto. Escríbenos y te lo mandamos directo.
+                </p>
+                <a class="btn btn-primary" href="index.html">Ir a Forward34</a>
+                <br>
+                <a class="rec-suave" href="mailto:hector@forward34.com">hector@forward34.com</a>
+            </div>
+
+            <noscript>
+                <h1>Activa JavaScript</h1>
+                <p class="rec-gancho">
+                    Esta página necesita JavaScript para entregarte el recurso. Si prefieres,
+                    escríbenos a <a href="mailto:hector@forward34.com">hector@forward34.com</a>.
+                </p>
+            </noscript>
+
+        </div>
+    </main>
+
+    <footer class="rec-foot">
+        <p>
+            Forward34 &middot; en colaboración con
+            <a href="descubrete.html">Descúbrete+</a>
+        </p>
+    </footer>
+
+</div>
+
+<script src="public/js/privacy-modal.js"></script>
+
+<script>
+(function () {
+    'use strict';
+
+    /* META PIXEL — pega aquí el ID (solo los números) para activarlo.
+       Mientras esté vacío el pixel no carga y no se envía nada. */
+    var META_PIXEL_ID = '';
+
+    if (META_PIXEL_ID) {
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+        (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', META_PIXEL_ID);
+        fbq('track', 'PageView');
+    }
+    function pixel(evento, datos) {
+        if (META_PIXEL_ID && window.fbq) window.fbq('track', evento, datos);
+    }
+
+    var $ = function (id) { return document.getElementById(id); };
+
+    var params = new URLSearchParams(location.search);
+    // De qué cuenta de Instagram llegó el lead. Se acepta utm_source o fuente.
+    var fuente = params.get('utm_source') || params.get('fuente') || 'directo';
+    var slug = (params.get('r') || '').trim().toLowerCase();
+
+    function mostrar(vista) {
+        ['rec-form-view', 'rec-exito-view', 'rec-vacio-view'].forEach(function (v) {
+            $(v).hidden = (v !== vista);
+        });
+        $('rec-card').classList.add('visible');
+    }
+
+    function pintarVacio() {
+        document.title = 'Recurso no encontrado | Forward34';
+        mostrar('rec-vacio-view');
+    }
+
+    fetch('/public/data/recursos.json', { cache: 'no-cache' })
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('catálogo ' + r.status)); })
+        .then(function (data) {
+            var lista = (data && data.recursos) || [];
+            var recurso = null;
+            for (var i = 0; i < lista.length; i++) {
+                if (lista[i].slug === slug) { recurso = lista[i]; break; }
+            }
+            if (!recurso) { pintarVacio(); return; }
+
+            document.title = recurso.titulo + ' | Forward34';
+            $('rec-titulo').textContent = recurso.titulo;
+            $('rec-gancho').textContent = recurso.gancho;
+
+            var ul = $('rec-bullets');
+            ul.innerHTML = '';
+            (recurso.bullets || []).forEach(function (texto) {
+                var li = document.createElement('li');
+                li.textContent = texto;
+                ul.appendChild(li);
+            });
+
+            mostrar('rec-form-view');
+            pixel('ViewContent', { content_name: recurso.titulo });
+
+            $('rec-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                var correo = $('rec-correo').value.trim();
+                var nombre = $('rec-nombre').value.trim();
+                var caja = $('rec-error');
+                caja.hidden = true;
+
+                if (!/^[^\s@]+@[^\s@,]+\.[^\s@,]{2,}$/.test(correo)) {
+                    caja.textContent = 'Revisa tu correo: parece que le falta algo.';
+                    caja.hidden = false;
+                    $('rec-correo').focus();
+                    return;
+                }
+
+                var boton = $('rec-enviar');
+                boton.disabled = true;
+                $('rec-enviar-texto').textContent = 'Enviando';
+                boton.insertAdjacentHTML('beforeend', '<span class="rec-spinner" id="rec-spinner"></span>');
+
+                fetch('/api/recurso', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        nombre: nombre,
+                        correo: correo,
+                        recurso_id: recurso.slug,
+                        fuente: fuente,
+                        website: $('rec-website').value
+                    })
+                })
+                .then(function (res) {
+                    if (!res.ok) throw new Error('status ' + res.status);
+                    return res.json();
+                })
+                .then(function (datos) {
+                    var enlace = $('rec-descargar');
+                    enlace.href = datos.pdf || recurso.pdf;
+                    enlace.setAttribute('download', '');
+
+                    $('rec-exito-titulo').textContent = nombre
+                        ? 'Listo, ' + nombre.split(' ')[0]
+                        : 'Listo';
+
+                    // Solo se promete el correo si de verdad salió.
+                    if (datos.correoEnviado) {
+                        $('rec-exito-detalle').innerHTML = 'Te lo enviamos a <strong></strong>. '
+                            + 'Si no aparece en unos minutos, revisa spam o promociones. '
+                            + 'También puedes descargarlo aquí mismo.';
+                        $('rec-exito-detalle').querySelector('strong').textContent = correo;
+                    } else {
+                        $('rec-exito-detalle').textContent =
+                            'Puedes descargarlo aquí mismo. Guárdalo en tu dispositivo.';
+                    }
+
+                    mostrar('rec-exito-view');
+                    pixel('Lead', { content_name: recurso.titulo, source: fuente });
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                })
+                .catch(function (err) {
+                    console.error('[recurso] error al enviar', err);
+                    caja.textContent = 'No pudimos procesarlo en este momento. Intenta de nuevo en un momento.';
+                    caja.hidden = false;
+                    boton.disabled = false;
+                    $('rec-enviar-texto').textContent = 'Recibir el recurso';
+                    var sp = $('rec-spinner');
+                    if (sp) sp.remove();
+                });
+            });
+        })
+        .catch(function (err) {
+            console.error('[recurso] no se pudo leer el catálogo', err);
+            pintarVacio();
+        });
+})();
+</script>
+
+</body>
+</html>
