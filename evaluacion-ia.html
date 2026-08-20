@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Página OCULTA: no indexar, no seguir. Solo se llega por el QR del taller. -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>Evaluación · IA Agéntica para Dirección — EO Querétaro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#F5F5F5; --ink:#1A1A1A; --line:#E6E6E6; --mut:#4A4A4A; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+           background:var(--bg); color:var(--ink); -webkit-font-smoothing:antialiased; }
+    .wrap { max-width:640px; margin:0 auto; padding:32px 20px 64px; }
+    .brand { display:flex; align-items:center; gap:10px; margin-bottom:28px; }
+    .brand .mk { width:36px; height:36px; border-radius:50%; background:#000; color:#fff;
+                 display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; }
+    .brand .nm { font-weight:600; font-size:15px; letter-spacing:-0.01em; }
+    h1 { font-size:26px; font-weight:600; letter-spacing:-0.02em; line-height:1.2; margin:0 0 8px; }
+    .lede { color:var(--mut); font-size:15px; line-height:1.5; margin:0 0 32px; }
+    .q { background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px; margin-bottom:16px; }
+    .q .n { font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--mut); margin-bottom:6px; }
+    .q label.ttl { display:block; font-weight:600; font-size:16px; line-height:1.35; margin-bottom:14px; }
+    .scale { display:grid; grid-template-columns:repeat(10,1fr); gap:6px; }
+    .scale button { border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:8px;
+                    padding:11px 0; font-size:15px; font-weight:600; cursor:pointer; font-family:inherit;
+                    transition:all .15s ease; }
+    .scale button:hover { border-color:#000; }
+    .scale button.on { background:#000; color:#fff; border-color:#000; }
+    .ends { display:flex; justify-content:space-between; font-size:12px; color:var(--mut); margin-top:8px; }
+    .opts { display:flex; flex-direction:column; gap:8px; }
+    .opt { display:flex; align-items:flex-start; gap:11px; border:1px solid var(--line); border-radius:9px;
+           padding:13px 14px; cursor:pointer; transition:border-color .15s ease; }
+    .opt:hover { border-color:#000; }
+    .opt.on { border-color:#000; background:#fafafa; }
+    .opt .dot { width:18px; height:18px; border:2px solid var(--ink); border-radius:50%; flex-shrink:0; margin-top:1px;
+                position:relative; }
+    .opt.on .dot::after { content:''; position:absolute; inset:3px; background:#000; border-radius:50%; }
+    .opt .txt { font-size:14.5px; line-height:1.4; }
+    textarea { width:100%; border:1px solid var(--line); border-radius:9px; padding:12px; font-size:15px;
+               font-family:inherit; resize:vertical; min-height:96px; outline:none; }
+    textarea:focus, input:focus { border-color:#000; }
+    input[type=text], input[type=email] { width:100%; border:1px solid var(--line); border-radius:9px;
+               padding:12px 14px; font-size:15px; font-family:inherit; outline:none; }
+    .datos { display:flex; flex-direction:column; gap:12px; }
+    .send { width:100%; background:#000; color:#fff; border:none; border-radius:8px; padding:16px;
+            font-size:16px; font-weight:600; letter-spacing:0.02em; cursor:pointer; margin-top:8px; font-family:inherit; }
+    .send:disabled { background:var(--mut); cursor:default; }
+    .err { color:#b00020; font-size:13.5px; margin-top:10px; display:none; }
+    /* pantalla de gracias */
+    .thanks { display:none; text-align:center; padding:60px 20px; }
+    .thanks .big { font-size:30px; font-weight:600; letter-spacing:-0.02em; margin:0 0 12px; }
+    .thanks p { color:var(--mut); font-size:16px; line-height:1.55; margin:0 auto 32px; max-width:420px; }
+    .thanks a.explore { display:inline-block; background:#000; color:#fff; text-decoration:none;
+            padding:15px 30px; border-radius:6px; font-weight:600; font-size:15px; letter-spacing:0.02em; }
+    @media (max-width:420px){ .scale button{ font-size:13px; padding:10px 0; } h1{ font-size:22px; } }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="form-wrap">
+    <div class="brand"><div class="mk">34</div><div class="nm">Forward 34</div></div>
+    <h1>IA Agéntica para Dirección — EO Querétaro</h1>
+    <p class="lede">Dos minutos. Tu respuesta nos ayuda a mejorar la siguiente edición.</p>
+
+    <form id="f">
+      <!-- 1 -->
+      <div class="q" data-q="valor_taller">
+        <div class="n">Pregunta 1 · Obligatoria</div>
+        <label class="ttl">Del 1 al 10, ¿qué tan valioso fue el taller para ti?</label>
+        <div class="scale" data-scale="valor_taller"></div>
+        <div class="ends"><span>1 · Poco valioso</span><span>Muy valioso · 10</span></div>
+      </div>
+      <!-- 2 -->
+      <div class="q" data-q="claridad_accion">
+        <div class="n">Pregunta 2 · Obligatoria</div>
+        <label class="ttl">Del 1 al 10, ¿qué tan claro te queda qué hacer en tu empresa esta semana?</label>
+        <div class="scale" data-scale="claridad_accion"></div>
+        <div class="ends"><span>1 · Nada claro</span><span>Totalmente claro · 10</span></div>
+      </div>
+      <!-- 3 -->
+      <div class="q" data-q="mejor_parte">
+        <div class="n">Pregunta 3 · Obligatoria</div>
+        <label class="ttl">¿Qué parte del taller te dio más valor?</label>
+        <div class="opts" data-opts="mejor_parte">
+          <div class="opt" data-val="marco"><div class="dot"></div><div class="txt">El marco: cómo se construyen los agentes</div></div>
+          <div class="opt" data-val="demo"><div class="dot"></div><div class="txt">La demo en vivo</div></div>
+          <div class="opt" data-val="ejercicio"><div class="dot"></div><div class="txt">El ejercicio con mis propios procesos</div></div>
+          <div class="opt" data-val="qa"><div class="dot"></div><div class="txt">La sesión de preguntas y respuestas</div></div>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div class="q" data-q="tier_empresa">
+        <div class="n">Pregunta 4 · Obligatoria</div>
+        <label class="ttl">¿Dónde está tu empresa hoy con la IA?</label>
+        <div class="opts" data-opts="tier_empresa">
+          <div class="opt" data-val="tier1"><div class="dot"></div><div class="txt">Tier 1 — mi gente la usa por su cuenta, sin medirlo</div></div>
+          <div class="opt" data-val="tier2"><div class="dot"></div><div class="txt">Tier 2 — veo mejoras, pero no las puedo medir en pesos</div></div>
+          <div class="opt" data-val="tier3"><div class="dot"></div><div class="txt">Tier 3 — tengo agentes con retorno medible</div></div>
+          <div class="opt" data-val="no_claro"><div class="dot"></div><div class="txt">Todavía no lo tengo claro</div></div>
+        </div>
+      </div>
+      <!-- 5 -->
+      <div class="q" data-q="primer_proceso">
+        <div class="n">Pregunta 5 · Obligatoria</div>
+        <label class="ttl">¿Cuál es el primer proceso que vas a atacar, y por qué ese?</label>
+        <textarea id="primer_proceso" maxlength="2000" placeholder="Escribe tu respuesta..."></textarea>
+      </div>
+      <!-- datos -->
+      <div class="q">
+        <div class="n">Tus datos · Obligatorio</div>
+        <div class="datos">
+          <input type="text" id="nombre" maxlength="120" placeholder="Nombre">
+          <input type="text" id="empresa" maxlength="160" placeholder="Empresa">
+          <input type="email" id="correo" maxlength="160" placeholder="Correo electrónico">
+        </div>
+      </div>
+
+      <button type="submit" class="send" id="send">Enviar evaluación</button>
+      <div class="err" id="err"></div>
+    </form>
+  </div>
+
+  <div class="wrap thanks" id="thanks">
+    <div class="brand" style="justify-content:center"><div class="mk">34</div><div class="nm">Forward 34</div></div>
+    <div class="big">Gracias.</div>
+    <p>Tu evaluación quedó registrada. Nos ayuda a hacer mejor la siguiente edición.</p>
+    <a class="explore" href="https://www.forward34.com/">Explora Forward &rarr;</a>
+  </div>
+
+  <script>
+    var BACKEND = 'https://tona34.com';
+    var state = { valor_taller:0, claridad_accion:0, mejor_parte:'', tier_empresa:'' };
+
+    // escalas 1-10
+    document.querySelectorAll('[data-scale]').forEach(function(sc){
+      var key = sc.getAttribute('data-scale');
+      for (var i=1;i<=10;i++){
+        var b=document.createElement('button'); b.type='button'; b.textContent=i; b.setAttribute('data-v',i);
+        b.addEventListener('click',function(){
+          state[key]=parseInt(this.getAttribute('data-v'),10);
+          sc.querySelectorAll('button').forEach(function(x){x.classList.remove('on');});
+          this.classList.add('on');
+        });
+        sc.appendChild(b);
+      }
+    });
+    // opciones
+    document.querySelectorAll('[data-opts]').forEach(function(g){
+      var key=g.getAttribute('data-opts');
+      g.querySelectorAll('.opt').forEach(function(o){
+        o.addEventListener('click',function(){
+          state[key]=this.getAttribute('data-val');
+          g.querySelectorAll('.opt').forEach(function(x){x.classList.remove('on');});
+          this.classList.add('on');
+        });
+      });
+    });
+
+    var form=document.getElementById('f'), errEl=document.getElementById('err'), sendEl=document.getElementById('send');
+    function showErr(m){ errEl.textContent=m; errEl.style.display='block'; }
+
+    form.addEventListener('submit', async function(e){
+      e.preventDefault(); errEl.style.display='none';
+      var primer=document.getElementById('primer_proceso').value.trim();
+      var nombre=document.getElementById('nombre').value.trim();
+      var empresa=document.getElementById('empresa').value.trim();
+      var correo=document.getElementById('correo').value.trim();
+      if(!state.valor_taller) return showErr('Responde la pregunta 1 (valor del taller).');
+      if(!state.claridad_accion) return showErr('Responde la pregunta 2 (claridad de acción).');
+      if(!state.mejor_parte) return showErr('Responde la pregunta 3 (parte más valiosa).');
+      if(!state.tier_empresa) return showErr('Responde la pregunta 4 (madurez de tu empresa).');
+      if(!primer) return showErr('Responde la pregunta 5 (primer proceso).');
+      if(!nombre) return showErr('Escribe tu nombre.');
+      if(!empresa) return showErr('Escribe tu empresa.');
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo)) return showErr('El correo no parece válido.');
+
+      sendEl.disabled=true; sendEl.textContent='Enviando...';
+      try{
+        var r=await fetch(BACKEND+'/api/encuesta',{
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({ valor_taller:state.valor_taller, claridad_accion:state.claridad_accion,
+            mejor_parte:state.mejor_parte, tier_empresa:state.tier_empresa,
+            primer_proceso:primer, nombre:nombre, empresa:empresa, correo:correo })
+        });
+        var d=await r.json().catch(function(){return {};});
+        if(r.ok && d.ok){
+          document.getElementById('form-wrap').style.display='none';
+          document.getElementById('thanks').style.display='block';
+          window.scrollTo(0,0);
+        } else {
+          sendEl.disabled=false; sendEl.textContent='Enviar evaluación';
+          showErr((d && d.error) || 'No se pudo enviar. Intenta de nuevo.');
+        }
+      }catch(err){
+        sendEl.disabled=false; sendEl.textContent='Enviar evaluación';
+        showErr('Error de conexión. Revisa tu internet e intenta de nuevo.');
+      }
+    });
+  </script>
+</body>
+</html>
