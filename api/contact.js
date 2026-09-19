@@ -21,7 +21,7 @@ const SERVICIOS = {
     transformacion: 'Transformación organizacional',
     'ia-tecnologia': 'IA y tecnología aplicada',
     experiencias: 'Experiencias corporativas',
-    coaching: 'Coaching y liderazgo',
+    coaching: 'Acompañamiento y liderazgo',
     medicion: 'Medición y seguimiento',
     otro: 'Otro'
 };
