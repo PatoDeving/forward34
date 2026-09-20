@@ -32,6 +32,11 @@
   ],
   "routes": [
     {
+      "src": "/(.*)",
+      "headers": { "Accept-Ranges": "none" },
+      "continue": true
+    },
+    {
       "src": "/",
       "dest": "/index.html"
     },
