@@ -22,6 +22,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "criterio/**",
+      "use": "@vercel/static"
+    },
+    {
       "src": "public/**",
       "use": "@vercel/static"
     },
@@ -32,9 +36,13 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "headers": { "Accept-Ranges": "none" },
-      "continue": true
+      "src": "/criterio",
+      "status": 308,
+      "headers": { "Location": "/criterio/" }
+    },
+    {
+      "src": "/criterio/",
+      "dest": "/criterio/index.html"
     },
     {
       "src": "/",

@@ -1,0 +1,145 @@
+/*
+ * Criterio — estilos propios de la sección de análisis.
+ * Solo se enlaza desde /criterio/. Reutiliza los tokens de improvements.css.
+ */
+
+/* Índice: el hero no necesita ocupar la pantalla completa */
+.hero.hero--criterio {
+    min-height: auto !important;
+    padding-bottom: 2rem !important;
+}
+
+/* Al ser un hero bajo, el degradado de fondo se cortaba en seco contra la
+   sección siguiente. Se desvanece hacia abajo para que no quede una franja. */
+.hero.hero--criterio::before {
+    -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 88%);
+    mask-image: linear-gradient(to bottom, #000 45%, transparent 88%);
+}
+
+/* El hero es flex: con un título tan corto el contenedor se encoge y se centra.
+   Se fuerza el ancho completo para que alinee con el resto de la página. */
+.hero.hero--criterio .container {
+    width: 100%;
+}
+
+.criterio-intro {
+    max-width: 68ch;
+}
+
+.criterio-intro p {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: rgba(11, 11, 15, 0.78);
+    margin-bottom: 1.25rem;
+}
+
+.section.criterio-indice {
+    padding-top: 1rem !important;
+}
+
+/* Listado de artículos */
+.criterio-lista {
+    list-style: none;
+    margin: 3.5rem 0 0;
+    padding: 0;
+    max-width: 68ch;
+    border-top: 1px solid var(--line-strong);
+}
+
+.criterio-lista:empty {
+    display: none;
+}
+
+.criterio-lista li {
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.criterio-lista h2 {
+    font-size: clamp(1.35rem, 2.4vw, 1.75rem) !important;
+    line-height: 1.2 !important;
+    margin: 0 0 0.5rem !important;
+}
+
+.criterio-lista h2 a {
+    color: var(--ink);
+    text-decoration: none;
+    background-image: linear-gradient(var(--volt), var(--volt));
+    background-repeat: no-repeat;
+    background-position: 0 92%;
+    background-size: 0 0.28em;
+    transition: background-size 0.4s var(--ease-out);
+}
+
+.criterio-lista h2 a:hover,
+.criterio-lista h2 a:focus-visible {
+    background-size: 100% 0.28em;
+}
+
+.criterio-lista time,
+.criterio-firma {
+    display: block;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    color: rgba(11, 11, 15, 0.62);
+}
+
+.criterio-lista p {
+    margin: 0.6rem 0 0;
+    color: rgba(11, 11, 15, 0.78);
+}
+
+/* Artículo */
+.section.criterio-articulo {
+    padding-top: calc(80px + 4rem) !important;
+    padding-bottom: 5rem !important;
+}
+
+.criterio-articulo .criterio-columna {
+    max-width: 68ch;
+}
+
+.criterio-articulo h1 {
+    font-size: clamp(2rem, 4.6vw, 3.5rem) !important;
+    line-height: 1.05 !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.criterio-firma {
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--line-strong);
+}
+
+.criterio-firma time {
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.criterio-firma a,
+.criterio-cuerpo a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--volt-2);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+.criterio-cuerpo h2 {
+    font-size: clamp(1.5rem, 2.8vw, 2rem) !important;
+    line-height: 1.15 !important;
+    margin: 3rem 0 1rem !important;
+}
+
+.criterio-cuerpo p {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: rgba(11, 11, 15, 0.82);
+    margin-bottom: 1.35rem;
+}
+
+@media (max-width: 768px) {
+    .section.criterio-articulo { padding-top: calc(72px + 2.5rem) !important; }
+    .criterio-intro p,
+    .criterio-cuerpo p { font-size: 1.0625rem; }
+}
