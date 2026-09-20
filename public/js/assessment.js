@@ -409,7 +409,9 @@
 
         submitBtn.disabled = false;
 
-        if (result && result.ok) {
+        // emailSent === false: el servidor respondió pero el correo no salió.
+        // Se trata como fallo para que el lead no se pierda: cae al mailto.
+        if (result && result.ok && result.emailSent !== false) {
             submitBtn.textContent = '✓ Recibido';
             showFormStatus('¡Gracias! Recibimos tus respuestas. Te contactaremos en menos de 48 horas hábiles con el roadmap detallado.', 'success');
             form.querySelectorAll('input, select, button').forEach((el) => { el.disabled = true; });
@@ -417,7 +419,7 @@
         } else {
             submitBtn.textContent = 'Reintentar';
             showFormStatus('No pudimos enviar automáticamente. Abrimos tu cliente de correo como alternativa.', 'error');
-            track('lead_fallback_mailto', { error: result && result.error });
+            track('lead_fallback_mailto', { error: result && (result.error || (result.ok ? 'Correo no enviado' : undefined)) });
             window.location.href = buildMailtoFallback(lead);
         }
     });
