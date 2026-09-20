@@ -36,6 +36,10 @@
   ],
   "routes": [
     {
+      "src": "/api/([^/.]+)",
+      "dest": "/api/$1.js"
+    },
+    {
       "src": "/criterio",
       "status": 308,
       "headers": { "Location": "/criterio/" }

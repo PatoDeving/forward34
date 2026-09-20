@@ -300,7 +300,9 @@
                     });
                     const result = await res.json().catch(() => ({}));
 
-                    if (res.ok && result.ok) {
+                    // emailSent === false: el servidor respondió pero el correo no salió.
+                    // Se trata como fallo para que el mensaje no se pierda: cae al mailto.
+                    if (res.ok && result.ok && result.emailSent !== false) {
                         showMessage('<strong>¡Mensaje enviado!</strong> Te respondemos en menos de 24h hábiles.', true);
                         form.reset();
                         if (typeof window.f34Track === 'function') {
@@ -308,7 +310,7 @@
                         }
                         setTimeout(() => { formMessage.style.display = 'none'; }, 6000);
                     } else {
-                        throw new Error(result.error || 'Error del servidor');
+                        throw new Error(result.error || (result.ok ? 'Correo no enviado' : 'Error del servidor'));
                     }
                 } catch (err) {
                     // Fallback: abrir el cliente de correo con los datos prellenados.
