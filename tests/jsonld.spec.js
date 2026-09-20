@@ -13,7 +13,8 @@ const PAGES = [
     'servicios.html',
     'empresa.html',
     'descubrete.html',
-    'contacto.html'
+    'contacto.html',
+    'criterio/index.html'
 ];
 
 function extractLdJson(html) {
