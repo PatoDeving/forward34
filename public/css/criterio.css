@@ -143,3 +143,14 @@
     .criterio-intro p,
     .criterio-cuerpo p { font-size: 1.0625rem; }
 }
+
+/* Página legal (aviso de privacidad): reutiliza la columna de artículo */
+.criterio-cuerpo h1 {
+    font-size: clamp(2rem, 4.6vw, 3.5rem) !important;
+    line-height: 1.05 !important;
+    margin: 0 0 1.5rem !important;
+}
+.criterio-cuerpo .legal-titulo { margin-top: 5rem !important; padding-top: 3rem; border-top: 1px solid var(--line-strong); }
+.criterio-cuerpo ul { margin: 0 0 1.35rem 1.25rem; color: rgba(11, 11, 15, 0.82); line-height: 1.7; }
+.criterio-cuerpo li { margin-bottom: 0.35rem; }
+.legal-fecha { font-size: 0.9rem; color: rgba(11, 11, 15, 0.6); margin-top: 2rem; }

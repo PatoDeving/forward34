@@ -1226,3 +1226,29 @@ footer .container { position: relative; z-index: 1; }
 .hero--empresa     { min-height: 75vh; }
 .hero--descubrete  { min-height: 80vh; }
 .hero--contacto    { min-height: 60vh; }
+
+/* ============================================================
+   Consentimiento en formularios sobre fondo claro (contacto).
+   assessment.css redefine .form-consent para el fondo oscuro.
+   ============================================================ */
+.form-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: rgba(11, 11, 15, 0.72);
+    line-height: 1.5;
+    cursor: pointer;
+}
+.form-consent input[type="checkbox"] {
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--ink);
+    margin-top: 2px;
+    cursor: pointer;
+}
+.form-consent a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--volt-2); text-decoration-thickness: 2px; }
+.privacy-permalink { font-size: 0.85rem; }
+.privacy-permalink a { text-decoration: underline; }
