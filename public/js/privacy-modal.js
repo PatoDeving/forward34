@@ -12,8 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="privacy-section">
                         <h3>AVISO DE PRIVACIDAD</h3>
                         <p><strong>Forward34, S.A. de C.V.</strong></p>
+                        <p class="privacy-permalink"><a href="/aviso-de-privacidad.html">Versión completa en forward34.com/aviso-de-privacidad.html</a></p>
 
-                        <p>En cumplimiento con lo dispuesto por la Ley Federal de Protección de Datos Personales en Posesión de los Particulares, Forward34, S.A. de C.V. (en adelante "Forward34"), con domicilio en México, es responsable del uso y protección de sus datos personales.</p>
+                        <p>En cumplimiento con lo dispuesto por la Ley Federal de Protección de Datos Personales en Posesión de los Particulares, Forward34, S.A. de C.V. (en adelante "Forward34"), con domicilio en Querétaro, Querétaro, México, es responsable del uso y protección de sus datos personales.</p>
 
                         <h3>1. Datos personales que se recaban</h3>
                         <p>Los datos personales que Forward34 puede recabar a través de su sitio web, formularios, correos electrónicos o cualquier otro medio incluyen, de manera enunciativa mas no limitativa:</p>
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <h3>4. Derechos ARCO</h3>
                         <p>Usted tiene derecho a Acceder, Rectificar, Cancelar u Oponerse al tratamiento de sus datos personales (Derechos ARCO).</p>
                         <p>Para ejercer estos derechos, deberá enviar una solicitud al correo electrónico:<br>
-                        📧 <strong>hector@forward34.com</strong></p>
+                        <strong>hector@forward34.com</strong></p>
                         <p>La solicitud deberá contener:</p>
                         <ul>
                             <li>Nombre del titular</li>
@@ -60,11 +61,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         <h3>5. Medidas de seguridad</h3>
                         <p>Forward34 adopta medidas administrativas, técnicas y físicas razonables para proteger sus datos personales contra daño, pérdida, alteración o uso no autorizado.</p>
 
-                        <h3>6. Cambios al aviso de privacidad</h3>
+                        <h3>6. Cookies y herramientas de analítica</h3>
+                        <p>Este sitio puede utilizar cookies y herramientas de analítica (como Google Analytics) para medir visitas y mejorar la experiencia de navegación. Estas herramientas recaban información técnica y estadística, como páginas visitadas, tipo de dispositivo y navegador, sin identificar personalmente al usuario. Puede deshabilitar las cookies desde la configuración de su navegador.</p>
+
+                        <h3>7. Cambios al aviso de privacidad</h3>
                         <p>Forward34 se reserva el derecho de modificar el presente Aviso de Privacidad. Cualquier cambio será publicado en este mismo sitio web.</p>
 
                         <div class="last-updated">
-                            <strong>Última actualización: 1 de enero de 2026</strong>
+                            <strong>Última actualización: 28 de septiembre de 2026</strong>
                         </div>
                     </div>
 
