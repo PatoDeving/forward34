@@ -1261,3 +1261,12 @@ footer .container { position: relative; z-index: 1; }
 .form-consent a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--volt-2); text-decoration-thickness: 2px; }
 .privacy-permalink { font-size: 0.85rem; }
 .privacy-permalink a { text-decoration: underline; }
+
+/* Aviso de privacidad simplificado bajo los formularios (art. 16 LFPDPPP) */
+.aviso-simplificado {
+    margin: 0.9rem 0 0;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: rgba(11, 11, 15, 0.6);
+}
+.aviso-simplificado a { color: inherit; text-decoration: underline; }

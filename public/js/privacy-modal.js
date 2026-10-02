@@ -46,7 +46,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         <h3>3. Transferencia de datos</h3>
                         <p>Forward34 no transferirá sus datos personales a terceros sin su consentimiento, salvo en los casos legalmente permitidos o requeridos por autoridad competente.</p>
 
-                        <h3>4. Derechos ARCO</h3>
+                        <h3>4. Opciones y medios para limitar el uso o divulgación de los datos</h3>
+                        <p>En cualquier momento usted puede limitar el uso o divulgación de sus datos personales, en particular dejar de recibir comunicaciones informativas o promocionales, enviando un correo a <strong>hector@forward34.com</strong> con el asunto "Limitar uso de datos". Forward34 lo inscribirá en su lista interna de exclusión en un plazo máximo de 5 días hábiles y se lo confirmará por el mismo medio.</p>
+
+                        <h3>5. Derechos ARCO</h3>
                         <p>Usted tiene derecho a Acceder, Rectificar, Cancelar u Oponerse al tratamiento de sus datos personales (Derechos ARCO).</p>
                         <p>Para ejercer estos derechos, deberá enviar una solicitud al correo electrónico:<br>
                         <strong>hector@forward34.com</strong></p>
@@ -57,18 +60,25 @@ document.addEventListener('DOMContentLoaded', function() {
                             <li>Documentos que acrediten identidad</li>
                             <li>Descripción clara del derecho que desea ejercer</li>
                         </ul>
+                        <p>Forward34 comunicará la determinación adoptada en un plazo máximo de 20 días contados desde la recepción de la solicitud y, si resulta procedente, la hará efectiva dentro de los 15 días siguientes a la respuesta, conforme al artículo 31 de la Ley.</p>
 
-                        <h3>5. Medidas de seguridad</h3>
+                        <h3>6. Revocación del consentimiento</h3>
+                        <p>Usted puede revocar en cualquier momento el consentimiento que haya otorgado para el tratamiento de sus datos personales, sin efectos retroactivos. Para hacerlo, envíe un correo a <strong>hector@forward34.com</strong> con el asunto "Revocación de consentimiento", indicando su nombre, un medio para comunicarle la respuesta y los documentos que acrediten su identidad. Forward34 responderá en un plazo máximo de 20 días y, de proceder, dejará de tratar sus datos dentro de los 15 días siguientes. Tome en cuenta que, para ciertas finalidades, la revocación puede implicar que no podamos seguir prestándole el servicio solicitado.</p>
+
+                        <h3>7. Plazo de conservación</h3>
+                        <p>Sus datos personales se conservarán mientras sean necesarios para cumplir las finalidades descritas en este aviso y durante los plazos que exijan las disposiciones legales aplicables. Cumplidas las finalidades, los datos serán bloqueados y posteriormente suprimidos.</p>
+
+                        <h3>8. Medidas de seguridad</h3>
                         <p>Forward34 adopta medidas administrativas, técnicas y físicas razonables para proteger sus datos personales contra daño, pérdida, alteración o uso no autorizado.</p>
 
-                        <h3>6. Cookies y herramientas de analítica</h3>
+                        <h3>9. Cookies y herramientas de analítica</h3>
                         <p>Este sitio puede utilizar cookies y herramientas de analítica (como Google Analytics) para medir visitas y mejorar la experiencia de navegación. Estas herramientas recaban información técnica y estadística, como páginas visitadas, tipo de dispositivo y navegador, sin identificar personalmente al usuario. Puede deshabilitar las cookies desde la configuración de su navegador.</p>
 
-                        <h3>7. Cambios al aviso de privacidad</h3>
-                        <p>Forward34 se reserva el derecho de modificar el presente Aviso de Privacidad. Cualquier cambio será publicado en este mismo sitio web.</p>
+                        <h3>10. Cambios al aviso de privacidad</h3>
+                        <p>Forward34 se reserva el derecho de modificar el presente Aviso de Privacidad. Cualquier cambio será publicado en este mismo sitio web, en la dirección forward34.com/aviso-de-privacidad.html, con la fecha de su última actualización. Cuando el cambio afecte finalidades que requieran consentimiento, se le notificará además por el correo electrónico que nos haya proporcionado.</p>
 
                         <div class="last-updated">
-                            <strong>Última actualización: 28 de septiembre de 2026</strong>
+                            <strong>Última actualización: 2 de octubre de 2026</strong>
                         </div>
                     </div>
 
