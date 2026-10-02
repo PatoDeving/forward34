@@ -819,6 +819,15 @@ a:hover { opacity: 1 !important; }
     padding: 0 0.1em;
 }
 
+/* Segundo nivel del manifiesto: la tesis en una linea mas corta */
+.manifesto .manifesto-nota {
+    max-width: 46ch;
+    margin: 2rem 0 0;
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    line-height: 1.6;
+    color: rgba(11, 11, 15, 0.72);
+}
+
 .section.dark .manifesto blockquote { color: var(--cream); }
 .section.dark .manifesto blockquote em { color: var(--cream); background: linear-gradient(180deg, transparent 60%, var(--volt) 60%); -webkit-text-fill-color: var(--cream); }
 
