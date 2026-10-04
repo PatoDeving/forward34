@@ -8,6 +8,14 @@
   document.documentElement.classList.add('js');
 
   /* --------------------------------------------------------
+   * Año del pie de página: se pone solo. El número escrito en el HTML
+   * queda como respaldo si no hay JavaScript.
+   * -------------------------------------------------------- */
+  document.querySelectorAll('.anio-actual').forEach((el) => {
+    el.textContent = new Date().getFullYear();
+  });
+
+  /* --------------------------------------------------------
    * Header scroll state
    * -------------------------------------------------------- */
   const header = document.getElementById('site-header');
