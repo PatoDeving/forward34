@@ -15,7 +15,8 @@ const PAGES = [
     'descubrete.html',
     'contacto.html',
     'criterio/index.html',
-    'aviso-de-privacidad.html'
+    'aviso-de-privacidad.html',
+    'criterio/forward34-openai-select-partner-mexico.html'
 ];
 
 function extractLdJson(html) {
