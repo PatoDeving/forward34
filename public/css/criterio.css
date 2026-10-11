@@ -154,3 +154,12 @@
 .criterio-cuerpo ul { margin: 0 0 1.35rem 1.25rem; color: rgba(11, 11, 15, 0.82); line-height: 1.7; }
 .criterio-cuerpo li { margin-bottom: 0.35rem; }
 .legal-fecha { font-size: 0.9rem; color: rgba(11, 11, 15, 0.6); margin-top: 2rem; }
+
+/* Entrada con sello de socio (OpenAI Select Partner) */
+.criterio-marca { display: block; width: 56px; height: 56px; margin: 0 0 1.25rem; }
+.criterio-dateline { font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(11, 11, 15, 0.6); margin: 0 0 1rem; }
+.criterio-cuerpo .criterio-entradilla { font-size: clamp(1.2rem, 2vw, 1.45rem); line-height: 1.55; color: var(--ink); }
+/* Espacio de protección del sello: nada dentro de este margen, sin recolorear ni deformar. */
+.criterio-sello { margin: 2.5rem 0; padding: 2.5rem; }
+.criterio-sello img { display: block; width: min(240px, 100%); height: auto; }
+.criterio-cierre { margin-top: 2.5rem; line-height: 1.6; }
