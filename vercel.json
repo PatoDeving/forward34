@@ -26,6 +26,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "data/**",
+      "use": "@vercel/static"
+    },
+    {
       "src": "public/**",
       "use": "@vercel/static"
     },
