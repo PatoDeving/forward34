@@ -7,7 +7,7 @@ Esta guía te ayudará a configurar todo lo necesario para trabajar con el sitio
 ### Solo para revisar el contenido
 
 Simplemente haz **doble clic** en cualquier archivo HTML:
-- `START-HERE.html` - Instrucciones generales
+- `plantillas/START-HERE.html` - Instrucciones generales
 - `index.html` - Página de inicio
 - `empresa.html`, `servicios.html`, etc.
 
