@@ -12,6 +12,7 @@
 const crypto = require('crypto');
 
 const SCOPE_SHEETS = 'https://www.googleapis.com/auth/spreadsheets';
+const SCOPE_CLOUD = 'https://www.googleapis.com/auth/cloud-platform';
 
 let tokenCache = { valor: null, expira: 0, scope: '' };
 
@@ -90,4 +91,4 @@ async function agregarFilaSheet(sheetId, rango, fila) {
     }
 }
 
-module.exports = { hayCredenciales, obtenerToken, agregarFilaSheet, SCOPE_SHEETS };
+module.exports = { hayCredenciales, obtenerToken, agregarFilaSheet, SCOPE_SHEETS, SCOPE_CLOUD };

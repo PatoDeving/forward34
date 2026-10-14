@@ -7,8 +7,12 @@
 // correo al equipo y, si está configurada, una fila en la hoja de cálculo.
 //
 // Variables de entorno:
-//   GEMINI_API_KEY        — llave de la Generative Language API (requerida)
-//   CHAT_MODEL            — modelo; por defecto gemini-2.5-flash
+//   GOOGLE_SA_CLIENT_EMAIL, GOOGLE_SA_PRIVATE_KEY — cuenta de servicio con rol
+//                           Vertex AI User; es la vía que usa el crédito de Google
+//   GEMINI_API_KEY        — respaldo por AI Studio si no hay cuenta de servicio
+//   CHAT_MODEL            — modelo; por defecto google/gemini-2.5-flash
+//   GOOGLE_PROJECT_ID     — proyecto de Google Cloud; por defecto forward34-sitio
+//   VERTEX_LOCATION       — región de Vertex; por defecto us-central1
 //   CHAT_LEAD_TO          — destino de los avisos; por defecto LEAD_TO o hector@
 //   CHAT_SHEETS_ID        — hoja donde se guardan los contactos (opcional)
 //   CHAT_SHEETS_RANGE     — pestaña y rango; por defecto 'Chat!A:J'
@@ -17,12 +21,19 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const { hayCredenciales, agregarFilaSheet } = require('./_google');
+const { hayCredenciales, agregarFilaSheet, obtenerToken, SCOPE_CLOUD } = require('./_google');
 
-const MODELO = process.env.CHAT_MODEL || 'gemini-2.5-flash';
-// Gemini expone un endpoint compatible con OpenAI: mismos `messages`, `tools`
-// y `tool_calls`, así que la lógica del agente no cambia al migrar de proveedor.
-const ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions';
+const MODELO = process.env.CHAT_MODEL || 'google/gemini-2.5-flash';
+const PROYECTO = process.env.GOOGLE_PROJECT_ID || 'forward34-sitio';
+const REGION = process.env.VERTEX_LOCATION || 'us-central1';
+// Vertex AI expone un endpoint compatible con OpenAI: mismos `messages`, `tools`
+// y `tool_calls`, así que la lógica del agente no cambia por el proveedor. Se usa
+// Vertex (y no la API de AI Studio) porque es la vía que consume el crédito de
+// Google Cloud de la empresa; AI Studio se cobra aparte a la tarjeta.
+const ENDPOINT = `https://${REGION}-aiplatform.googleapis.com/v1/projects/${PROYECTO}`
+    + `/locations/${REGION}/endpoints/openapi/chat/completions`;
+// Respaldo: si no hay cuenta de servicio pero sí una llave de AI Studio, se usa esa.
+const ENDPOINT_ESTUDIO = 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions';
 const ORIGENES = new Set(['https://forward34.com', 'https://www.forward34.com']);
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
 
@@ -134,21 +145,32 @@ function fechaMexico() {
 
 // --------------------------------------------------------------- modelo
 async function llamarModelo(messages, conHerramientas) {
-    const key = process.env.GEMINI_API_KEY;
-    if (!key) {
+    // Vertex AI si hay cuenta de servicio (consume el crédito de Google Cloud);
+    // si no, la llave de AI Studio como respaldo.
+    let endpoint = ENDPOINT;
+    let modelo = MODELO;
+    let autorizacion;
+    if (hayCredenciales()) {
+        autorizacion = `Bearer ${await obtenerToken(SCOPE_CLOUD)}`;
+    } else if (process.env.GEMINI_API_KEY) {
+        endpoint = ENDPOINT_ESTUDIO;
+        modelo = modelo.replace(/^google\//, '');
+        autorizacion = `Bearer ${process.env.GEMINI_API_KEY}`;
+    } else {
         const e = new Error('Agente no disponible (sin llave configurada).');
         e.status = 503; throw e;
     }
-    const payload = { model: MODELO, messages, temperature: 0.4, max_tokens: 700 };
+
+    const payload = { model: modelo, messages, temperature: 0.4, max_tokens: 700 };
     if (conHerramientas) payload.tools = [HERRAMIENTA_LEAD];
 
     const ctrl = new AbortController();
     const reloj = setTimeout(() => ctrl.abort(), 45000);
     let res;
     try {
-        res = await fetch(ENDPOINT, {
+        res = await fetch(endpoint, {
             method: 'POST',
-            headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+            headers: { Authorization: autorizacion, 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
             signal: ctrl.signal
         });
