@@ -89,7 +89,7 @@ npm run deploy
 ## 🎯 Próximos Pasos
 
 ### 1. Ver el sitio
-- Abre `START-HERE.html` para instrucciones completas
+- Abre `plantillas/START-HERE.html` para instrucciones completas
 - O ejecuta `ABRIR-SITIO.bat`
 
 ### 2. Personalizar

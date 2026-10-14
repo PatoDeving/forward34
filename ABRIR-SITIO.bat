@@ -10,7 +10,7 @@ REM Obtener la ruta completa del directorio actual
 set "current_dir=%~dp0"
 
 REM Abrir el archivo START-HERE.html en el navegador predeterminado
-start "" "%current_dir%START-HERE.html"
+start "" "%current_dir%plantillasSTART-HERE.html"
 
 echo.
 echo OPCIONES DISPONIBLES:
