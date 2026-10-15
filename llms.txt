@@ -27,7 +27,7 @@ Seis frentes de trabajo:
 - [Consultoría IA](https://forward34.com/consultoria-ia.html): diagnóstico gratuito de madurez en IA (8 preguntas, 5 minutos) y el programa AI Sprint, de 10 semanas, para pasar de pilotos sueltos a casos de uso con impacto medible.
 - [Empresa](https://forward34.com/empresa.html): qué es la firma y cómo trabaja.
 - [Descúbrete+](https://forward34.com/descubrete.html): la marca operativa de Forward34.
-- [Criterio](https://forward34.com/criterio/): análisis propios sobre adopción de inteligencia artificial en organizaciones.
+- [Blog](https://forward34.com/blog/): análisis propios sobre adopción de inteligencia artificial en organizaciones.
 - [Contacto](https://forward34.com/contacto.html)
 - [Aviso de privacidad](https://forward34.com/aviso-de-privacidad.html)
 

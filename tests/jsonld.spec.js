@@ -14,9 +14,10 @@ const PAGES = [
     'empresa.html',
     'descubrete.html',
     'contacto.html',
-    'criterio/index.html',
+    'blog/index.html',
     'aviso-de-privacidad.html',
-    'criterio/forward34-openai-select-partner-mexico.html'
+    'blog/forward34-openai-select-partner-mexico.html',
+    'blog/comprar-ia-no-esta-transformando-tu-empresa.html'
 ];
 
 function extractLdJson(html) {

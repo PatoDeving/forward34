@@ -5,13 +5,13 @@
         PLANTILLA DE ARTÍCULO DE CRITERIO. No se enlaza desde ningún lado.
 
         Para publicar un artículo:
-        1. Duplicar este archivo como /criterio/SLUG.html (minúsculas, sin acentos, con guiones).
+        1. Duplicar este archivo como /blog/SLUG.html (minúsculas, sin acentos, con guiones).
         2. Reemplazar todo lo que está entre dobles llaves:
            TITULO, RESUMEN (entre 100 y 160 caracteres; LinkedIn exige mínimo 100),
            SLUG, FECHA_ISO (2026-09-19), FECHA_VISIBLE (19 de septiembre de 2026),
            AUTOR_ID, AUTOR_NOMBRE, AUTOR_LINKEDIN y NODO_PERSON_DEL_AUTOR.
         3. Borrar la línea <meta name="robots" content="noindex"> y este comentario.
-        4. Agregar la entrada al listado de /criterio/index.html, arriba de las demás.
+        4. Agregar la entrada al listado de /blog/index.html, arriba de las demás.
         5. Agregar la URL a /sitemap.xml.
 
         Autores (usar solo el de la pieza, nunca los dos):
@@ -48,9 +48,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
 
-    <title>{{TITULO}} | Criterio — Forward34</title>
+    <title>{{TITULO}} | Blog</title>
     <meta name="description" content="{{RESUMEN}}">
-    <link rel="canonical" href="https://forward34.com/criterio/{{SLUG}}.html">
+    <link rel="canonical" href="https://forward34.com/blog/{{SLUG}}.html">
     <meta name="theme-color" content="#0B0B0F">
 
     <link rel="icon" href="/favicon.ico" sizes="any">
@@ -62,7 +62,7 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="{{TITULO}}">
     <meta property="og:description" content="{{RESUMEN}}">
-    <meta property="og:url" content="https://forward34.com/criterio/{{SLUG}}.html">
+    <meta property="og:url" content="https://forward34.com/blog/{{SLUG}}.html">
     <meta property="og:image" content="https://forward34.com/public/images/og-default.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -92,26 +92,26 @@
       "@graph": [
         {
           "@type": "Article",
-          "@id": "https://forward34.com/criterio/{{SLUG}}.html#article",
+          "@id": "https://forward34.com/blog/{{SLUG}}.html#article",
           "headline": "{{TITULO}}",
           "description": "{{RESUMEN}}",
           "datePublished": "{{FECHA_ISO}}",
           "dateModified": "{{FECHA_ISO}}",
           "inLanguage": "es-MX",
-          "url": "https://forward34.com/criterio/{{SLUG}}.html",
-          "mainEntityOfPage": "https://forward34.com/criterio/{{SLUG}}.html",
+          "url": "https://forward34.com/blog/{{SLUG}}.html",
+          "mainEntityOfPage": "https://forward34.com/blog/{{SLUG}}.html",
           "image": "https://forward34.com/public/images/og-default.png",
           "author": { "@id": "{{AUTOR_ID}}" },
           "publisher": { "@id": "https://forward34.com/#organization" },
-          "isPartOf": { "@id": "https://forward34.com/criterio/#collection" }
+          "isPartOf": { "@id": "https://forward34.com/blog/#collection" }
         },
         {{NODO_PERSON_DEL_AUTOR}},
         {
           "@type": "BreadcrumbList",
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://forward34.com/" },
-            { "@type": "ListItem", "position": 2, "name": "Criterio", "item": "https://forward34.com/criterio/" },
-            { "@type": "ListItem", "position": 3, "name": "{{TITULO}}", "item": "https://forward34.com/criterio/{{SLUG}}.html" }
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://forward34.com/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "{{TITULO}}", "item": "https://forward34.com/blog/{{SLUG}}.html" }
           ]
         }
       ]
@@ -134,7 +134,7 @@
                 <a href="/empresa.html">Empresa</a>
                 <a href="/descubrete.html">Descúbrete+</a>
                 <a href="/servicios.html">Servicios</a>
-                <a href="/criterio/" class="active">Criterio</a>
+                <a href="/blog/" class="active">Blog</a>
                 <a href="/consultoria-ia.html">Consultoría IA</a>
                 <a href="mailto:hector@forward34.com" class="btn btn-primary">Hablemos</a>
             </nav>
@@ -150,7 +150,7 @@
             <a href="/empresa.html">Empresa</a>
             <a href="/descubrete.html">Descúbrete+</a>
             <a href="/servicios.html">Servicios</a>
-            <a href="/criterio/" class="active">Criterio</a>
+            <a href="/blog/" class="active">Blog</a>
             <a href="/consultoria-ia.html">Consultoría IA</a>
             <a href="mailto:hector@forward34.com" class="btn btn-primary">Hablemos</a>
         </nav>
@@ -161,7 +161,7 @@
     <section class="section criterio-articulo">
         <div class="container">
             <article class="criterio-columna">
-                <a href="/criterio/" class="eyebrow"><span class="dot"></span> Criterio</a>
+                <a href="/blog/" class="eyebrow"><span class="dot"></span> Blog</a>
 
                 <!-- Título: texto estático, sin animación ni rotador -->
                 <h1>{{TITULO}}</h1>

@@ -57,10 +57,10 @@ forward34.com/consultoria-ia.html.
 de OpenAI Partner Network. Usa siempre esa denominación exacta. No es un aval de
 OpenAI sobre los servicios de Forward 34 ni una certificación de producto: es un
 nivel dentro del programa de socios. El comunicado está en
-forward34.com/criterio/forward34-openai-select-partner-mexico.html.
+forward34.com/blog/forward34-openai-select-partner-mexico.html.
 
-**Criterio.** La sección donde Forward 34 publica su análisis:
-forward34.com/criterio/.
+**Blog.** La sección donde Forward 34 publica su análisis:
+forward34.com/blog/.
 
 **Descúbrete+.** Es la marca a través de la cual Forward 34 entrega experiencias,
 programas, acompañamiento y comunidad. Forward 34 S.A. de C.V. es la entidad que
