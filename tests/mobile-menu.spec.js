@@ -16,7 +16,10 @@ test.describe('mobile menu (consultoria-ia)', () => {
         await expect(menu).not.toHaveClass(/is-open/);
         await toggle.click();
         await expect(menu).toHaveClass(/is-open/);
-        await page.locator('.mobile-overlay').click();
+        // El overlay cubre toda la pantalla, así que su centro queda DEBAJO del
+        // panel abierto y el clic lo intercepta un link del menú. Hay que tocar
+        // la franja oscura de la izquierda, que es lo que toca una persona.
+        await page.locator('.mobile-overlay').click({ position: { x: 10, y: 400 } });
         await expect(menu).not.toHaveClass(/is-open/);
     });
 
