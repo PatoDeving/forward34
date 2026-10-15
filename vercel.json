@@ -26,7 +26,7 @@
       "use": "@vercel/static"
     },
     {
-      "src": "criterio/**",
+      "src": "blog/**",
       "use": "@vercel/static"
     },
     {
@@ -52,13 +52,23 @@
       "dest": "/api/$1.js"
     },
     {
-      "src": "/criterio",
-      "status": 308,
-      "headers": { "Location": "/criterio/" }
+      "src": "/criterio/(.+)",
+      "status": 301,
+      "headers": { "Location": "/blog/$1" }
     },
     {
-      "src": "/criterio/",
-      "dest": "/criterio/index.html"
+      "src": "/criterio/?",
+      "status": 301,
+      "headers": { "Location": "/blog/" }
+    },
+    {
+      "src": "/blog",
+      "status": 308,
+      "headers": { "Location": "/blog/" }
+    },
+    {
+      "src": "/blog/",
+      "dest": "/blog/index.html"
     },
     {
       "src": "/",
