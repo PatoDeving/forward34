@@ -10,13 +10,13 @@
 (function () {
     'use strict';
 
-    var GA4_ID = 'G-XXXXXXXXXX'; // ← reemplazar con tu ID de GA4
+    var GA4_ID = 'G-CQ3PX3RY71';
 
     window.dataLayer = window.dataLayer || [];
     function gtag() { window.dataLayer.push(arguments); }
     window.gtag = window.gtag || gtag;
 
-    var enabled = /^G-[A-Z0-9]{6,}$/.test(GA4_ID);
+    var enabled = /^G-[A-Z0-9]{6,}$/.test(GA4_ID) && GA4_ID !== 'G-XXXXXXXXXX';
 
     if (enabled) {
         var s = document.createElement('script');
