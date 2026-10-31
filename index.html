@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Forward34 hace que la IA funcione dentro de las organizaciones en México: primero las personas, después las automatizaciones que identifican sus equipos.">
+    <meta name="description" content="Forward34, OpenAI Select Partner en México, hace que la IA funcione dentro de tu empresa: primero las personas, después las automatizaciones.">
 
     <link rel="canonical" href="https://forward34.com/">
     <meta name="theme-color" content="#0B0B0F">
@@ -15,8 +15,8 @@
 
     <meta property="og:site_name" content="Forward34">
     <meta property="og:locale" content="es_MX">
-    <meta property="og:title" content="Forward34 — Estrategia y transformación organizacional">
-    <meta property="og:description" content="Forward34 hace que la IA funcione dentro de las organizaciones. Empezamos por las personas y después implementamos las automatizaciones que identifican.">
+    <meta property="og:title" content="Forward34 — Adopción de IA para empresas en México">
+    <meta property="og:description" content="Forward34, OpenAI Select Partner en México, hace que la IA funcione dentro de tu empresa: primero las personas, después las automatizaciones.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://forward34.com/">
     <meta property="og:image" content="https://forward34.com/public/images/og-default.png">
@@ -24,14 +24,14 @@
     <meta property="og:image:height" content="630">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Forward34 — Estrategia + Transformación">
-    <meta name="twitter:description" content="Forward34 hace que la IA funcione dentro de las organizaciones. Empezamos por las personas y después implementamos las automatizaciones que identifican.">
+    <meta name="twitter:title" content="Forward34 — Adopción de IA para empresas en México">
+    <meta name="twitter:description" content="Forward34, OpenAI Select Partner en México, hace que la IA funcione dentro de tu empresa: primero las personas, después las automatizaciones.">
     <meta name="twitter:image" content="https://forward34.com/public/images/og-default.png">
 
     <!-- Verificación de Google Search Console -->
     <meta name="google-site-verification" content="p6KcjsMyKOVDL87yiz2GVHTE9hotOq4p9o-R77Wf2s0">
 
-    <title>Forward34 — Estrategia + Transformación</title>
+    <title>Forward34 — Adopción de IA para empresas en México</title>
 
     <script>document.documentElement.className+=' js';</script>
 
@@ -49,7 +49,10 @@
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "Organization",
+          "@type": [
+            "Organization",
+            "ProfessionalService"
+          ],
           "@id": "https://forward34.com/#organization",
           "name": "Forward34",
           "legalName": "Forward34 S.A. de C.V.",
@@ -57,7 +60,10 @@
           "logo": "https://forward34.com/public/images/forward34-logo.png",
           "image": "https://forward34.com/public/images/og-default.png",
           "description": "Firma mexicana que hace que la IA funcione dentro de las organizaciones: primero las personas (criterio, cultura y capacidades), después las automatizaciones.",
-          "areaServed": "MX",
+          "areaServed": {
+            "@type": "Country",
+            "name": "México"
+          },
           "email": "hector@forward34.com",
           "foundingDate": "2022",
           "telephone": "+52-442-840-9335",
@@ -73,28 +79,55 @@
             "Automatización de procesos",
             "Diagnóstico de madurez en IA",
             "Transformación organizacional",
-            "Gestión del cambio"
+            "Gestión del cambio",
+            "Consultoría de inteligencia artificial",
+            "Agentes de IA",
+            "IA generativa en empresas"
           ],
           "sameAs": [
             "https://www.linkedin.com/company/forward34/"
           ],
-          "founder": { "@id": "https://forward34.com/#hector" }
+          "founder": {
+            "@id": "https://forward34.com/#hector"
+          },
+          "alternateName": "Forward34 S.A. de C.V.",
+          "award": "OpenAI Select Partner",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "sales",
+            "email": "hector@forward34.com",
+            "telephone": "+52-442-840-9335",
+            "areaServed": "MX",
+            "availableLanguage": "es"
+          },
+          "subOrganization": {
+            "@id": "https://forward34.com/descubrete.html#descubrete"
+          },
+          "subjectOf": {
+            "@id": "https://forward34.com/blog/forward34-openai-select-partner-mexico.html#article"
+          }
         },
         {
           "@type": "Person",
           "@id": "https://forward34.com/#hector",
           "name": "Héctor Hernández",
           "jobTitle": "Cofundador y CEO",
-          "worksFor": { "@id": "https://forward34.com/#organization" },
+          "worksFor": {
+            "@id": "https://forward34.com/#organization"
+          },
           "url": "https://forward34.com/empresa.html#hector",
-          "sameAs": ["https://www.linkedin.com/in/hectorhernandezf34/"]
+          "sameAs": [
+            "https://www.linkedin.com/in/hectorhernandezf34/"
+          ]
         },
         {
           "@type": "WebSite",
           "@id": "https://forward34.com/#website",
           "url": "https://forward34.com/",
           "name": "Forward34",
-          "publisher": { "@id": "https://forward34.com/#organization" },
+          "publisher": {
+            "@id": "https://forward34.com/#organization"
+          },
           "inLanguage": "es-MX"
         }
       ]
@@ -109,7 +142,7 @@
         <div class="header-container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="public/images/forward34-logo.png" alt="Forward34" class="logo-svg">
+                    <img src="public/images/forward34-logo.png" alt="Forward34" class="logo-svg" width="308" height="88">
                 </a>
             </div>
             <nav class="main-nav">
@@ -144,7 +177,7 @@
     <section class="hero hero--home">
         <div class="container">
             <div class="hero-content">
-                <span class="eyebrow reveal"><span class="dot"></span> Forward34 · Estrategia + Transformación</span>
+                <span class="eyebrow reveal"><span class="dot"></span> OpenAI Select Partner · Adopción de IA en México</span>
                 <h1 class="reveal" data-delay="1">
                     <span class="visually-hidden">Diseñamos el futuro de tu organización · Estrategia + Transformación</span>
                     <span aria-hidden="true">Diseñamos<br>
@@ -159,8 +192,8 @@
                     <a href="servicios.html" class="btn btn-secondary">Explora servicios</a>
                 </div>
                 <div class="hero-meta reveal" data-delay="4">
-                    <span><span class="mark"></span> Desde México</span>
-                    <span><span class="mark"></span> B2B · Corporativo</span>
+                    <span><span class="mark"></span> Desde Querétaro, México</span>
+                    <span><span class="mark"></span> <a href="/blog/forward34-openai-select-partner-mexico.html">OpenAI Select Partner</a></span>
                     <span><span class="mark"></span> Marca operativa: Descúbrete+</span>
                 </div>
             </div>
@@ -289,7 +322,7 @@
             <div class="footer-content">
                 <div class="footer-section intro">
                     <h4>La firma</h4>
-                    <p>Estrategia y transformación organizacional. Operamos desde México para América Latina.</p>
+                    <p>Consultoría de IA y transformación organizacional. Operamos desde Querétaro, México, para América Latina.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Navegación</h4>
@@ -297,6 +330,8 @@
                     <p><a href="empresa.html">Empresa</a></p>
                     <p><a href="servicios.html">Servicios</a></p>
                     <p><a href="descubrete.html">Descúbrete+</a></p>
+                    <p><a href="/consultoria-ia.html">Consultoría IA</a></p>
+                    <p><a href="/blog/">Blog</a></p>
                 </div>
                 <div class="footer-section">
                     <h4>Contacto</h4>
