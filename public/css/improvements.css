@@ -1336,3 +1336,104 @@ footer .container { position: relative; z-index: 1; }
     border-bottom: 1px solid currentColor;
     padding-bottom: 1px;
 }
+
+/* ============================================================
+   ÚLTIMOS ARTÍCULOS (inicio)
+   Enlaces normales a los 3 artículos más recientes del blog.
+   ============================================================ */
+.home-blog-lista {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--line-strong);
+}
+
+.home-blog-lista li {
+    padding: 2.25rem 2rem 2.25rem 0;
+    border-right: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line-strong);
+    margin: 0 !important;
+}
+
+.home-blog-lista li + li { padding-left: 2rem; }
+.home-blog-lista li:last-child { border-right: none; }
+
+.home-blog-lista time {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    color: rgba(11, 11, 15, 0.65);
+    margin-bottom: 0.9rem;
+}
+
+.home-blog .home-blog-lista h3 {
+    font-size: clamp(1.25rem, 2vw, 1.6rem) !important;
+    line-height: 1.15 !important;
+    margin: 0 0 0.9rem !important;
+}
+
+.home-blog .home-blog-lista h3 a {
+    color: var(--ink) !important;
+    text-decoration: none;
+}
+
+.home-blog .home-blog-lista h3 a:hover,
+.home-blog .home-blog-lista h3 a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.home-blog .home-blog-lista p {
+    font-size: 0.98rem !important;
+    color: rgba(11, 11, 15, 0.7) !important;
+    margin: 0 !important;
+}
+
+@media (max-width: 1024px) {
+    .home-blog-lista { grid-template-columns: 1fr; }
+    .home-blog-lista li,
+    .home-blog-lista li + li { padding: 1.75rem 0; border-right: none; }
+}
+
+/* ============================================================
+   SIGUE LEYENDO (final de cada artículo del blog)
+   ============================================================ */
+.criterio-relacionados {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line-strong);
+}
+
+.criterio-relacionados h2 {
+    font-size: 1rem !important;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 1.25rem !important;
+}
+
+.criterio-relacionados ul {
+    list-style: none !important;
+    margin: 0 0 1.25rem !important;
+    padding: 0 !important;
+}
+
+.criterio-relacionados li { margin: 0 0 0.75rem !important; }
+
+.criterio-relacionados a {
+    color: var(--ink) !important;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    border-bottom: 1px solid currentColor;
+    text-decoration: none;
+}
+
+.criterio-relacionados p {
+    font-size: 0.98rem !important;
+    color: rgba(11, 11, 15, 0.7) !important;
+    margin: 0 !important;
+}
+
+.criterio-relacionados p a { font-size: inherit; font-family: inherit; }
