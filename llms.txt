@@ -30,6 +30,7 @@ Seis frentes de trabajo:
 - [Blog](https://forward34.com/blog/): análisis propios sobre adopción de inteligencia artificial en organizaciones.
 - [Contacto](https://forward34.com/contacto.html)
 - [Aviso de privacidad](https://forward34.com/aviso-de-privacidad.html)
+- [Contenido completo](https://forward34.com/llms-full.txt): texto de las páginas principales y de todos los artículos del blog.
 
 ## Artículos del blog
 
