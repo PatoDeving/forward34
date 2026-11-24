@@ -29,7 +29,7 @@
 <script>document.documentElement.className+=' js';</script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,500&amp;display=swap" rel="stylesheet"/>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,500&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,500&amp;display=swap"></noscript>
 <link href="https://forward34.com/public/css/styles.css" rel="stylesheet"/>
 <link href="https://forward34.com/public/css/improvements.css" rel="stylesheet"/>
 <link href="https://forward34.com/public/css/privacy-modal.css" rel="stylesheet"/>
@@ -95,7 +95,7 @@
 <div class="header-container">
 <div class="logo">
 <a href="/index.html">
-<img alt="Forward34" class="logo-svg" width="160" height="44" src="https://forward34.com/public/images/forward34-lockup-digital-oscuro.png"/>
+<img alt="Forward34" class="logo-svg" width="160" height="44" src="https://forward34.com/public/images/forward34-lockup-digital-oscuro.png" fetchpriority="high"/>
 </a>
 </div>
 <nav class="main-nav">
@@ -157,11 +157,11 @@
 <div class="footer-wordmark">Forward<span class="accent">34</span></div>
 <div class="footer-content">
 <div class="footer-section intro">
-<h4>La firma</h4>
+<h3>La firma</h3>
 <p>Estrategia y transformación organizacional. Operamos desde México para América Latina.</p>
 </div>
 <div class="footer-section">
-<h4>Navegación</h4>
+<h3>Navegación</h3>
 <p><a href="/index.html">Inicio</a></p>
 <p><a href="/empresa.html">Empresa</a></p>
 <p><a href="/servicios.html">Servicios</a></p>
@@ -169,14 +169,14 @@
 <p><a href="/contacto.html">Contacto</a></p>
 </div>
 <div class="footer-section">
-<h4>Contacto</h4>
+<h3>Contacto</h3>
 <p><a href="mailto:hector@forward34.com">hector@forward34.com</a></p>
 <p><a href="tel:+524428409335" data-track="phone">+52 442 840 9335</a></p>
 <p><a href="https://wa.me/524428409335" data-track="whatsapp" target="_blank" rel="noopener">WhatsApp</a></p>
 <p>México</p>
 </div>
 <div class="footer-section">
-<h4>Legal</h4>
+<h3>Legal</h3>
 <p><a class="open-privacy-modal" href="/aviso-de-privacidad.html">Aviso de privacidad</a></p>
 <p><a class="open-privacy-modal" href="/aviso-de-privacidad.html#terminos">Términos</a></p>
 </div>
@@ -190,7 +190,7 @@
 <script src="https://forward34.com/public/js/wow.js"></script>
 <script src="https://forward34.com/public/js/privacy-modal.js"></script>
 <script src="https://forward34.com/public/js/mobile-menu.js"></script>
-<!-- Agente de recepción Forward 34 -->
+<!-- Agente de recepción Forward34 -->
 <script defer="" src="https://forward34.com/public/js/f34-widget.js"></script>
 </body>
 </html>

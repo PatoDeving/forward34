@@ -50,7 +50,7 @@ function systemPrompt() {
         } catch { /* siguiente ruta */ }
     }
     // Sin el archivo el agente no debe inventar: responde lo mínimo y deriva.
-    promptCache = 'Eres el agente de recepción digital de Forward 34 (forward34.com). '
+    promptCache = 'Eres el agente de recepción digital de Forward34 (forward34.com). '
         + 'Responde con brevedad, en tono institucional y directo, y pide nombre, empresa '
         + 'y correo para que el equipo contacte a la persona. Si no sabes algo, dilo y deriva '
         + 'al equipo. No inventes datos, precios ni nombres de clientes.';
