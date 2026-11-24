@@ -1474,3 +1474,7 @@ footer .container { position: relative; z-index: 1; }
 #site-header .mobile-menu-toggle { border-color: rgba(244, 239, 230, 0.28); }
 #site-header .mobile-menu-toggle:hover { background: rgba(244, 239, 230, 0.08); }
 #site-header .mobile-menu-toggle span { background-color: #F7F6F3; }
+
+/* Teléfono como título de tarjeta en secciones oscuras (contacto.html) */
+.section.dark .card h3 a { color: var(--cream) !important; }
+.section.dark .card h3 a:hover { color: var(--volt) !important; }

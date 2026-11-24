@@ -49,4 +49,45 @@
             }
         } catch (_) { /* analytics no debe romper la UI */ }
     };
+
+    // Clics de contacto (reporte del 23 nov 2026, P1·5). Un solo listener para
+    // todo el sitio, así cualquier enlace nuevo a contacto, WhatsApp, teléfono o
+    // correo se mide sin tocar el HTML. El envío confirmado del formulario se
+    // mide aparte, en contacto.html, como `contact_success`.
+    //   contact_click  → enlaces a /contacto.html (desde otra página)
+    //   whatsapp_click → wa.me / api.whatsapp.com
+    //   phone_click    → tel:
+    //   email_click    → mailto:
+    function clasificar(href) {
+        if (/^tel:/i.test(href)) return 'phone_click';
+        if (/^mailto:/i.test(href)) return 'email_click';
+        if (/^https?:\/\/(wa\.me|api\.whatsapp\.com)\//i.test(href)) return 'whatsapp_click';
+        if (/(^|\/)contacto\.html(?:[?#]|$)/i.test(href)) return 'contact_click';
+        return null;
+    }
+
+    function zona(el) {
+        if (el.closest('#site-header')) return 'header';
+        if (el.closest('.mobile-menu')) return 'mobile_menu';
+        if (el.closest('footer')) return 'footer';
+        return 'content';
+    }
+
+    document.addEventListener('click', function (e) {
+        try {
+            var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+            if (!a) return;
+            var href = a.getAttribute('href') || '';
+            var name = clasificar(href);
+            if (!name) return;
+            // En /contacto.html, un enlace a sí misma no es una intención nueva.
+            if (name === 'contact_click' && /\/contacto\.html$/i.test(window.location.pathname)) return;
+            window.f34Track(name, {
+                link_location: zona(a),
+                link_text: (a.textContent || '').trim().slice(0, 80),
+                page_path: window.location.pathname,
+                transport_type: 'beacon'
+            });
+        } catch (_) { /* analytics no debe romper la UI */ }
+    }, true);
 })();
