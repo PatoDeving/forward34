@@ -165,8 +165,20 @@
         aviso.hidden = false;
     }
 
+    // El aviso sale cuando la página ya cargó, para que no compita con el
+    // contenido principal (ni con el LCP) en la primera pintada.
+    function mostrarAvisoDespues() {
+        var mostrar = function () {
+            if (leerConsentimiento()) return;
+            if ('requestIdleCallback' in window) window.requestIdleCallback(mostrarAviso, { timeout: 1500 });
+            else window.setTimeout(mostrarAviso, 1);
+        };
+        if (document.readyState === 'complete') mostrar();
+        else window.addEventListener('load', mostrar, { once: true });
+    }
+
     function iniciarAviso() {
-        if (!leerConsentimiento()) mostrarAviso();
+        if (!leerConsentimiento()) mostrarAvisoDespues();
         document.addEventListener('click', function (e) {
             var a = e.target && e.target.closest ? e.target.closest('[data-cookie-prefs]') : null;
             if (!a) return;

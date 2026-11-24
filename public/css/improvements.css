@@ -1158,6 +1158,15 @@ footer .container { position: relative; z-index: 1; }
 .reveal[data-delay="4"] { transition-delay: 0.32s; }
 .reveal[data-delay="5"] { transition-delay: 0.4s; }
 
+/* La primera sección de cada página se ve desde el inicio: es el contenido
+   principal y lo que mide el LCP. Si arrancaba invisible, Lighthouse tomaba
+   como LCP el aviso de cookies. El efecto de entrada sigue en lo de abajo. */
+.js main > section:first-of-type .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.01ms !important;
