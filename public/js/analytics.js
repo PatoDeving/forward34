@@ -19,10 +19,28 @@
     var enabled = /^G-[A-Z0-9]{6,}$/.test(GA4_ID) && GA4_ID !== 'G-XXXXXXXXXX';
 
     if (enabled) {
-        var s = document.createElement('script');
-        s.async = true;
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA4_ID);
-        document.head.appendChild(s);
+        // gtag.js (~150 KB) se descarga cuando la página ya terminó de cargar
+        // (o en la primera interacción, lo que pase antes). En Lighthouse móvil
+        // era lo que más retrasaba el LCP. Los eventos no se pierden: config y
+        // f34Track van a window.dataLayer y gtag.js los envía al cargar.
+        var gtagCargado = false;
+        var cargarGtag = function () {
+            if (gtagCargado) return;
+            gtagCargado = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA4_ID);
+            document.head.appendChild(s);
+        };
+        var cuandoInactivo = function () {
+            if ('requestIdleCallback' in window) window.requestIdleCallback(cargarGtag, { timeout: 2000 });
+            else window.setTimeout(cargarGtag, 1);
+        };
+        if (document.readyState === 'complete') cuandoInactivo();
+        else window.addEventListener('load', cuandoInactivo, { once: true });
+        ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function (ev) {
+            window.addEventListener(ev, cargarGtag, { once: true, passive: true });
+        });
 
         gtag('js', new Date());
         gtag('config', GA4_ID, {
