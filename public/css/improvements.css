@@ -1778,3 +1778,57 @@ body.menu-locked { overflow: hidden; }
     .main-nav { display: none !important; }
     .mobile-menu-toggle { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; }
 }
+
+/* ============================================================
+   AVISO DE COOKIES (Consent Mode, analytics.js)
+   Abajo a la izquierda para no tapar la burbuja del chat.
+   ============================================================ */
+.f34-cookies {
+    position: fixed;
+    left: 24px;
+    bottom: 24px;
+    z-index: 990; /* debajo del menú móvil (1000) y del encabezado */
+    max-width: 420px;
+    padding: 1.1rem 1.25rem;
+    background: var(--ink);
+    color: #F7F6F3;
+    border: 1px solid rgba(244, 239, 230, 0.14);
+    border-radius: 14px;
+    box-shadow: 0 12px 40px rgba(11, 11, 15, 0.28);
+    font-family: var(--font-body);
+}
+
+.f34-cookies[hidden] { display: none !important; }
+
+.f34-cookies p {
+    margin: 0 0 0.9rem !important;
+    font-size: 0.88rem !important;
+    line-height: 1.5 !important;
+    color: rgba(247, 246, 243, 0.85) !important;
+}
+
+.f34-cookies a {
+    color: #F7F6F3 !important;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
+.f34-cookies-botones { display: flex; gap: 0.6rem; justify-content: flex-end; }
+
+.f34-cookies button {
+    font: 600 0.85rem/1 var(--font-body);
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    border: 1px solid rgba(244, 239, 230, 0.4);
+    background: transparent;
+    color: #F7F6F3;
+}
+
+.f34-cookies button.f34-cookies-aceptar { background: var(--volt); border-color: var(--volt); color: var(--ink); }
+.f34-cookies button:hover { border-color: #F7F6F3; }
+.f34-cookies button:focus-visible { outline: 2px solid var(--volt); outline-offset: 2px; }
+
+@media (max-width: 600px) {
+    .f34-cookies { left: 12px; right: 12px; bottom: 92px; max-width: none; }
+}

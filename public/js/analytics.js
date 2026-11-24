@@ -18,6 +18,26 @@
 
     var enabled = /^G-[A-Z0-9]{6,}$/.test(GA4_ID) && GA4_ID !== 'G-XXXXXXXXXX';
 
+    // ── Consent Mode (reporte del 23 nov 2026, P2·11) ──────────────────────
+    // Modelo elegido por Mau: GA4 mide hasta que la persona rechace. La
+    // elección se guarda en este navegador. No hay anuncios, así que los
+    // permisos de publicidad quedan siempre en «denied».
+    var CLAVE_CONSENTIMIENTO = 'f34_consent';
+    var leerConsentimiento = function () {
+        try { return window.localStorage.getItem(CLAVE_CONSENTIMIENTO); } catch (_) { return null; }
+    };
+    var guardarConsentimiento = function (valor) {
+        try { window.localStorage.setItem(CLAVE_CONSENTIMIENTO, valor); } catch (_) { /* sin almacenamiento: vale solo esta visita */ }
+    };
+    var eleccion = leerConsentimiento();
+
+    gtag('consent', 'default', {
+        analytics_storage: eleccion === 'denied' ? 'denied' : 'granted',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied'
+    });
+
     if (enabled) {
         // gtag.js (~150 KB) se descarga cuando la página ya terminó de cargar
         // (o en la primera interacción, lo que pase antes). En Lighthouse móvil
@@ -108,4 +128,50 @@
             });
         } catch (_) { /* analytics no debe romper la UI */ }
     }, true);
+
+    // ── Aviso de cookies ──────────────────────────────────────────────────
+    // Aparece mientras la persona no haya elegido. «Preferencias de cookies»
+    // en el pie (data-cookie-prefs) lo vuelve a abrir.
+    var aviso = null;
+
+    function decidir(valor) {
+        guardarConsentimiento(valor);
+        gtag('consent', 'update', { analytics_storage: valor });
+        if (aviso) aviso.hidden = true;
+    }
+
+    function mostrarAviso() {
+        if (!aviso) {
+            aviso = document.createElement('div');
+            aviso.className = 'f34-cookies';
+            aviso.setAttribute('role', 'region');
+            aviso.setAttribute('aria-label', 'Aviso de cookies');
+            aviso.innerHTML =
+                '<p>Usamos cookies de analítica (Google Analytics) para saber cómo se usa el sitio. ' +
+                'Puedes rechazarlas. <a href="/aviso-de-privacidad.html">Aviso de privacidad</a></p>' +
+                '<div class="f34-cookies-botones">' +
+                '<button type="button" class="f34-cookies-rechazar">Rechazar</button>' +
+                '<button type="button" class="f34-cookies-aceptar">Aceptar</button>' +
+                '</div>';
+            aviso.querySelector('.f34-cookies-aceptar').addEventListener('click', function () { decidir('granted'); });
+            aviso.querySelector('.f34-cookies-rechazar').addEventListener('click', function () { decidir('denied'); });
+            document.body.appendChild(aviso);
+        }
+        aviso.hidden = false;
+    }
+
+    function iniciarAviso() {
+        if (!leerConsentimiento()) mostrarAviso();
+        document.addEventListener('click', function (e) {
+            var a = e.target && e.target.closest ? e.target.closest('[data-cookie-prefs]') : null;
+            if (!a) return;
+            e.preventDefault();
+            mostrarAviso();
+            var boton = aviso.querySelector(leerConsentimiento() === 'denied' ? '.f34-cookies-rechazar' : '.f34-cookies-aceptar');
+            if (boton) boton.focus();
+        });
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciarAviso, { once: true });
+    else iniciarAviso();
 })();
