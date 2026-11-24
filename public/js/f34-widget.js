@@ -1,5 +1,5 @@
 /**
- * f34-widget.js — Agente de recepción de Forward 34 (widget flotante).
+ * f34-widget.js — Agente de recepción de Forward34 (widget flotante).
  *
  * Se embebe en forward34.com (Vercel) con:
  *   <script src="/public/js/f34-widget.js" defer></script>
@@ -14,10 +14,10 @@
 
   // Mismo origen que el sitio: la función vive en /api/chat de este proyecto.
   var BACKEND = (window.F34_AGENT_URL || '').replace(/\/$/, '');
-  var GREETING = 'Soy el asistente digital de Forward 34. ¿En qué puedo orientarte?';
+  var GREETING = 'Soy el asistente digital de Forward34. ¿En qué puedo orientarte?';
   // Saludo cuando el chat se abre desde un CTA de contacto ("Hablemos",
   // "Agenda una conversación"): intención alta → vamos directo a sus datos.
-  var GREETING_CONTACTO = 'Con gusto te conecto con el equipo de Forward 34. Para que te contacten, déjame tus datos: nombre, empresa, correo y teléfono, y en una línea qué buscas resolver.';
+  var GREETING_CONTACTO = 'Con gusto te conecto con el equipo de Forward34. Para que te contacten, déjame tus datos: nombre, empresa, correo y teléfono, y en una línea qué buscas resolver.';
 
   // ── historial (memoria de la sesión del visitante) ──
   var history = [];
@@ -71,7 +71,9 @@
   // ── burbuja ──
   var bubble = document.createElement('div');
   bubble.className = 'f34-b';
-  bubble.setAttribute('aria-label', 'Abrir chat de Forward 34');
+  bubble.setAttribute('role', 'button');
+  bubble.setAttribute('tabindex', '0');
+  bubble.setAttribute('aria-label', 'Abrir chat de Forward34');
   bubble.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>';
   document.body.appendChild(bubble);
 
@@ -79,7 +81,7 @@
   var panel = document.createElement('div');
   panel.className = 'f34-p';
   panel.innerHTML = '' +
-    '<div class="f34-h"><div class="f34-av">34</div><div><div class="f34-t">Forward 34</div><div class="f34-s">Asistente IA</div></div>' +
+    '<div class="f34-h"><div class="f34-av">34</div><div><div class="f34-t">Forward34</div><div class="f34-s">Asistente IA</div></div>' +
       '<button class="f34-x" aria-label="Cerrar">&times;</button></div>' +
     '<div class="f34-m" id="f34-m"></div>' +
     '<div class="f34-cap">Asistente digital · las conversaciones pueden ser revisadas por el equipo</div>' +
@@ -125,6 +127,9 @@
   function close() { panel.classList.remove('open'); bubble.style.display = 'flex'; }
 
   bubble.addEventListener('click', function () { open(); });
+  bubble.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+  });
   panel.querySelector('.f34-x').addEventListener('click', close);
 
   async function send() {
