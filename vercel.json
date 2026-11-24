@@ -18,6 +18,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "llms-full.txt",
+      "use": "@vercel/static"
+    },
+    {
       "src": "robots.txt",
       "use": "@vercel/static"
     },
