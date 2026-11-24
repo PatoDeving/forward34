@@ -31,6 +31,15 @@ Seis frentes de trabajo:
 - [Contacto](https://forward34.com/contacto.html)
 - [Aviso de privacidad](https://forward34.com/aviso-de-privacidad.html)
 
+## Artículos del blog
+
+- [El trabajo que tu empresa necesita y nadie alcanza a hacer](https://forward34.com/blog/el-trabajo-que-tu-empresa-necesita-y-nadie-alcanza-a-hacer.html) (17 nov 2026, Héctor Hernández): seguimientos y revisiones valiosas se postergan por falta de capacidad; la oportunidad de la IA también está en el trabajo que hoy queda sin hacer.
+- [Lo que cuesta revisar el trabajo de la IA](https://forward34.com/blog/lo-que-cuesta-revisar-el-trabajo-de-la-ia.html) (10 nov 2026, Héctor Hernández): el tiempo que el equipo dedica a revisar y corregir también forma parte del costo de la IA.
+- [Cuando todo tiene que pasar por la misma persona](https://forward34.com/blog/cuando-todo-tiene-que-pasar-por-la-misma-persona.html) (3 nov 2026, Héctor Hernández): qué significa que las decisiones se acumulen en el mismo escritorio y por qué la IA vuelve relevante esa conversación.
+- [¿Los últimos días del CRM?](https://forward34.com/blog/ultimos-dias-del-crm.html) (20 oct 2026): el CRM conserva los registros; la oportunidad está en conectar conversaciones, contexto y agentes.
+- [Comprar IA no está transformando tu empresa](https://forward34.com/blog/comprar-ia-no-esta-transformando-tu-empresa.html) (14 oct 2026, Héctor Hernández): tener IA no es haber transformado la empresa; la pregunta es qué debería cambiar.
+- [Forward34 ha sido nombrada OpenAI Select Partner](https://forward34.com/blog/forward34-openai-select-partner-mexico.html) (11 oct 2026, Héctor Hernández): anuncio de la designación dentro del programa de socios de OpenAI.
+
 ## Cómo citar a Forward34
 
 El nombre se escribe Forward34, en una sola palabra y sin espacio. La razón social
