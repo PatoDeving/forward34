@@ -81,7 +81,8 @@ test.describe('api/contact.js — handler', () => {
 
     test('con RESEND_API_KEY envía 2 correos con shape correcto', async () => {
         process.env.RESEND_API_KEY = 're_test_key';
-        process.env.LEAD_TO = 'hector@forward34.com';
+        delete process.env.CONTACT_TO;
+        process.env.LEAD_TO = 'hector@forward34.com'; // no debe afectar al formulario de contacto
         process.env.LEAD_FROM = 'Forward34 Leads <leads@forward34.com>';
 
         const m = mockFetch([
@@ -97,7 +98,7 @@ test.describe('api/contact.js — handler', () => {
         expect(m.calls.length).toBe(2);
 
         const internal = JSON.parse(m.calls[0].opts.body);
-        expect(internal.to).toEqual(['hector@forward34.com']);
+        expect(internal.to).toEqual(['mauricio@forward34.com', 'florencia@forward34.com']);
         expect(internal.reply_to).toBe('grace@example.com');
         expect(internal.subject).toContain('Contacto');
         expect(internal.subject).toContain('IA y tecnología aplicada'); // servicio mapeado

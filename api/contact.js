@@ -4,7 +4,9 @@
 //
 // Variables de entorno opcionales:
 //   RESEND_API_KEY  → API key de https://resend.com
-//   LEAD_TO         → destino interno (default: hector@forward34.com)
+//   CONTACT_TO      → destino interno, separado por comas
+//                     (default: mauricio@forward34.com, florencia@forward34.com).
+//                     No usa LEAD_TO: esa variable es del diagnóstico (api/lead.js).
 //   LEAD_FROM       → remitente verificado en Resend (default: leads@forward34.com)
 //   LEAD_REPLY_TO   → reply-to del correo de confirmación (default: hector@forward34.com)
 
@@ -99,7 +101,8 @@ async function sendViaResend(c) {
     const key = process.env.RESEND_API_KEY;
     if (!key) return { sent: false, reason: 'RESEND_API_KEY not set' };
 
-    const to = process.env.LEAD_TO || 'hector@forward34.com';
+    const to = (process.env.CONTACT_TO || 'mauricio@forward34.com,florencia@forward34.com')
+        .split(',').map((x) => x.trim()).filter(Boolean);
     const from = process.env.LEAD_FROM || 'Forward34 Leads <leads@forward34.com>';
     const replyTo = process.env.LEAD_REPLY_TO || 'hector@forward34.com';
     const headers = {
@@ -113,7 +116,7 @@ async function sendViaResend(c) {
         headers,
         body: JSON.stringify({
             from,
-            to: [to],
+            to,
             reply_to: c.email || undefined,
             subject: `Contacto — ${c.empresa || c.nombre || 'Nuevo'} (${c.servicioLabel || 'sin servicio'})`,
             text: buildInternalText(c),

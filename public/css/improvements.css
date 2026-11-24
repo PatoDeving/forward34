@@ -1438,6 +1438,15 @@ footer .container { position: relative; z-index: 1; }
 
 .criterio-relacionados p a { font-size: inherit; font-family: inherit; }
 
+/* Enlace secundario debajo de los botones de «Próximo paso» (empresa.html) */
+.cta-full p.cta-alt { margin: 1.5rem 0 0 !important; font-size: 1rem !important; }
+.cta-full p.cta-alt a {
+    color: var(--cream) !important;
+    border-bottom: 1px solid rgba(244, 239, 230, 0.5);
+    padding-bottom: 1px;
+}
+.cta-full p.cta-alt a:hover { border-bottom-color: var(--volt); }
+
 /* ============================================================
    ENCABEZADO OSCURO (manual de marca 2026)
    El lockup digital (Forward en blanco óptico, 34 en lima) solo está
