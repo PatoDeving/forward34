@@ -1446,3 +1446,31 @@ footer .container { position: relative; z-index: 1; }
     padding-bottom: 1px;
 }
 .cta-full p.cta-alt a:hover { border-bottom-color: var(--volt); }
+
+/* ============================================================
+   ENCABEZADO OSCURO (manual de marca 2026)
+   El lockup digital (Forward en blanco óptico, 34 en lima) solo está
+   aprobado sobre fondo oscuro, así que el encabezado pasa a --ink.
+   ============================================================ */
+#site-header,
+#site-header.is-scrolled {
+    background: rgba(11, 11, 15, 0.94) !important;
+    border-bottom-color: rgba(244, 239, 230, 0.08) !important;
+}
+
+#site-header .main-nav a:not(.btn) { color: #F7F6F3 !important; }
+#site-header .main-nav a:not(.btn)::after { background: var(--volt); }
+
+#site-header .main-nav .btn-primary {
+    background: var(--volt) !important;
+    color: var(--ink) !important;
+}
+
+#site-header .main-nav .btn-primary:hover {
+    background: #F7F6F3 !important;
+    color: var(--ink) !important;
+}
+
+#site-header .mobile-menu-toggle { border-color: rgba(244, 239, 230, 0.28); }
+#site-header .mobile-menu-toggle:hover { background: rgba(244, 239, 230, 0.08); }
+#site-header .mobile-menu-toggle span { background-color: #F7F6F3; }
