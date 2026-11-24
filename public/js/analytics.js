@@ -16,7 +16,12 @@
     function gtag() { window.dataLayer.push(arguments); }
     window.gtag = window.gtag || gtag;
 
-    var enabled = /^G-[A-Z0-9]{6,}$/.test(GA4_ID) && GA4_ID !== 'G-XXXXXXXXXX';
+    // Solo se mide en el sitio publicado. En local (pruebas, npm run dev) y en
+    // las vistas previas de Vercel no se carga gtag.js: antes, cada corrida de
+    // las pruebas mandaba visitas falsas a GA4. Los eventos se siguen poniendo
+    // en dataLayer, así que las pruebas pueden revisarlos.
+    var esProduccion = /(^|\.)forward34\.com$/i.test(window.location.hostname);
+    var enabled = esProduccion && /^G-[A-Z0-9]{6,}$/.test(GA4_ID) && GA4_ID !== 'G-XXXXXXXXXX';
 
     // ── Consent Mode (reporte del 23 nov 2026, P2·11) ──────────────────────
     // Modelo elegido por Mau: GA4 mide hasta que la persona rechace. La
