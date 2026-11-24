@@ -152,8 +152,8 @@
             aviso.setAttribute('role', 'region');
             aviso.setAttribute('aria-label', 'Aviso de cookies');
             aviso.innerHTML =
-                '<p>Usamos cookies de analítica (Google Analytics) para saber cómo se usa el sitio. ' +
-                'Puedes rechazarlas. <a href="/aviso-de-privacidad.html">Aviso de privacidad</a></p>' +
+                '<p>Este sitio usa cookies para mejorar tu experiencia. ' +
+                '<a href="/aviso-de-privacidad.html">Más información</a></p>' +
                 '<div class="f34-cookies-botones">' +
                 '<button type="button" class="f34-cookies-rechazar">Rechazar</button>' +
                 '<button type="button" class="f34-cookies-aceptar">Aceptar</button>' +

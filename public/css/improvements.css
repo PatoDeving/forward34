@@ -1161,7 +1161,8 @@ footer .container { position: relative; z-index: 1; }
 /* La primera sección de cada página se ve desde el inicio: es el contenido
    principal y lo que mide el LCP. Si arrancaba invisible, Lighthouse tomaba
    como LCP el aviso de cookies. El efecto de entrada sigue en lo de abajo. */
-.js main > section:first-of-type .reveal {
+.js main > section:first-of-type .reveal,
+.js .criterio-indice .criterio-intro.reveal { /* en /blog/ la intro también está en la primera pantalla */
     opacity: 1;
     transform: none;
     transition: none;
@@ -1817,6 +1818,7 @@ body.menu-locked { overflow: hidden; }
 }
 
 .f34-cookies a {
+    white-space: nowrap;
     color: #F7F6F3 !important;
     text-decoration: underline;
     text-underline-offset: 0.15em;

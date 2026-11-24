@@ -172,7 +172,7 @@ async function extraer(browser, pagina, hojas) {
 
 function deshacer(html) {
     // Quita un bloque anterior, si lo hay.
-    html = html.replace(/[ \t]*<!-- css-critico:inicio -->[\s\S]*?<!-- css-critico:fin -->\n?/, '');
+    html = html.replace(/[ \t]*<!-- css-critico:inicio -->[\s\S]*?<!-- css-critico:fin -->\r?\n?/, '');
     // Deshace una conversión anterior a preload, para partir de los <link> normales.
     html = html.replace(/<link rel="preload" as="style" href="([^"]*public\/css\/[^"]+\.css)" onload="this\.onload=null;this\.rel='stylesheet'"><noscript><link rel="stylesheet" href="\1"><\/noscript>/g,
         '<link rel="stylesheet" href="$1">');
