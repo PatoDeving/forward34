@@ -48,3 +48,12 @@ test('contacto.html ya no manda contact_submit', () => {
     expect(html).not.toContain('contact_submit');
     expect(html).toContain("'contact_success'");
 });
+
+test('evaluacion-ia.html: un solo <main> y el formulario se ve', async ({ page }) => {
+    const html = fs.readFileSync(path.join(RAIZ, 'evaluacion-ia.html'), 'utf8');
+    expect(html.match(/<main[\s>]/g) || []).toHaveLength(1);
+    await page.route(/tona34\.com/, (r) => r.abort());
+    await page.goto('/evaluacion-ia.html');
+    await expect(page.locator('main #form-wrap')).toBeVisible();
+    await expect(page.locator('main #thanks')).toBeHidden();
+});
