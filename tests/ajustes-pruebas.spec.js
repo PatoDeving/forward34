@@ -57,3 +57,14 @@ test('evaluacion-ia.html: un solo <main> y el formulario se ve', async ({ page }
     await expect(page.locator('main #form-wrap')).toBeVisible();
     await expect(page.locator('main #thanks')).toBeHidden();
 });
+
+test('fuentes alojadas en el sitio: sin Google Fonts y los woff2 responden', async ({ request }) => {
+    const paginas = [...PAGINAS, 'recurso.html', 'evaluacion-ia.html', 'plantillas/blog-plantilla.html'];
+    for (const p of paginas) {
+        expect(fs.readFileSync(path.join(RAIZ, p), 'utf8'), p).not.toMatch(/fonts\.(googleapis|gstatic)\.com/);
+    }
+    for (const f of ['space-grotesk-latin-var', 'inter-tight-latin-var', 'inter-tight-latin-italic-500', 'inter-latin-var']) {
+        const r = await request.get(`/public/fonts/${f}.woff2`);
+        expect(r.status(), f).toBe(200);
+    }
+});
