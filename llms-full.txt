@@ -60,17 +60,17 @@ Forward34 S.A. de C.V. es la entidad legal y comercial que contrata, opera y fac
 
 #### Últimos artículos
 
+- 27 de noviembre de 2026 Quién puede adaptarse a la IA en tu empresa Las personas dicen que la IA les ahorra horas, pero la empresa no lo ve. Parte de la respuesta está en quién puede adaptarse a ella y qué necesita para lograrlo.
+
+##### Quién puede adaptarse a la IA en tu empresa
+
 - 17 de noviembre de 2026 El trabajo que tu empresa necesita y nadie alcanza a hacer Seguimientos y revisiones valiosas se postergan por falta de capacidad. La oportunidad de la IA también está en el trabajo que hoy queda sin hacer.
 
 ##### El trabajo que tu empresa necesita y nadie alcanza a hacer
 
-- 10 de noviembre de 2026 Lo que cuesta revisar el trabajo de la IA El tiempo que el equipo dedica a revisar y corregir también forma parte del costo de la IA.
+- 10 de noviembre de 2026 Lo que cuesta revisar el trabajo de la IA El tiempo que el equipo dedica a revisar y corregir también forma parte del costo de la IA. Por qué importa el trabajo que queda pendiente después de una respuesta.
 
 ##### Lo que cuesta revisar el trabajo de la IA
-
-- 3 de noviembre de 2026 Cuando todo tiene que pasar por la misma persona Podemos contratar más gente y seguir acumulando decisiones en el mismo escritorio. Qué significa esa dependencia.
-
-##### Cuando todo tiene que pasar por la misma persona
 
 ---
 
@@ -381,6 +381,74 @@ Llámanos o escríbenos por WhatsApp.
 ##### México
 
 Trabajamos en modalidad híbrida con organizaciones de toda América Latina.
+
+---
+
+## Blog: Quién puede adaptarse a la IA en tu empresa
+
+URL: https://forward34.com/blog/quien-puede-adaptarse-a-la-ia-en-tu-empresa.html
+
+### Quién puede adaptarse a la IA en tu empresa
+
+27 de noviembre de 2026 Por Héctor Hernández · 7 min de lectura
+
+Hay una pregunta que creo que muchos directores se están haciendo: si mi gente dice que la IA le ahorra horas cada semana, ¿por qué no lo veo en la empresa?
+
+Rebecca Hinds dirige el Work AI Institute de Glean, una empresa de software empresarial, y su equipo publicó una encuesta que intenta responderla. Ella la explicó en «Conversations in Action», el programa del canal Imagination in Action que conducen John Werner y Alex Wissner-Gross, publicado el 24 de noviembre. Las citas del video están traducidas del inglés por Forward34 y cada enlace lleva al minuto donde se dicen.
+
+Según una encuesta de Glean en Estados Unidos, Reino Unido y Australia, con 6,000 trabajadores digitales de tiempo completo entre diciembre de 2025 y enero de 2026, 75% dice que la IA lo hace más productivo y calcula que automatiza unas 11 horas por semana. Pero sólo 13% dice que su organización está rindiendo de forma significativamente mejor por eso. Glean Work AI Institute, The Work AI Index 2026.
+
+Conviene leerlo con cuidado. Los datos son autodeclarados, los recoge un proveedor de software, no incluyen México y la propia muestra tiene más adopción de IA, más peso de puestos de alto nivel y del sector tecnológico que la población trabajadora en general. No mide tu empresa. Pero la brecha se reconoce fácil: cada persona siente que avanza más rápido y la empresa, en conjunto, no lo nota.
+
+Mi lectura es que parte de la respuesta no está en la herramienta sino en la gente: quién puede adaptarse a ella y qué necesita para lograrlo. Y creo que conviene preguntárselo sin convertirlo en una lista de quién sobra.
+
+#### El tiempo ahorrado se va en vigilar
+
+Hinds le pone nombre a lo que pasa con esas horas: botsitting. Es el trabajo de supervisar lo que produce la IA, corregirlo, darle el contexto que le falta y saltar de una herramienta a otra. En el video lo describe como «un enorme costo oculto de trabajo humano». Según el informe, la gente le dedica en promedio 6.4 horas por semana, casi un día de trabajo y más tiempo del que pasa usando la IA para producir.
+
+Lo que más me importa es lo que ocurre cuando nadie cuenta ese trabajo. Si la organización no lo valora ni lo contabiliza, explica Hinds, la gente recorta camino. El informe registra algo parecido: 69% de quienes usan IA admite al menos una conducta de este tipo, como entregar trabajo hecho con IA que no verificó, que no entiende del todo o que no podría respaldar con confianza.
+
+El trabajo que no se revisó no desaparece, le llega a otra persona. Hinds lo dice así: cuando alguien entrega sin revisar, su colega «se ve obligado a recoger los pedazos». Las horas que se ahorraron en un escritorio se gastan en limpiar en otro, y nadie las suma. Por eso su consejo para cualquier CEO es «dejen de tratar esta tecnología como una herramienta de productividad individual».
+
+#### Lo que hace posible adaptarse
+
+Primero, el criterio. Según Hinds, la IA da buenos resultados cuando se usa en un terreno cercano al propio, donde la persona sabe cómo se ve lo bueno. Cuando no lo sabe, la usa de forma superficial, pendiente de lo que sale y no de cómo se llegó, y si un flujo con agentes se desvía no está segura de en qué etapa falló. Dicho de otro modo, la IA amplía lo que alguien ya sabe juzgar. Por eso adaptarse no es lo mismo que usar más la herramienta.
+
+Segundo, el mando medio. Hinds cree que su papel se vuelve más importante, pero no de la misma manera para todos. Distingue entre quien repiensa su rol, y dedica ese tiempo a formar a su gente, y quien lo ve como un mecanismo de coordinación: al segundo le encanta agendar juntas y pedir reportes de estatus, y eso, si no se repiensa, se automatiza muy rápido. Lo que se automatiza es el trabajo de coordinar, no la persona. Creo que la diferencia se puede cerrar si el rol se rediseña y a quien lo ocupa se le forma para ello. En la encuesta, 61% dice que la IA le ayuda más en su trabajo diario que su propio gerente. No creo que esa cifra condene a los gerentes. Sí dice que, si su aporte es pasar información, la IA ya compite con ellos.
+
+Tercero, quién responde. Hinds describe tres formas en que la gente piensa en la IA en el trabajo: como herramienta, como compañero o como empleado. La tercera es la que le preocupa. Cada vez más organizaciones, dice, ponen agentes en el organigrama, y su investigación preliminar sugiere que entonces las personas empiezan a desviar la culpa. Ella no cita ese estudio, así que lo tomo como una señal y no como un hallazgo. Pero la lógica se entiende: si el agente aparece junto a las personas, es más fácil decir que el error fue suyo. Mi postura es que un agente puede tener un trabajo asignado, y que alguien con nombre y apellido responde por el resultado.
+
+Eso incluye lo que sale de la empresa. Hinds cuenta que empiezan a aparecer políticas contra el contenido de IA sin revisar, con una norma de fondo: «eres dueño del resultado» (you own the output). Detrás del error también está la reputación de quien firma. Adaptarse también es estar listo para asumir esa responsabilidad.
+
+#### Qué tan rápido hay que moverse
+
+En la misma conversación, Alex Wissner-Gross puso la nota más fuerte. Ante la pregunta de qué habilidad humana sería la más duradera, respondió «creo que las habilidades humanas están acabadas» (I think human skills are cooked), y que está algo más dispuesto que Hinds a decir que «lo loco empieza a pasar en los próximos uno o dos años». Lo tomo como la provocación de alguien que sigue la tecnología de cerca, no como un pronóstico. Depende de condiciones que él mismo enumera, como que los modelos sigan mejorando y que no haya una reacción social en contra.
+
+Hinds contesta con otra cosa. Que los modelos mejoren no quiere decir que las organizaciones puedan absorberlo, por cómo están estructuradas, y dice que puede imaginar un mundo en el que dentro de tres años no ha cambiado mucho.
+
+No sé quién tiene razón y creo que a un director no le hace falta saberlo. En los dos casos la tarea de hoy es la misma: saber quién en la organización puede adaptarse a estas herramientas y qué necesita para lograrlo. Si el ritmo es el de Hinds, ese conocimiento evita que sigas pagando cada semana un costo que no ves. Si se acerca al de Wissner-Gross, llegas con la gente formada y los roles rediseñados en lugar de hacerlo con prisa.
+
+#### Las preguntas que haría un CEO
+
+Medir quién puede adaptarse no es hacer una lista de quién sobra. Es saber a quién formar primero y qué roles rediseñar mientras la IA entra al trabajo diario. Estas son las preguntas que yo me haría al frente de una empresa:
+
+- ¿En qué trabajos tengo a alguien que sepa reconocer un buen resultado, y quién más podría aprender a hacerlo con apoyo?
+
+- ¿Quién ya usa la IA donde puede juzgar lo que sale, y quién la usa donde no tendría cómo saber que se equivocó?
+
+- ¿Qué parte del trabajo de cada mando medio es coordinar y qué parte es rediseñar el trabajo y formar gente? ¿Qué necesitaría cada quien para pasar de lo primero a lo segundo, y mis incentivos lo premian?
+
+- ¿Quién, con nombre y apellido, responde por lo que entrega cada agente, y quién está listo para asumirlo?
+
+- ¿Cuántas horas a la semana se van en supervisar, corregir y darle contexto a la IA, y quién las carga hoy sin que nadie lo vea?
+
+- ¿Qué decisiones de hoy me sirven igual si el ritmo es el de Hinds que si es el de Wissner-Gross?
+
+Si no puedes contestar las dos primeras con nombres y no con impresiones, ahí empieza la medición: saber a quién formar y qué roles rediseñar antes de decidir qué más desplegar.
+
+Forward34 es una empresa de despliegue de IA. Entender quién puede adaptarse a estas herramientas, y qué necesita para lograrlo, es de las conversaciones que más me interesa tener con un director antes de decidir qué desplegar.
+
+Si en tu empresa la gente dice que ahorra tiempo y tú no lo ves, cuéntame qué estás viendo y conversemos.
 
 ---
 

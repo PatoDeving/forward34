@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://forward34.com/</loc>
-        <lastmod>2026-11-24</lastmod>
+        <lastmod>2026-11-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -38,7 +38,7 @@
     </url>
     <url>
         <loc>https://forward34.com/blog/</loc>
-        <lastmod>2026-11-24</lastmod>
+        <lastmod>2026-11-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -47,6 +47,12 @@
         <lastmod>2026-11-24</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://forward34.com/blog/quien-puede-adaptarse-a-la-ia-en-tu-empresa.html</loc>
+        <lastmod>2026-11-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://forward34.com/blog/el-trabajo-que-tu-empresa-necesita-y-nadie-alcanza-a-hacer.html</loc>
