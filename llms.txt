@@ -34,6 +34,7 @@ Seis frentes de trabajo:
 
 ## Artículos del blog
 
+- [Quién puede adaptarse a la IA en tu empresa](https://forward34.com/blog/quien-puede-adaptarse-a-la-ia-en-tu-empresa.html) (27 nov 2026, Héctor Hernández): las personas dicen que la IA les ahorra horas, pero la empresa no lo ve; parte de la respuesta está en quién puede adaptarse a ella y qué necesita para lograrlo.
 - [El trabajo que tu empresa necesita y nadie alcanza a hacer](https://forward34.com/blog/el-trabajo-que-tu-empresa-necesita-y-nadie-alcanza-a-hacer.html) (17 nov 2026, Héctor Hernández): seguimientos y revisiones valiosas se postergan por falta de capacidad; la oportunidad de la IA también está en el trabajo que hoy queda sin hacer.
 - [Lo que cuesta revisar el trabajo de la IA](https://forward34.com/blog/lo-que-cuesta-revisar-el-trabajo-de-la-ia.html) (10 nov 2026, Héctor Hernández): el tiempo que el equipo dedica a revisar y corregir también forma parte del costo de la IA.
 - [Cuando todo tiene que pasar por la misma persona](https://forward34.com/blog/cuando-todo-tiene-que-pasar-por-la-misma-persona.html) (3 nov 2026, Héctor Hernández): qué significa que las decisiones se acumulen en el mismo escritorio y por qué la IA vuelve relevante esa conversación.

@@ -24,6 +24,7 @@ const PAGINAS = [
 
 // Del más reciente al más antiguo, igual que blog/index.html.
 const BLOG = [
+    'quien-puede-adaptarse-a-la-ia-en-tu-empresa',
     'el-trabajo-que-tu-empresa-necesita-y-nadie-alcanza-a-hacer',
     'lo-que-cuesta-revisar-el-trabajo-de-la-ia',
     'cuando-todo-tiene-que-pasar-por-la-misma-persona',
@@ -44,7 +45,7 @@ El nombre se escribe Forward34, en una sola palabra. Forward34 S.A. de C.V. es l
 
 // Corre dentro de la página: devuelve el texto del contenido principal en Markdown simple.
 function extraer() {
-    const omitir = (el) => el.closest('header, footer, nav, aside, form, script, style, noscript, .mobile-menu, .marquee, .f34-b, .f34-p, .privacy-modal-overlay, [aria-hidden="true"], #assessment, .criterio-relacionados, .cta-full');
+    const omitir = (el) => el.closest('header, footer, nav, aside, form, script, style, noscript, .mobile-menu, .marquee, .f34-b, .f34-p, .privacy-modal-overlay, .f34-cookies, [aria-hidden="true"], #assessment, .criterio-relacionados, .cta-full');
     const prefijo = { H1: '### ', H2: '#### ', H3: '##### ', H4: '##### ', SUMMARY: '**P:** ', LI: '- ', BLOCKQUOTE: '> ' };
     const lineas = [];
     const vistas = new Set();

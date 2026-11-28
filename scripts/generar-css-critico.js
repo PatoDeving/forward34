@@ -40,7 +40,7 @@ const PAGINAS = process.env.SOLO ? [process.env.SOLO] : [
         .map((f) => 'blog/' + f)
 ];
 const PLANTILLA = 'plantillas/blog-plantilla.html';
-const ARTICULO_MODELO = 'blog/el-trabajo-que-tu-empresa-necesita-y-nadie-alcanza-a-hacer.html';
+const ARTICULO_MODELO = 'blog/quien-puede-adaptarse-a-la-ia-en-tu-empresa.html';
 
 const VISTAS = [
     { width: 412, height: 915 },   // celular (Lighthouse móvil)
